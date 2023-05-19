@@ -1,10 +1,18 @@
-import "./App.css";
+import { Fragment } from "react";
+
+import Header from "./views/layout/Header";
+import Footer from "./views/layout/Footer";
+import Simulation from "./views/pages/simul/Simulation";
+
+import "./assets/css/common.css";
 
 function App() {
   return (
-    <>
-      <div>Hi</div>
-    </>
+    <Fragment>
+      <Header />
+      <Simulation />
+      <Footer />
+    </Fragment>
   );
 }
 
