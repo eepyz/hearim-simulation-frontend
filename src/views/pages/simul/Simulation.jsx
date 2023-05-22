@@ -1,9 +1,8 @@
-import { Fragment } from "react";
+import { Fragment, Suspense } from "react";
 
-import { Canvas } from "@react-three/fiber";
 import { Leva } from "leva";
 
-import ThreeDView from "./ThreeDView";
+import GraphicView from "./GraphicView";
 
 import "../../../assets/css/simul.css";
 
@@ -12,17 +11,7 @@ const Simulation = () => {
     <Fragment>
       <div className="container">
         <Leva collapsed />
-        <Canvas
-          shadows
-          camera={{
-            fov: 45,
-            near: 0.1,
-            far: 200,
-            position: [-4, 3, 6],
-          }}
-        >
-          <ThreeDView />
-        </Canvas>
+        <GraphicView />
       </div>
     </Fragment>
   );
