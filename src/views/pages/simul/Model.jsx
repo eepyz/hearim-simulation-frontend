@@ -14,6 +14,9 @@ const Model = ({ url }) => {
 
   return (
     <Fragment>
+      {/* <mesh position={modelRef.current.position} geometry={geom} scale={0.5}>
+        <meshBasicMaterial wireframe />
+      </mesh> */}
       <mesh
         ref={modelRef}
         geometry={geom}

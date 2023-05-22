@@ -114,7 +114,7 @@ const BoundarySettings = (props) => {
           </div>
         </div>
       )}
-      {inflowSelected && (
+      {!inflowSelected && (
         <div className="boundary-settings-box">
           <div className="settings-title">Inflow Settings</div>
           <select id="subsFluid" className="boundary-settings-select">
