@@ -277,4 +277,4 @@ class MeshInfo {
     return angle;
   }
 }
-export { MeshInfo };
+export default MeshInfo;

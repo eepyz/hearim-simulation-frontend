@@ -17,11 +17,7 @@ html {
   overflow: hidden;
 }
 
-.gui-container {
-  position: relative;
-  width: 100%;
-  height: 100%;
-
+.container {
   background: linear-gradient(
     163deg,
     rgba(19, 34, 110, 1) 0%,
@@ -50,9 +46,10 @@ input[type="text"] {
   position: absolute;
   top: 10%;
   left: 1vw;
-  /* background-color: rgba(255, 255, 255, 0.172); */
+  /* background-color: rgba(255, 255, 255, 0.7); */
   border-radius: 30px;
-  /* padding: 15px; */
+  z-index: 1;
+  padding: 10px 0;
 }
 
 #tool-menu button {
@@ -60,10 +57,10 @@ input[type="text"] {
   cursor: pointer;
   background-color: transparent;
   border: none;
-  color: #b4b4b4;
+  color: rgb(148, 148, 176);
   transition-duration: 0.2s;
   outline: none;
-  margin: 30px 0px;
+  margin: 3px 0px;
 }
 
 #tool-menu button input[type="file"] {
@@ -80,7 +77,7 @@ input[type="text"] {
 #tool-menu button :hover,
 #tool-menu label:hover {
   cursor: pointer;
-  transform: translateY(-5px);
+  text-shadow: 0px 0px 3px rgb(103, 117, 209);
 }
 
 .material-symbols-outlined,
@@ -92,14 +89,13 @@ input[type="text"] {
 .material-symbols-outlined:hover,
 .material-icons:hover {
   color: white;
-  /* text-shadow: 0px 0px 15px rgb(103, 117, 209); */
 }
 
 /* half edge angle range */
 .flex {
   display: flex;
   align-items: center;
-  height: 30px;
+  /* height: 30px; */
 }
 
 .adj-angle-range {
@@ -172,7 +168,7 @@ input[type="text"] {
   overflow-x: hidden;
   overflow-y: auto;
   background-color: rgba(0, 0, 0, 0.4);
-  z-index: 50;
+  z-index: 2;
   overflow: hidden;
 }
 
@@ -319,19 +315,22 @@ input[type="text"] {
 }
 
 .boundary-menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: absolute;
   transition: all ease-out 0.2s;
   bottom: 5%;
   left: 25%;
+  z-index: 1;
+  font-size: 18px;
 }
 
 .boundary-menu-title {
-  height: 80px;
   margin-right: 50px;
-  font-size: 18px;
   text-align: center;
   text-decoration: none;
-  transition: all ease-in 0.2s;
+  transition: all ease-in 0.1s;
   opacity: 1;
   color: white;
   /* background-color: rgba(231, 237, 255, 0.7); */
@@ -340,20 +339,20 @@ input[type="text"] {
 }
 
 .boundary-menu-elem {
-  height: 80px;
   margin-right: 30px;
-  font-size: 18px;
-  text-align: center;
-  line-height: 80px;
   text-decoration: none;
   transition: all ease 0.2s;
   opacity: 1;
   padding: 5px 10px;
   border-radius: 10px;
+  color: rgb(52, 89, 168);
+  border: 3px solid transparent;
 }
 
 .boundary-menu-elem:hover {
-  border: 3px solid rgba(231, 237, 255, 0.7);
+  cursor: pointer;
+  /* color: white; */
+  border: 3px solid white;
 }
 
 /*boundary-settings*/
@@ -809,14 +808,6 @@ input[type="text"] {
 
   .material-symbols-outlined {
     font-size: 30px;
-  }
-
-  #tool-menu {
-    padding: 15px;
-  }
-
-  #tool-menu button {
-    margin-top: 60px;
   }
 
   .adj-angle-range {

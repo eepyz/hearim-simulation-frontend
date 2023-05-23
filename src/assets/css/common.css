@@ -1,18 +1,35 @@
+@import url("https://fonts.googleapis.com/css2?family=Barlow:wght@400;600&family=Kanit:wght@100;500&family=Noto+Sans+KR:wght@100&family=Poppins&family=Quicksand:wght@300;400;500;600;700&family=Raleway&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* user-select: none; */
+  outline: none;
+  font-family: "Poppins", sans-serif;
+}
+
+*::selection {
+  background-color: rgb(204, 250, 225);
+  color: rgb(68, 68, 68);
+}
+
+html {
+  overflow: overlay;
+  overflow-x: hidden;
+}
+
+html::-webkit-scrollbar {
+  width: 7px;
+}
+
+html::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
 .container {
+  position: relative;
   width: 100vw;
   height: 100vh;
-}
-
-.header {
-  position: absolute;
-  top: 0;
-}
-
-.footer {
-  position: absolute;
-  bottom: 0;
-}
-
-.color {
-  color: #aac0d6;
 }

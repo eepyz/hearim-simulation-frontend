@@ -264,4 +264,4 @@ class BoundaryInfo {
   }
 }
 
-export { BoundaryInfo };
+export default BoundaryInfo;

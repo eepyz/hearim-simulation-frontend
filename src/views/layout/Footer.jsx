@@ -2,7 +2,15 @@ import { Fragment } from "react";
 const Footer = () => {
   return (
     <Fragment>
-      <div className="footer">Footer</div>
+      <footer>
+        <div>
+          Development by Research Of Numerical Simulation SW,
+          <a>HEARIM</a>
+          <br />
+          <br />
+          Copyright &copy; HEARIM All Rights Reserved.
+        </div>
+      </footer>
     </Fragment>
   );
 };
