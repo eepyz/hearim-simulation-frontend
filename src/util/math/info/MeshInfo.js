@@ -55,7 +55,7 @@ class MeshInfo {
 
   init() {
     this.storeGeoInfo();
-    console.log(this);
+    // console.log(this);
   }
 
   storeGeoInfo() {

@@ -17,7 +17,7 @@ const cameraConfig = {
   position: [-4, 3, 6],
 };
 
-const GraphicView = () => {
+const GUIView = () => {
   const [url, setUrl] = useState("/models/duct_matched_ascii.stl");
 
   //view
@@ -29,4 +29,4 @@ const GraphicView = () => {
     </Canvas>
   );
 };
-export default GraphicView;
+export default GUIView;
