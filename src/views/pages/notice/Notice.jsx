@@ -1,5 +1,7 @@
 import { Fragment } from "react";
-import styled from "../../../assets/css/Notice.module.css";
+import { Outlet } from "react-router-dom";
+
+import styles from "../../../assets/css/Notice.module.css";
 
 const Notice = () => {
   return (
@@ -11,7 +13,7 @@ const Notice = () => {
             <div>See What's going on in HEARIM.</div>
           </div>
         </section>
-        <router-view></router-view>
+        <Outlet />
       </main>
     </Fragment>
   );

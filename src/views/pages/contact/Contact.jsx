@@ -1,5 +1,8 @@
 import { Fragment } from "react";
-import "../../../assets/css/Contact.module.css";
+
+import styles from "../../../assets/css/Contact.module.css";
+
+import contactHeaderImg from "../../../assets/img/notice/team-work.png";
 
 const Contact = () => {
   return (
@@ -11,12 +14,12 @@ const Contact = () => {
             <div>We always look forward to communicating with you.</div>
           </div>
         </section>
-        <section className="between-div">
-          <img src="../../../assets/img/notice/team-work.png" alt="" />
-          <div className="side-box">
+        <section className={styles["between-div"]}>
+          <img src={contactHeaderImg} alt="" />
+          <div className={styles["side-box"]}>
             Welcome to our contact page!
             <br />
-            <div className="side-elem">
+            <div className={styles["side-elem"]}>
               We are thrilled to hear from you and eager to assist with any
               questions, comments, or feedback you may have. Our goal is to
               provide exceptional customer service and ensure your satisfaction
@@ -26,85 +29,85 @@ const Contact = () => {
             </div>
           </div>
         </section>
-        <section className="contact-main-box">
+        <section className={styles["contact-main-box"]}>
           <div className="flex">
-            <div className="contact-info">
-              <div className="contact-info-elem">
-                <div className="title">
+            <div className={styles["contact-info"]}>
+              <div className={styles["contact-info-elem"]}>
+                <div className={styles["title"]}>
                   <i className="bi bi-telephone-fill"></i>Call
                 </div>
-                <div className="content">+82 10 8971 2309</div>
+                <div className={styles["content"]}>+82 10 8971 2309</div>
               </div>
-              <div className="contact-info-elem">
-                <div className="title">
+              <div className={styles["contact-info-elem"]}>
+                <div className={styles["title"]}>
                   <i className="bi bi-envelope-fill"></i> Email
                 </div>
-                <div className="content">kjh@hearimsw.com</div>
+                <div className={styles["content"]}>kjh@hearimsw.com</div>
               </div>
-              <div className="contact-info-elem">
-                <div className="title">
+              <div className={styles["contact-info-elem"]}>
+                <div className={styles["title"]}>
                   <i className="bi bi-geo-alt-fill"></i> Location
                 </div>
-                <div className="content">
+                <div className={styles["content"]}>
                   A 207-1, 357, Guseong-ro, Giheung-gu, Yongin-si, Gyeonggi-do,
                   Republic of Korea
                 </div>
               </div>
             </div>
-            <div className="contact-form">
+            <div className={styles["contact-form"]}>
               <div>
                 <div className="flex">
-                  <div className="form-div">
-                    <div className="form-input-title">First Name</div>
+                  <div className={styles["form-div"]}>
+                    <div className={styles["form-input-title"]}>First Name</div>
                     <input
-                      className="form-input-content"
+                      className={styles["form-input-content"]}
                       type="text"
                       placeholder="Your First Name"
                     />
                   </div>
-                  <div className="form-div">
-                    <div className="form-input-title">Last Name</div>
+                  <div className={styles["form-div"]}>
+                    <div className={styles["form-input-title"]}>Last Name</div>
                     <input
-                      className="form-input-content"
+                      className={styles["form-input-content"]}
                       type="text"
                       placeholder="Your Last Name"
                     />
                   </div>
                 </div>
                 <div className="flex">
-                  <div className="form-div">
-                    <div className="form-input-title">Email</div>
+                  <div className={styles["form-div"]}>
+                    <div className={styles["form-input-title"]}>Email</div>
                     <input
-                      className="form-input-content"
+                      className={styles["form-input-content"]}
                       type="text"
                       placeholder="Your Email"
                     />
                   </div>
-                  <div className="form-div">
-                    <div className="form-input-title">Company</div>
+                  <div className={styles["form-div"]}>
+                    <div className={styles["form-input-title"]}>Company</div>
                     <input
-                      className="form-input-content"
+                      className={styles["form-input-content"]}
                       type="text"
                       placeholder="Your Company"
                     />
                   </div>
                 </div>
-                <div className="form-input-title">
+                <div className={styles["form-input-title"]}>
                   What Can We Help You With?
                 </div>
-                <select className="form-input-select">
+                <select className={styles["form-input-select"]}>
                   <option></option>
                 </select>
 
-                <div className="form-div">
-                  <div className="form-input-title">Message</div>
+                <div className={styles["form-div"]}>
+                  <div className={styles["form-input-title"]}>Message</div>
                   <textarea
-                    className="message"
+                    className={styles["message"]}
                     type="text"
                     placeholder="Feel free to say anything. "
                   ></textarea>
                 </div>
-                <button className="send-btn">send</button>
+                <button className={styles["send-btn"]}>send</button>
               </div>
             </div>
           </div>

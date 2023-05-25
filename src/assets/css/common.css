@@ -31,7 +31,7 @@ html::-webkit-scrollbar-thumb {
 .container {
   position: relative;
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .sub-header {

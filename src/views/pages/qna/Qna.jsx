@@ -1,5 +1,8 @@
 import { Fragment } from "react";
-import "../../../assets/css/Qna.module.css";
+import { Outlet } from "react-router-dom";
+
+import styles from "../../../assets/css/Qna.module.css";
+
 const Qna = () => {
   return (
     <Fragment>
@@ -10,6 +13,7 @@ const Qna = () => {
             <div>Do you have any opinion? Share with people.</div>
           </div>
         </section>
+        <Outlet />
       </main>
     </Fragment>
   );
