@@ -2,7 +2,8 @@ import { Fragment } from "react";
 
 import styles from "../../../assets/css/About.module.css";
 
-import aboutHeaderImg from "../../../assets/img/logo.png";
+import aboutLogoImg from "../../../assets/img/logo.png";
+import aboutQuoteImg from "../../../assets/img/about/quote.png";
 import aboutVideo from "../../../assets/video/HEARIM.mp4";
 
 const About = () => {
@@ -20,16 +21,24 @@ const About = () => {
             <div className={styles["about-info"]}>
               {/* <AboutTechDetail></AboutTechDetail> */}
               <div className={styles["info-img"]}>
-                <img src={aboutHeaderImg} />
+                <img src={aboutLogoImg} />
               </div>
               <div className={styles["info-content"]}>
                 <span>
-                  <img className={styles["quote front"]} alt="" />
+                  <img
+                    src={aboutQuoteImg}
+                    className={`${styles["quote"]} ${styles["front"]}`}
+                    alt=""
+                  />
                 </span>
                 HEARIM is a company that develops general-purpose numerical
                 analysis software and provides sales and services using it.
                 <span>
-                  <img className={styles["quote back"]} alt="" />
+                  <img
+                    src={aboutQuoteImg}
+                    className={`${styles["quote"]} ${styles["back"]}`}
+                    alt=""
+                  />
                 </span>
               </div>
             </div>
