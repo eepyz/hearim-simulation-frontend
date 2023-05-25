@@ -1,0 +1,44 @@
+.write-box {
+  border-radius: 5px;
+  width: 1000px;
+  height: 500px;
+  margin: 0 auto;
+  margin-top: 50px;
+  font-size: 30px;
+}
+
+.title-input {
+  color: rgb(97, 97, 97);
+  font-size: 35px;
+  font-weight: bold;
+  text-shadow: none;
+  border: none;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.title-input::placeholder {
+  color: rgb(172, 172, 172);
+}
+
+.btn-box {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 30px;
+}
+
+.back-btn,
+.submit-btn {
+  margin-left: 50px;
+  color: rgb(123, 123, 123);
+  border: none;
+  font-size: 18px;
+  text-align: center;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.back-btn:hover,
+.submit-btn:hover {
+  cursor: pointer;
+}

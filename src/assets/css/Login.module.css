@@ -1,0 +1,150 @@
+.container {
+  background: linear-gradient(
+    163deg,
+    rgb(84, 144, 197) 30%,
+    rgb(255, 214, 214) 100%
+  );
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-title {
+  color: white;
+  margin: 50px 0px;
+  font-size: 40px;
+}
+
+.flex {
+  position: relative;
+  width: 100%;
+  justify-content: center;
+}
+
+/*- - - - - - - - - - */
+/*login page*/
+.login-box {
+  width: 400px;
+  margin: 0 auto;
+  border-radius: 10px;
+  padding: 0px 30px;
+  background-color: rgba(240, 240, 240, 0.2);
+  z-index: 10;
+}
+
+.login-box-elem {
+  width: 100%;
+  height: 45px;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: none;
+  padding: 0px 30px;
+  font-size: 18px;
+  transition: all ease-out 0.2s;
+}
+
+.bi-arrow-left-circle {
+  position: absolute;
+  top: 30px;
+  left: 0;
+  color: white;
+  font-size: 30px;
+  transition: all ease-in 0.1s;
+}
+
+.bi-arrow-left-circle:hover {
+  color: rgb(204, 204, 204);
+  cursor: pointer;
+}
+
+input {
+  background-color: aliceblue;
+}
+
+input:hover {
+  background-color: rgb(255, 255, 255);
+}
+
+.login-btn {
+  margin-top: 10px;
+  text-align: center;
+  border-radius: 25px;
+  background-color: rgb(226, 237, 248);
+  color: rgb(120, 120, 120);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.login-btn:hover {
+  transform: scale(1.03);
+  background-color: rgb(241, 248, 255);
+  box-shadow: 0 2px 30px rgba(99, 145, 187, 0.4);
+}
+
+.hr {
+  margin: 20px;
+  border: 1px solid rgba(145, 145, 145, 0.2);
+}
+
+.connect-sns > .login-box-elem {
+  cursor: pointer;
+}
+
+.ask-signup {
+  text-align: center;
+  margin: 20px auto;
+}
+
+.ask-signup a {
+  text-decoration: none;
+  color: rgb(64, 106, 222);
+  font-size: 15px;
+  font-weight: bold;
+  transition: all ease-out 0.2s;
+}
+
+.ask-signup a:hover {
+  color: rgb(95, 133, 236);
+}
+
+@media (min-width: 1800px) {
+  /*login page*/
+
+  .login-box {
+    width: 500px;
+    min-height: 650px;
+    padding: 10px 50px;
+  }
+
+  .login-box-elem {
+    width: 100%;
+    height: 55px;
+    margin-bottom: 10px;
+    padding: 0px 30px;
+    font-size: 18px;
+  }
+
+  .login-btn {
+    margin-top: 20px;
+    text-align: center;
+    border-radius: 25px;
+  }
+
+  .login-btn:hover {
+    transform: scale(1.03);
+  }
+
+  .hr {
+    margin: 30px;
+  }
+
+  .ask-signup {
+    margin: 30px auto;
+  }
+
+  .ask-signup a {
+    font-size: 20px;
+  }
+}

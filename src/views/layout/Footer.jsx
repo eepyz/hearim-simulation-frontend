@@ -1,4 +1,6 @@
 import { Fragment } from "react";
+import styles from "../../assets/css/layout/Footer.module.css";
+
 const Footer = () => {
   return (
     <Fragment>

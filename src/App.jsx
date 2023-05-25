@@ -1,19 +1,12 @@
-import { Fragment } from "react";
+import { RouterProvider, Route } from "react-router-dom";
+import Root from "./views/layout/Root";
 
-import Header from "./views/layout/Header";
-import Footer from "./views/layout/Footer";
-import Simulation from "./views/pages/simul/Simulation";
+import router from "./router/Router";
 
 import "./assets/css/common.css";
 
 function App() {
-  return (
-    <Fragment>
-      <Header />
-      <Simulation />
-      <Footer />
-    </Fragment>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;

@@ -5,7 +5,7 @@ import GUIView from "./GUIView/GUIView";
 import ToolMenu from "./menus/ToolMenu";
 import BoundaryMenu from "./menus/BoundaryMenu";
 import FlowMenu from "./menus/FlowMenu";
-import "../../../assets/css/simul.css";
+import "../../../assets/css/Simulation.module.css";
 
 const Simulation = () => {
   const [flowMenuOpen, setFlowMenuOpen] = useState(false);

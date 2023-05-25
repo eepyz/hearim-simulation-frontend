@@ -131,7 +131,9 @@ const BoundarySettings = (props) => {
             <option value="Ar">Ar</option>
           </select>
 
-          <button class="show-settings-detail-btn">User Fluid Setting</button>
+          <button className="show-settings-detail-btn">
+            User Fluid Setting
+          </button>
           <div className="boundary-settings-detail">
             <div className="title">Density</div>
             <input id="fluidUser-density" type="text" />

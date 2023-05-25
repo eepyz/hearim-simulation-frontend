@@ -1,0 +1,164 @@
+* {
+  transition: all ease 0.1s;
+}
+
+.sub-header {
+  height: 200px;
+  background: linear-gradient(
+    100deg,
+    rgb(94, 149, 216) 30%,
+    /* rgb(180, 119, 119) 100% */ rgb(55, 57, 128) 100%
+  );
+}
+
+.mypage-main-box {
+  position: relative;
+  width: 1090px;
+  margin: 0 auto;
+}
+
+.mypage-menu {
+  position: absolute;
+  right: 0;
+  margin-top: 20px;
+}
+
+.mypage-menu a {
+  margin-left: 1rem;
+  padding: 10px;
+  color: rgb(155, 155, 155);
+  border: 1px solid rgb(235, 235, 235);
+  border-radius: 100%;
+  background-color: rgb(255, 255, 255);
+  font-weight: bolder;
+  text-align: center;
+  text-decoration: none;
+  transition: all ease-out 0.1s;
+}
+
+.bi-person-fill,
+.bi-archive-fill,
+.bi-heart-fill {
+  font-size: 20px;
+}
+
+.mypage-menu a:nth-child(1):hover {
+  color: rgb(56, 105, 241);
+}
+
+.mypage-menu a:nth-child(2):hover {
+  color: rgb(27, 193, 101);
+}
+
+.mypage-menu a:nth-child(3):hover {
+  color: rgb(254, 94, 94);
+}
+
+/* selected view  */
+.mypage-selected-view {
+  display: flex;
+  padding: 20px 0px;
+}
+
+.mypage-profile-photo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  width: 200px;
+  height: 200px;
+  background-color: rgb(239, 239, 239);
+  border-radius: 100%;
+  object-fit: cover;
+  border: 1px solid rgb(224, 224, 224);
+  box-shadow: 4px 2px 5px rgba(228, 229, 229, 0.7);
+  margin: 0px 100px 20px 50px;
+  background-size: cover;
+  text-align: center;
+}
+
+.mypage-profile-photo label {
+  position: absolute;
+  bottom: 60px;
+  padding: 0.5em 0.75em;
+  color: #999;
+  font-size: inherit;
+  line-height: normal;
+  vertical-align: middle;
+  background-color: #fdfdfd;
+  cursor: pointer;
+  border: 1px solid #ebebeb;
+  border-bottom-color: #e2e2e2;
+  border-radius: 0.25em;
+}
+
+.mypage-profile-photo input[type="file"] {
+  /* 파일 필드 숨기기 */
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.mypage-profile-photo img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.information-box {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  border-radius: 5px;
+  margin-top: 30px;
+}
+
+.main-title {
+  font-size: 30px;
+  font-weight: bold;
+  margin-top: 50px;
+  margin-bottom: 20px;
+}
+
+.information-box input {
+  width: 300px;
+  padding: 10px;
+  font-size: 16px;
+  margin-bottom: 1rem;
+  margin-right: 3rem;
+  border: 1px solid rgb(215, 215, 215);
+  border-radius: 5px;
+}
+
+.information-box input:focus {
+  box-shadow: inset 5px 5px 5px rgba(76, 78, 99, 0.3);
+}
+
+.userInfo-save-btn {
+  position: absolute;
+  right: 0px;
+  bottom: 10px;
+  width: 100px;
+  height: 50px;
+  color: white;
+  background-color: black;
+  border-radius: 5px;
+  font-size: 18px;
+  border: none;
+  transition: all ease 0.1s;
+}
+
+.userInfo-save-btn:hover {
+  cursor: pointer;
+  background-color: rgb(63, 63, 63);
+}
+
+.hr {
+  margin: 30px 0px;
+  border: 1px solid rgba(186, 186, 186, 0.2);
+}

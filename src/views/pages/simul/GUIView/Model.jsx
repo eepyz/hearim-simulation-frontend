@@ -10,6 +10,7 @@ import BoundaryDetail from "../Settings/BoundarySettings";
 import MeshInfo from "../../../../util/math/info/MeshInfo";
 import BoundaryInfo from "../../../../util/math/info/BoundaryInfo";
 
+//convert to jsx
 extend({ DragControls });
 
 const Model = ({ url }) => {
@@ -56,7 +57,7 @@ const Model = ({ url }) => {
     ));
   };
 
-  const saveMeshInfos = (stlGeometry) => {
+  const setMeshInfos = (stlGeometry) => {
     let separatedGeometries = [];
     let separatedInfos = [];
 
@@ -95,7 +96,7 @@ const Model = ({ url }) => {
 
   //useEffect
   useEffect(() => {
-    saveMeshInfos(stlGeometry);
+    setMeshInfos(stlGeometry);
     setBoundary(new BoundaryInfo());
   }, []);
 
@@ -123,8 +124,6 @@ const Model = ({ url }) => {
       dragControls.dispose();
     };
   }, [camera, gl.domElement]);
-
-  //functions
 
   //jsx
   return (

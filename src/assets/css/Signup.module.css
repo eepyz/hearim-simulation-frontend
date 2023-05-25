@@ -1,0 +1,229 @@
+.container {
+  background: linear-gradient(
+    -160deg,
+    rgb(84, 144, 197) 30%,
+    rgb(255, 214, 214) 100%
+  );
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-title {
+  color: white;
+  margin: 50px 0px;
+  font-size: 40px;
+}
+
+.flex {
+  position: relative;
+  width: 100%;
+}
+
+/*- - - - - - - - - - */
+
+.signup-box {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  margin: 0 auto;
+  border-radius: 10px;
+  padding: 10px 30px 35px 30px;
+  background-color: rgba(240, 240, 240, 0.3);
+}
+
+.bi-arrow-left-circle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: white;
+  font-size: 30px;
+  margin: 25px 0px 0px 0px;
+  transition: all ease-in 0.1s;
+}
+
+.bi-arrow-left-circle:hover {
+  color: rgb(204, 204, 204);
+  cursor: pointer;
+}
+
+.main-title {
+  margin: 25px auto;
+}
+
+.flex {
+  display: flex;
+}
+
+label {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+label .field-div {
+  color: rgb(63, 63, 63);
+  font-size: 16px;
+}
+
+.duplicate-check-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  background-color: aliceblue;
+  text-align: center;
+  border-radius: 3px;
+  font-size: 15px;
+  padding: 5px;
+  margin-left: 10px;
+}
+
+.duplicate-check-btn:hover {
+  cursor: pointer;
+}
+.warning-div,
+.warning-div-checked {
+  font-size: 14px;
+  margin-right: 10px;
+}
+
+.warning-div {
+  color: rgb(216, 4, 4);
+}
+
+.warning-div-checked {
+  color: rgb(59, 240, 194);
+}
+
+input,
+select,
+button {
+  height: 40px;
+  border-radius: 5px;
+  border: none;
+  padding: 0px 20px;
+  font-size: 18px;
+  transition: all ease-out 0.2s;
+  margin-right: 20px;
+  background-color: aliceblue;
+}
+
+input:hover,
+input:focus,
+select:hover,
+select:focus {
+  background-color: rgb(255, 255, 255);
+}
+
+.password-input,
+.job-input,
+select {
+  width: 160px;
+}
+
+.name-input,
+.email-input {
+  width: 100%;
+}
+
+.sumbit {
+  display: flex;
+  justify-content: center;
+}
+
+.signup-btn {
+  margin: 0 auto;
+  width: 100%;
+  margin: 10px 0px;
+  text-align: center;
+  border-radius: 25px;
+  background-color: rgb(226, 237, 248);
+  color: rgb(120, 120, 120);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.signup-btn:hover {
+  transform: scale(1.03);
+  background-color: rgb(241, 248, 255);
+  box-shadow: 0 2px 30px rgba(99, 145, 187, 0.4);
+}
+
+.hr {
+  margin-bottom: 20px;
+  border: 1px solid rgba(145, 145, 145, 0.2);
+}
+
+.connect-sns > .signup-btn {
+  font-weight: lighter;
+  border-radius: 5px;
+  margin: 5px 0px;
+}
+
+.connect-sns > .signup-btn:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+@media (min-width: 1800px) {
+  .signup-box {
+    width: 500px;
+    min-height: 650px;
+    padding: 10px 60px 65px 60px;
+  }
+
+  .bi-arrow-left-circle {
+    margin: 30px 0px 0px 0px;
+    font-size: 30px;
+  }
+
+  .main-title {
+    margin: 25px auto;
+  }
+
+  label {
+    width: 100%;
+  }
+
+  label div {
+    font-size: 16px;
+  }
+
+  input,
+  select,
+  button {
+    height: 50px;
+    padding: 0px 20px;
+    font-size: 18px;
+    margin-right: 20px;
+  }
+
+  .duplicate-check-btn {
+    height: 50px;
+  }
+
+  .password-input,
+  .job-input,
+  select {
+    width: 180px;
+  }
+
+  .name-input,
+  .email-input {
+    width: 100%;
+  }
+
+  .signup-btn {
+    width: 100%;
+    margin: 20px 0px;
+  }
+
+  .hr {
+    margin-bottom: 20px;
+  }
+
+  .connect-sns > .signup-btn {
+    margin: 5px 0px;
+  }
+}

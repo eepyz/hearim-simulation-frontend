@@ -1,0 +1,153 @@
+* {
+  transition: all ease 0.1s;
+}
+
+.container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(
+    163deg,
+    rgba(19, 34, 110, 1) 0%,
+    rgba(38, 112, 164, 1) 54%,
+    rgba(70, 239, 252, 1) 100%
+  );
+
+  overflow: hidden;
+}
+
+.home-content-box {
+  position: absolute;
+  left: 80px;
+  width: 700px;
+  margin: 0 auto;
+  color: white;
+  z-index: 5;
+  text-align: center;
+}
+
+.content-big-font {
+  font-family: "Raleway", sans-serif;
+  font-weight: bold;
+  font-size: 85px;
+}
+
+.content-small-font {
+  font-family: "Raleway", sans-serif;
+  color: rgb(224, 224, 224);
+  font-size: 15px;
+  margin: 0 auto;
+  margin-top: 20px;
+  width: 500px;
+}
+
+.go-to-simul-btn {
+  font-family: "Kanit", sans-serif;
+  font-size: 35px;
+  border: none;
+  border-radius: 10px;
+  width: 450px;
+  z-index: 5;
+  margin: 0 auto;
+  margin-top: 50px;
+  padding: 10px;
+  height: 80px;
+  transition: 0.3s;
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.2);
+  /* box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.7); */
+}
+
+.go-to-simul-btn a {
+  color: white;
+  text-decoration: none;
+}
+
+.go-to-simul-btn:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+  animation: pulse 2.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+    font-size: 36px;
+  }
+
+  5% {
+    box-shadow: 0 0 0 0px rgba(227, 236, 255, 0.5);
+    font-size: 37px;
+  }
+
+  70% {
+    box-shadow: 0 0 0 25px rgba(255, 255, 255, 0);
+    font-size: 35px;
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+    font-size: 35px;
+  }
+}
+
+.threeJs {
+  position: absolute;
+  right: 200px;
+  width: 1000px;
+  height: 100%;
+  /* overflow: hidden; */
+  z-index: 3;
+}
+
+.change-stlfile-div {
+  position: absolute;
+  top: 150px;
+  right: -100px;
+  z-index: 3;
+}
+
+.change-stlfile-div label {
+  color: #a9a9be;
+  cursor: pointer;
+  border: none;
+  border-radius: 0.25em;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+.material-symbols-outlined {
+  font-size: 20px;
+}
+
+.change-stlfile-div label:hover {
+  cursor: pointer;
+  color: #c4c4da;
+}
+
+.change-stlfile-div input[type="file"] {
+  /* 파일 필드 숨기기 */
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+@media (min-width: 1800px) {
+  .threeJs {
+    position: absolute;
+    top: 30px;
+    height: 100%;
+    right: 1000px;
+  }
+
+  .change-stlfile-div {
+    right: -750px;
+  }
+}
