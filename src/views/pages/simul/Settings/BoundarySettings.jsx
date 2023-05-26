@@ -1,6 +1,8 @@
 import { Html } from "@react-three/drei";
 import { Fragment, useState } from "react";
 
+import styles from "../../../../assets/css/Simulation.module.css";
+
 const BoundarySettings = (props) => {
   //이거 Model에서 설정하고 boundaryMenu, BoundarySettings로 넘겨줘야함
   const [wallSelected, setWallSelected] = useState(true);

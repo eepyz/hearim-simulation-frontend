@@ -15,8 +15,7 @@ const Simulation = () => {
 
   return (
     <Fragment>
-      <div className="container">
-        <Leva collapsed />
+      <div className={styles["container"]}>
         <GUIView />
       </div>
       {flowMenuOpen && <FlowMenu />}

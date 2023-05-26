@@ -1,8 +1,8 @@
 .container {
   background: linear-gradient(
-    -160deg,
+    163deg,
     rgb(84, 144, 197) 30%,
-    rgb(255, 214, 214) 100%
+    rgb(135, 248, 225) 100%
   );
 
   display: flex;
@@ -27,24 +27,37 @@
   display: flex;
   flex-direction: column;
   width: 400px;
+  height: 500px;
   margin: 0 auto;
   border-radius: 10px;
   padding: 10px 30px 35px 30px;
   background-color: rgba(240, 240, 240, 0.3);
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 
-.bi-arrow-left-circle {
+.signup-box::-webkit-scrollbar {
+  width: 7px;
+}
+
+.signup-box::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+.arrow-icon {
   position: absolute;
   top: 0;
   left: 0;
   color: white;
   font-size: 30px;
   margin: 25px 0px 0px 0px;
+  text-shadow: 0 2px 5px rgb(88, 124, 158);
   transition: all ease-in 0.1s;
 }
 
-.bi-arrow-left-circle:hover {
-  color: rgb(204, 204, 204);
+.arrow-icon:hover {
+  text-shadow: none;
   cursor: pointer;
 }
 
@@ -142,12 +155,16 @@ select {
   color: rgb(120, 120, 120);
   font-weight: bold;
   cursor: pointer;
+  box-shadow: none;
 }
 
 .signup-btn:hover {
-  transform: scale(1.03);
+  box-shadow: 0 2px 5px rgb(88, 124, 158);
   background-color: rgb(241, 248, 255);
-  box-shadow: 0 2px 30px rgba(99, 145, 187, 0.4);
+}
+
+.signup-btn:active {
+  box-shadow: none;
 }
 
 .hr {

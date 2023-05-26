@@ -20,7 +20,8 @@
 
 .home-content-box {
   position: absolute;
-  left: 80px;
+  top: 35%;
+  right: 80px;
   width: 700px;
   margin: 0 auto;
   color: white;
@@ -95,11 +96,10 @@
 
 .threeJs {
   position: absolute;
-  right: 200px;
-  width: 1000px;
+  width: 100%;
   height: 100%;
   /* overflow: hidden; */
-  z-index: 3;
+  z-index: 1;
 }
 
 .change-stlfile-div {
@@ -110,7 +110,6 @@
 }
 
 .change-stlfile-div label {
-  color: #a9a9be;
   cursor: pointer;
   border: none;
   border-radius: 0.25em;
@@ -118,13 +117,14 @@
   margin-top: 10px;
 }
 
-.material-symbols-outlined {
+.icon {
+  color: white;
   font-size: 20px;
+  margin-bottom: 10px;
 }
 
 .change-stlfile-div label:hover {
   cursor: pointer;
-  color: #c4c4da;
 }
 
 .change-stlfile-div input[type="file"] {

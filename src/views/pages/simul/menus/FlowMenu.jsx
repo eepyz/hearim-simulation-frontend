@@ -1,26 +1,31 @@
 import { Fragment } from "react";
 
+import styles from "../../../../assets/css/Simulation.module.css";
+
 const FlowMenu = () => {
   return (
     <Fragment>
-      <div className="flow-settings-container">
-        <div className="flow-settings-box">
+      <div className={styles["flow-settings-container"]}>
+        <div className={styles["flow-settings-box"]}>
           <div>
-            <div className="flow-settings-title">
-              <span className="material-symbols-outlined icon"> water </span>
+            <div className={styles["flow-settings-title"]}>
+              <span className={styles["material-symbols-outlined icon"]}>
+                {" "}
+                water{" "}
+              </span>
               Flow Settings
             </div>
           </div>
-          <table className="flow-settings-table">
+          <table className={styles["flow-settings-table"]}>
             <thead>
               <td>
                 <input
                   name="inout"
                   type="radio"
-                  className="flow-type"
+                  className={styles["flow-type"]}
                   id="internal"
                 />
-                <label htmlFor="internal" className="modal-checkbox">
+                <label htmlFor="internal" className={styles["modal-checkbox"]}>
                   Internal Flow
                 </label>
               </td>
@@ -28,10 +33,10 @@ const FlowMenu = () => {
                 <input
                   name="inout"
                   type="radio"
-                  className="flow-type"
+                  className={styles["flow-type"]}
                   id="external"
                 />
-                <label htmlFor="external" className="modal-checkbox">
+                <label htmlFor="external" className={styles["modal-checkbox"]}>
                   External Flow
                 </label>
               </td>
@@ -41,10 +46,10 @@ const FlowMenu = () => {
                 <input
                   name="continuity"
                   type="radio"
-                  className="flow-type"
+                  className={styles["flow-type"]}
                   id="transient"
                 />
-                <label htmlFor="transient" className="modal-checkbox">
+                <label htmlFor="transient" className={styles["modal-checkbox"]}>
                   Transient Flow
                 </label>
               </td>
@@ -52,11 +57,11 @@ const FlowMenu = () => {
                 <input
                   name="continuity"
                   type="radio"
-                  className="flow-type"
+                  className={styles["flow-type"]}
                   id="steady"
                 />
 
-                <label htmlFor="steady" className="modal-checkbox">
+                <label htmlFor="steady" className={styles["modal-checkbox"]}>
                   Steady Flow
                 </label>
               </td>
@@ -67,7 +72,7 @@ const FlowMenu = () => {
                   type="number"
                   name="physicalFlow"
                   placeholder="physical flow time(s)"
-                  className="flow-detail-input"
+                  className={styles["flow-detail-input"]}
                 />
               </td>
             </thead>
@@ -76,10 +81,10 @@ const FlowMenu = () => {
                 <input
                   name="gravity"
                   type="radio"
-                  className="flow-type"
+                  className={styles["flow-type"]}
                   id="gravity"
                 />
-                <label htmlFor="gravity" className="modal-checkbox">
+                <label htmlFor="gravity" className={styles["modal-checkbox"]}>
                   Gravity
                 </label>
               </td>
@@ -88,10 +93,13 @@ const FlowMenu = () => {
                 <input
                   name="gravity"
                   type="radio"
-                  className="flow-type"
+                  className={styles["flow-type"]}
                   id="no-gravity"
                 />
-                <label htmlFor="no-gravity" className="modal-checkbox">
+                <label
+                  htmlFor="no-gravity"
+                  className={styles["modal-checkbox"]}
+                >
                   No Gravity
                 </label>
               </td>
@@ -102,13 +110,13 @@ const FlowMenu = () => {
                   type="number"
                   name="gravityForce"
                   placeholder="gravity force(m/s^2)"
-                  className="flow-detail-input"
+                  className={styles["flow-detail-input"]}
                 />
               </td>
             </thead>
           </table>
           <div>
-            <button type="button" className="flow-settings-done-btn">
+            <button type="button" className={styles["flow-settings-done-btn"]}>
               DONE
             </button>
           </div>

@@ -2,7 +2,7 @@
   background: linear-gradient(
     163deg,
     rgb(84, 144, 197) 30%,
-    rgb(255, 214, 214) 100%
+    rgb(135, 248, 225) 100%
   );
 
   display: flex;
@@ -12,8 +12,9 @@
 
 .main-title {
   color: white;
-  margin: 50px 0px;
+  margin: 30px 0px;
   font-size: 40px;
+  text-align: center;
 }
 
 .flex {
@@ -25,11 +26,11 @@
 /*- - - - - - - - - - */
 /*login page*/
 .login-box {
-  width: 400px;
+  width: 450px;
   margin: 0 auto;
-  border-radius: 10px;
+  border-radius: 9px;
   padding: 0px 30px;
-  background-color: rgba(240, 240, 240, 0.2);
+  background-color: rgba(240, 240, 240, 0.3);
   z-index: 10;
 }
 
@@ -45,17 +46,18 @@
   transition: all ease-out 0.2s;
 }
 
-.bi-arrow-left-circle {
+.arrow-icon {
   position: absolute;
-  top: 30px;
-  left: 0;
+  top: 0px;
+  left: 20px;
   color: white;
   font-size: 30px;
   transition: all ease-in 0.1s;
+  text-shadow: 0 2px 5px rgb(88, 124, 158);
 }
 
-.bi-arrow-left-circle:hover {
-  color: rgb(204, 204, 204);
+.arrow-icon:hover {
+  text-shadow: none;
   cursor: pointer;
 }
 
@@ -68,6 +70,7 @@ input:hover {
 }
 
 .login-btn {
+  width: 100%;
   margin-top: 10px;
   text-align: center;
   border-radius: 25px;
@@ -75,12 +78,16 @@ input:hover {
   color: rgb(120, 120, 120);
   font-weight: bold;
   cursor: pointer;
+  box-shadow: none;
 }
 
 .login-btn:hover {
-  transform: scale(1.03);
+  box-shadow: 0 2px 5px rgb(88, 124, 158);
   background-color: rgb(241, 248, 255);
-  box-shadow: 0 2px 30px rgba(99, 145, 187, 0.4);
+}
+
+.login-btn:active {
+  box-shadow: none;
 }
 
 .hr {

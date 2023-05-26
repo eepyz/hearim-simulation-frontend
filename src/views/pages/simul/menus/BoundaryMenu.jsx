@@ -1,23 +1,25 @@
 import { Fragment } from "react";
 
+import styles from "../../../../assets/css/Simulation.module.css";
+
 const BoundaryMenu = () => {
   return (
     <Fragment>
-      <div className="boundary-menu">
-        <div className="boundary-menu-title">Boundary Type</div>
-        <div id="wall" href="#" className="boundary-menu-elem">
+      <div className={styles["boundary-menu"]}>
+        <div className={styles["boundary-menu-title"]}>Boundary Type</div>
+        <div id="wall" href="#" className={styles["boundary-menu-elem"]}>
           Wall
         </div>
-        <div id="inflow" href="#" className="boundary-menu-elem">
+        <div id="inflow" href="#" className={styles["boundary-menu-elem"]}>
           Inflow
         </div>
-        <div id="outflow" href="#" className="boundary-menu-elem">
+        <div id="outflow" href="#" className={styles["boundary-menu-elem"]}>
           Outflow
         </div>
-        <div id="far-field" href="#" className="boundary-menu-elem">
+        <div id="far-field" href="#" className={styles["boundary-menu-elem"]}>
           Far-Field
         </div>
-        <div id="symmetry" href="#" className="boundary-menu-elem">
+        <div id="symmetry" href="#" className={styles["boundary-menu-elem"]}>
           Symmetry
         </div>
       </div>

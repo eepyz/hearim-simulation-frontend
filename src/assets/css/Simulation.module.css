@@ -1,8 +1,3 @@
-.threeDContainer {
-  width: 100%;
-  height: 100%;
-}
-
 .label div {
   user-select: none;
 }
@@ -18,6 +13,8 @@ html {
 }
 
 .container {
+  width: 100vw;
+  height: 100vh;
   background: linear-gradient(
     163deg,
     rgba(19, 34, 110, 1) 0%,
@@ -42,28 +39,29 @@ input[type="text"] {
   margin-right: 20px;
 }
 
-#tool-menu {
+.tool-menu {
   position: absolute;
   top: 10%;
   left: 1vw;
-  /* background-color: rgba(255, 255, 255, 0.7); */
   border-radius: 30px;
   z-index: 1;
   padding: 10px 0;
 }
 
-#tool-menu button {
+.tool-menu button {
   display: block;
   cursor: pointer;
   background-color: transparent;
   border: none;
-  color: rgb(148, 148, 176);
+  color: #fff8d6;
+  text-shadow: 0px 0px 1px rgb(74, 74, 74);
+  /* text-shadow: 0px 0px 1px white; */
   transition-duration: 0.2s;
   outline: none;
   margin: 3px 0px;
 }
 
-#tool-menu button input[type="file"] {
+.tool-menu button input[type="file"] {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -74,20 +72,19 @@ input[type="text"] {
   border: 0;
 }
 
-#tool-menu button :hover,
-#tool-menu label:hover {
+.tool-menu button :hover,
+.tool-menu label:hover {
   cursor: pointer;
   text-shadow: 0px 0px 3px rgb(103, 117, 209);
 }
 
-.material-symbols-outlined,
-.material-icons {
+.icons {
+  margin-top: 10px;
   transition: all ease 0.1s;
-  font-size: 25px;
+  font-size: 30px;
 }
 
-.material-symbols-outlined:hover,
-.material-icons:hover {
+.icons:hover {
   color: white;
 }
 
@@ -341,12 +338,12 @@ input[type="text"] {
 .boundary-menu-elem {
   margin-right: 30px;
   text-decoration: none;
-  transition: all ease 0.2s;
   opacity: 1;
   padding: 5px 10px;
   border-radius: 10px;
   color: rgb(52, 89, 168);
   border: 3px solid transparent;
+  transition: all ease 0.1s;
 }
 
 .boundary-menu-elem:hover {

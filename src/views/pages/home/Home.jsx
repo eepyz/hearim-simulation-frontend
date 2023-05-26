@@ -1,5 +1,7 @@
 import { Fragment } from "react";
 import { Link } from "react-router-dom";
+
+import GUIView from "./GUIView/GUIView";
 import styles from "../../../assets/css/Home.module.css";
 
 const Home = () => {
@@ -22,10 +24,14 @@ const Home = () => {
         <section className={styles.threeJs}>
           <div className={styles["change-stlfile-div"]}>
             <label htmlFor="stlfile">
-              <span className="material-symbols-outlined"> folder_open </span>
+              <span className={"material-symbols-outlined " + styles["icon"]}>
+                {" "}
+                folder_open{" "}
+              </span>
             </label>
             <input type="file" id="stlfile" />
           </div>
+          <GUIView />
         </section>
       </main>
     </Fragment>

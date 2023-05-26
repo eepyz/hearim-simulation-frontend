@@ -19,6 +19,9 @@ import Contact from "../views/pages/contact/Contact";
 
 import MyPage from "../views/pages/mypage/MyPage";
 
+import Login from "../views/pages/auth/Login";
+import Signup from "../views/pages/auth/Signup";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -58,6 +61,14 @@ const router = createBrowserRouter([
       {
         path: "mypage",
         element: <MyPage />,
+      },
+      {
+        path: "login",
+        element: <Login />,
+      },
+      {
+        path: "signup",
+        element: <Signup />,
       },
     ],
   },

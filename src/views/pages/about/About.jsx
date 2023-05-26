@@ -90,7 +90,7 @@ const About = () => {
                   className={styles["video"]}
                   src={aboutVideo}
                   controls
-                  autoplay
+                  autoPlay
                   muted
                   loop=""
                 ></video>
