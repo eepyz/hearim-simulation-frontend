@@ -1,6 +1,5 @@
 import { Fragment } from "react";
 
-Fragment;
 const ToolMenu = () => {
   return (
     <Fragment>

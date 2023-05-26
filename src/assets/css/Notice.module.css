@@ -96,7 +96,10 @@
   display: flex;
   flex-wrap: wrap;
   width: 1200px;
-  margin: 0 auto;
+  /* 나중에 글 로드까지 완료하면 css 깨지면 여기 보기 */
+  /* margin: 0 auto; */
+  justify-content: center;
+  /* border: 1px solid black; */
 }
 
 .notice-content-all::-webkit-scrollbar {
