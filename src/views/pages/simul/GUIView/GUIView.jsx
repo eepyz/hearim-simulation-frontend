@@ -14,7 +14,7 @@ const cameraConfig = {
   fov: 45,
   near: 0.1,
   far: 20000,
-  position: [-4, 3, 6],
+  position: [0, 13, 30],
 };
 
 const GUIView = () => {

@@ -13,16 +13,17 @@ import BoundaryInfo from "../../../../util/math/info/BoundaryInfo";
 //convert to jsx
 extend({ DragControls });
 
-const Model = ({ url }) => {
+const Model = (props) => {
   //ref
   const groupRef = useRef();
   const modelRef = useRef();
+  const lineRef = useRef();
   const orbitControlRef = useRef();
 
   //state
   const [hovered, setHover] = useState(false);
 
-  const [modelUrl, setModelUrl] = useState(url);
+  const [modelUrl, setModelUrl] = useState(props.url);
 
   const [meshList, setMeshList] = useState([]);
   const [lineList, setLineList] = useState([]);
@@ -31,7 +32,7 @@ const Model = ({ url }) => {
   const [boundary, setBoundary] = useState();
 
   //variables
-  const { camera, gl } = useThree();
+  const { camera, gl, viewport } = useThree();
   const stlGeometry = useLoader(STLLoader, modelUrl);
 
   //animate
@@ -43,17 +44,22 @@ const Model = ({ url }) => {
   //functions
   const createMeshes = (geometries) => {
     return geometries.map((geometry, index) => (
-      <mesh key={index} geometry={geometry}>
-        <meshStandardMaterial roughness={0.01} color="#97aff8" />
-        <Html
-          position={[10, 2, 0]}
-          wrapperClass="label"
-          center
-          distanceFactor={8}
-        >
-          <BoundaryDetail />
-        </Html>
-      </mesh>
+      <>
+        <mesh key={index} geometry={geometry} ref={modelRef}>
+          <meshStandardMaterial roughness={0.01} color="#97aff8" />
+          <Html
+            position={[10, 2, 0]}
+            wrapperClass="label"
+            center
+            distanceFactor={8}
+          >
+            <BoundaryDetail />
+          </Html>
+          <mesh key={index} geometry={geometry} ref={lineRef}>
+            <meshStandardMaterial roughness={0.01} color="white" wireframe />
+          </mesh>
+        </mesh>
+      </>
     ));
   };
 

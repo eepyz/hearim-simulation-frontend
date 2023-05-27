@@ -53,12 +53,11 @@ input[type="text"] {
   cursor: pointer;
   background-color: transparent;
   border: none;
-  color: #fff8d6;
   text-shadow: 0px 0px 1px rgb(74, 74, 74);
   /* text-shadow: 0px 0px 1px white; */
   transition-duration: 0.2s;
   outline: none;
-  margin: 3px 0px;
+  margin: 10px 0px;
 }
 
 .tool-menu button input[type="file"] {
@@ -79,13 +78,13 @@ input[type="text"] {
 }
 
 .icons {
-  margin-top: 10px;
+  color: white;
   transition: all ease 0.1s;
-  font-size: 30px;
+  font-size: 20px;
 }
 
 .icons:hover {
-  color: white;
+  color: #d6deff;
 }
 
 /* half edge angle range */
@@ -320,7 +319,7 @@ input[type="text"] {
   bottom: 5%;
   left: 25%;
   z-index: 1;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .boundary-menu-title {

@@ -16,7 +16,7 @@ const Plane = () => {
           mixBlur={0.5}
           mirror={0.5}
           color="white"
-          side={THREE.DoubleSide}
+          // side={THREE.DoubleSide}
         />
       </mesh>
     </>

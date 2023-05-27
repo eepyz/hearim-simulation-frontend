@@ -8,18 +8,70 @@ import FlowMenu from "./menus/FlowMenu";
 import styles from "../../../assets/css/Simulation.module.css";
 
 const Simulation = () => {
+  //state
   const [flowMenuOpen, setFlowMenuOpen] = useState(false);
-  const toggleFlowMenu = () => {
-    setFlowMenuOpen(!flowMenuOpen);
-  };
+
+  const [toolState, setToolState] = useState({
+    showLine: false,
+    findBoundary: false,
+    resetPosition: false,
+    rotateObject: false,
+    rotateCamera: false,
+    clippingObject: false,
+    showFlowSettings: true,
+    showBbox: false,
+    showIndicator: false,
+    showLookupTable: false,
+  });
+
+  const [indicatorState, setIndicatorState] = useState({
+    angleSearching: false,
+    angleSelected: false,
+    angleDecided: false,
+    flowAngle: {
+      selected: true,
+      value: {
+        theta: null,
+        phi: null,
+      },
+    },
+    gravityAngle: {
+      selected: false,
+      value: {
+        theta: null,
+        phi: null,
+      },
+    },
+  });
+
+  const [pointerState, setPointerState] = useState({
+    objectHovered: false,
+    objectClicked: false,
+    hoverInfo: {
+      number: null,
+      object: null,
+      face: null,
+    },
+    clickInfo: {
+      number: null,
+      object: null,
+      face: null,
+    },
+  });
+
+  const [controlState, setControlState] = useState({
+    isDragging: false,
+    isWindowResized: false,
+    isKeyLocked: false,
+  });
 
   return (
     <Fragment>
       <div className={styles["container"]}>
-        <GUIView />
+        <GUIView toolState={toolState} />
       </div>
       {flowMenuOpen && <FlowMenu />}
-      <ToolMenu />
+      <ToolMenu toolState={toolState} />
       <BoundaryMenu />
     </Fragment>
   );
