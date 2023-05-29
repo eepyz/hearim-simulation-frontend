@@ -2,15 +2,16 @@ import React, { useState, useRef, useEffect } from "react";
 import { useSelector } from "react-redux";
 
 import { extend, useThree, useFrame, useLoader } from "@react-three/fiber";
-import { Html, OrbitControls } from "@react-three/drei";
+import { Html, OrbitControls, CycleRaycast } from "@react-three/drei";
 
 import * as THREE from "three";
 import { DragControls } from "three/examples/jsm/controls/DragControls";
 import { STLLoader } from "three/examples/jsm/loaders/STLLoader";
 
-import BoundaryDetail from "../../userSettings/BoundarySettings";
+import BoundingBox from "../indicator/BoundingBox";
 import MeshInfo from "../../../../../util/math/info/MeshInfo";
 import BoundaryInfo from "../../../../../util/math/info/BoundaryInfo";
+import STLMeshes from "./STLMeshes";
 
 //convert to jsx
 extend({ DragControls });
@@ -20,19 +21,14 @@ const Model = (props) => {
 
   //ref
   const groupRef = useRef();
-  const modelRef = useRef();
-  const lineRef = useRef();
   const orbitControlRef = useRef();
 
   //state
-  const [hovered, setHover] = useState(false);
 
   const [modelUrl, setModelUrl] = useState(props.url);
-
   const [meshList, setMeshList] = useState([]);
   const [lineList, setLineList] = useState([]);
   const [meshInfoList, setMeshInfoList] = useState([]);
-
   const [boundary, setBoundary] = useState();
 
   //variables
@@ -40,32 +36,24 @@ const Model = (props) => {
   const stlGeometry = useLoader(STLLoader, modelUrl);
 
   //animate
-  useFrame(() => {
+  useFrame((state, delta) => {
     if (toolState.rotateObject) {
-      groupRef.current.rotation.y += 0.01;
+      groupRef.current.rotation.y += delta;
     }
   });
 
   //functions
+
   const createMeshes = (geometries) => {
-    return geometries.map((geometry, index) => (
+    const clippingSize = -1;
+    return geometries.map((geometry, i) => (
       <>
-        <mesh key={index} geometry={geometry} ref={modelRef}>
-          <meshStandardMaterial roughness={0.01} color="#97aff8" />
-          <Html
-            position={[10, 2, 0]}
-            wrapperClass="label"
-            center
-            distanceFactor={8}
-          >
-            <BoundaryDetail />
-          </Html>
-          {toolState.showLine && (
-            <mesh key={index} geometry={geometry} ref={lineRef}>
-              <meshStandardMaterial roughness={0.01} color="white" wireframe />
-            </mesh>
-          )}
-        </mesh>
+        <STLMeshes
+          geometry={geometry}
+          key={i}
+          name={"stlMesh-" + (i + 1)}
+          position={[0, 0, 0]}
+        />
       </>
     ));
   };
@@ -141,6 +129,7 @@ const Model = (props) => {
   //jsx
   return (
     <>
+      {toolState.showBbox && <BoundingBox stlGeometry={stlGeometry} />}
       <group ref={groupRef}>{createMeshes(meshList)}</group>
       <OrbitControls ref={orbitControlRef} args={[camera, gl.domElement]} />
     </>

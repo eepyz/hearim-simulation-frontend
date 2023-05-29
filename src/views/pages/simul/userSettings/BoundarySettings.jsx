@@ -11,11 +11,11 @@ const BoundarySettings = (props) => {
 
   return (
     <Fragment>
-      {!wallSelected && (
-        <div className="boundary-settings-box">
-          <div className="settings-title">Wall Settings</div>
+      {wallSelected && (
+        <div className={styles["boundary-settings-box"]}>
+          <div className={styles["settings-title"]}>Wall Settings</div>
 
-          <select id="velocity" className="boundary-settings-select">
+          <select id="velocity" className={styles["boundary-settings-select"]}>
             <option value="nearWallZeroV">
               Near Wall Zero Velocity(No-slip)
             </option>
@@ -24,8 +24,10 @@ const BoundarySettings = (props) => {
           </select>
 
           <div>
-            <button className="show-settings-detail-btn">Velocity</button>
-            <div className="boundary-settings-detail">
+            <button className={styles["show-settings-detail-btn"]}>
+              Velocity
+            </button>
+            <div className={styles["boundary-settings-detail"]}>
               <input id="wallV-nv-btn" type="radio" name="wallV" />
               <label htmlFor="wallV-nv-btn">Normal Velocity</label>
               <input id="wallV-nv" type="text" />
@@ -50,28 +52,35 @@ const BoundarySettings = (props) => {
             </div>
           </div>
 
-          <select id="temperature" className="boundary-settings-select">
+          <select
+            id="temperature"
+            className={styles["boundary-settings-select"]}
+          >
             <option value="adiabatic">Adiabatic</option>
             <option value="constantST">Constant Surface Temperature</option>
             <option value="ambientT">Ambient Temperature</option>
           </select>
 
           <div>
-            <button className="show-settings-detail-btn">Temperature</button>
-            <div className="boundary-settings-detail">
+            <button className={styles["show-settings-detail-btn"]}>
+              Temperature
+            </button>
+            <div className={styles["boundary-settings-detail"]}>
               <input id="constantST-t" type="text" />
               <span>[℃]</span>
             </div>
           </div>
 
-          <div className="boundary-settings-detail">
-            <button className="show-settings-detail-btn">Temperature</button>
+          <div className={styles["boundary-settings-detail"]}>
+            <button className={styles["show-settings-detail-btn"]}>
+              Temperature
+            </button>
             <input id="ambientT-highT-btn" type="radio" name="wallT" />
             <label htmlFor="ambientT-highT-btn">High Temperature </label>
             <input id="ambientT-highT" type="text" />
             <span>[℃]</span>
 
-            <div className="checkbox-div">
+            <div className={styles["checkbox-div"]}>
               <input type="checkbox" id="highT-radiative-btn" />
               <label htmlFor="highT-radiative-btn">
                 Radiative Heat Transfer Coefficient
@@ -88,7 +97,7 @@ const BoundarySettings = (props) => {
             <input id="ambientT-naturalV" type="text" />
             <span>[℃]</span>
 
-            <div className="checkbox-div">
+            <div className={styles["checkbox-div"]}>
               <input type="checkbox" id="naturalV-convective-btn" />
               <label htmlFor="naturalV-convective-btn">
                 Convective Heat Transfer Coefficient
@@ -105,7 +114,7 @@ const BoundarySettings = (props) => {
             <input id="ambientT-highV" type="text" />
             <span>[℃]</span>
 
-            <div className="checkbox-div">
+            <div className={styles["checkbox-div"]}>
               <input type="checkbox" id="highV-convective-btn" />
               <label htmlFor="highV-convective-btn">
                 Convective Heat Transfer Coefficient
@@ -118,9 +127,9 @@ const BoundarySettings = (props) => {
         </div>
       )}
       {!inflowSelected && (
-        <div className="boundary-settings-box">
-          <div className="settings-title">Inflow Settings</div>
-          <select id="subsFluid" className="boundary-settings-select">
+        <div className={styles["boundary-settings-box"]}>
+          <div className={styles["settings-title"]}>Inflow Settings</div>
+          <select id="subsFluid" className={styles["boundary-settings-select"]}>
             <option value="user">Substance Of Fluid : User</option>
             <option value="Air">Air</option>
             <option value="Nitrogen">Nitrogen</option>
@@ -134,23 +143,23 @@ const BoundarySettings = (props) => {
             <option value="Ar">Ar</option>
           </select>
 
-          <button className="show-settings-detail-btn">
+          <button className={styles["show-settings-detail-btn"]}>
             User Fluid Setting
           </button>
-          <div className="boundary-settings-detail">
-            <div className="title">Density</div>
+          <div className={styles["boundary-settings-detail"]}>
+            <div className={styles["title"]}>Density</div>
             <input id="fluidUser-density" type="text" />
             <span>[kg/m^3]</span>
 
-            <div className="title">Viscosity</div>
+            <div className={styles["title"]}>Viscosity</div>
             <input id="fluidUser-viscosity" type="text" />
             <span>[kg/m-s]</span>
 
-            <div className="title">Cp</div>
+            <div className={styles["title"]}>Cp</div>
             <input id="fluidUser-cp" type="text" />
             <span>[j/kg-K]</span>
 
-            <div className="title">Thermal Conductivity</div>
+            <div className={styles["title"]}>Thermal Conductivity</div>
             <input id="fluidUser-thermal" type="text" />
             <span>[w/m-K]</span>
           </div>
@@ -158,26 +167,32 @@ const BoundarySettings = (props) => {
           <div
             id="inflowP"
             value="inflowP"
-            className="boundary-settings-select-one"
+            className={styles["boundary-settings-select-one"]}
           >
             Property
           </div>
-          <button className="show-settings-detail-btn">Temperature</button>
-          <div className="boundary-settings-detail">
-            <div className="title">Inflow Temperature</div>
+          <button className={styles["show-settings-detail-btn"]}>
+            Temperature
+          </button>
+          <div className={styles["boundary-settings-detail"]}>
+            <div className={styles["title"]}>Inflow Temperature</div>
             <input id="inflowP-inflowT" type="text" />
             <span>[℃]</span>
           </div>
 
-          <button className="show-settings-detail-btn">Pressure</button>
-          <div className="boundary-settings-detail">
-            <div className="title">Static Pressure(Gage)</div>
+          <button className={styles["show-settings-detail-btn"]}>
+            Pressure
+          </button>
+          <div className={styles["boundary-settings-detail"]}>
+            <div className={styles["title"]}>Static Pressure(Gage)</div>
             <input id="inflowP-sp" type="text" />
             <span>[Pa]</span>
           </div>
 
-          <button className="show-settings-detail-btn">Velocity</button>
-          <div className="boundary-settings-detail">
+          <button className={styles["show-settings-detail-btn"]}>
+            Velocity
+          </button>
+          <div className={styles["boundary-settings-detail"]}>
             <input type="radio" id="inflowP-nv-btn" name="inflowV" />
             <label for="inflowP-nv-btn">
               Normal Velocity
@@ -189,7 +204,7 @@ const BoundarySettings = (props) => {
             <input
               id="inflowP-cv-btn"
               type="radio"
-              className="title"
+              className={styles["title"]}
               name="inflowV"
             />
             <label for="inflowP-cv-btn">
@@ -209,17 +224,24 @@ const BoundarySettings = (props) => {
         </div>
       )}
       {!outflowSelected && (
-        <div className="boundary-settings-box">
-          <div className="settings-title">Outflow Settings</div>
-          <div className="border">
-            <div className="boundary-settings-select-one"> Property</div>
-            <button className="show-settings-detail-btn">Pressure</button>
-            <div className="boundary-settings-detail">
-              <div className="title">Static Pressure (Gage)</div>
+        <div className={styles["boundary-settings-box"]}>
+          <div className={styles["settings-title"]}>Outflow Settings</div>
+          <div className={styles["border"]}>
+            <div className={styles["boundary-settings-select-one"]}>
+              {" "}
+              Property
+            </div>
+            <button className={styles["show-settings-detail-btn"]}>
+              Pressure
+            </button>
+            <div className={styles["boundary-settings-detail"]}>
+              <div className={styles["title"]}>Static Pressure (Gage)</div>
               <input id="outflowP-sp" type="text" />
               <span>[Pa]</span>
 
-              <button className="show-settings-detail-btn">Velocity</button>
+              <button className={styles["show-settings-detail-btn"]}>
+                Velocity
+              </button>
 
               <input id="outflowP-nsv-btn" type="radio" name="outflowV" />
               <label for="outflowP-nsv-btn">

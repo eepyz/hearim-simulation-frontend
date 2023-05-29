@@ -19,3 +19,7 @@ footer a {
 footer a:hover {
   color: rgb(25, 150, 222);
 }
+
+#color {
+  color: #292828;
+}
