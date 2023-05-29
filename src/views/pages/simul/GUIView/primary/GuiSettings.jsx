@@ -1,4 +1,4 @@
-const Settings = () => {
+const GuiSettings = () => {
   return (
     <>
       <directionalLight castShadow position={[-1, 1, 0]} intensity={1} />
@@ -7,4 +7,4 @@ const Settings = () => {
   );
 };
 
-export default Settings;
+export default GuiSettings;

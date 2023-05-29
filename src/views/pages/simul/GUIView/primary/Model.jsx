@@ -1,4 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useSelector } from "react-redux";
+
 import { extend, useThree, useFrame, useLoader } from "@react-three/fiber";
 import { Html, OrbitControls } from "@react-three/drei";
 
@@ -6,14 +8,16 @@ import * as THREE from "three";
 import { DragControls } from "three/examples/jsm/controls/DragControls";
 import { STLLoader } from "three/examples/jsm/loaders/STLLoader";
 
-import BoundaryDetail from "../Settings/BoundarySettings";
-import MeshInfo from "../../../../util/math/info/MeshInfo";
-import BoundaryInfo from "../../../../util/math/info/BoundaryInfo";
+import BoundaryDetail from "../../userSettings/BoundarySettings";
+import MeshInfo from "../../../../../util/math/info/MeshInfo";
+import BoundaryInfo from "../../../../../util/math/info/BoundaryInfo";
 
 //convert to jsx
 extend({ DragControls });
 
 const Model = (props) => {
+  const toolState = useSelector((state) => state.toolState);
+
   //ref
   const groupRef = useRef();
   const modelRef = useRef();
@@ -37,8 +41,9 @@ const Model = (props) => {
 
   //animate
   useFrame(() => {
-    // groupRef.current.rotation.x += 0.01;
-    // groupRef.current.rotation.y += 0.01;
+    if (toolState.rotateObject) {
+      groupRef.current.rotation.y += 0.01;
+    }
   });
 
   //functions
@@ -55,9 +60,11 @@ const Model = (props) => {
           >
             <BoundaryDetail />
           </Html>
-          <mesh key={index} geometry={geometry} ref={lineRef}>
-            <meshStandardMaterial roughness={0.01} color="white" wireframe />
-          </mesh>
+          {toolState.showLine && (
+            <mesh key={index} geometry={geometry} ref={lineRef}>
+              <meshStandardMaterial roughness={0.01} color="white" wireframe />
+            </mesh>
+          )}
         </mesh>
       </>
     ));

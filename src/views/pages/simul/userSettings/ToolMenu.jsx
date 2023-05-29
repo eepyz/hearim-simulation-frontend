@@ -1,7 +1,41 @@
 import { Fragment } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { toolStateActions } from "../../../../store/state/toolState";
 
 import styles from "../../../../assets/css/Simulation.module.css";
+
 const ToolMenu = () => {
+  const dispatch = useDispatch();
+  const ToolHandlers = {
+    showLine: () => {
+      dispatch(toolStateActions.showLine());
+    },
+    findBoundary: () => {
+      dispatch(toolStateActions.findBoundary());
+    },
+    resetPosition: () => {
+      dispatch(toolStateActions.resetPosition());
+    },
+    rotateObject: () => {
+      dispatch(toolStateActions.rotateObject());
+    },
+    rotateCamera: () => {
+      dispatch(toolStateActions.rotateCamera());
+    },
+    clippingObject: () => {
+      dispatch(toolStateActions.clippingObject());
+    },
+    showFlowSettings: () => {
+      dispatch(toolStateActions.showFlowSettings());
+    },
+    showBbox: () => {
+      dispatch(toolStateActions.showBbox());
+    },
+    showLookupTable: () => {
+      dispatch(toolStateActions.showLookupTable());
+    },
+  };
+
   return (
     <Fragment>
       <div className={styles["tool-menu"]}>
@@ -14,7 +48,7 @@ const ToolMenu = () => {
           <input type="file" id="stlfile" />
         </button>
 
-        <button id="show-Lines" type="button">
+        <button id="show-Lines" type="button" onClick={ToolHandlers.showLine}>
           <span className={"material-symbols-outlined " + styles["icons"]}>
             {" "}
             change_history{" "}
@@ -22,7 +56,12 @@ const ToolMenu = () => {
         </button>
 
         <div className="flex">
-          <button id="search-segment" type="button" title="[W] Select Surface">
+          <button
+            id="found-boundary"
+            type="button"
+            title="[W] Find Boundary"
+            onClick={ToolHandlers.findBoundary}
+          >
             <span className={"material-symbols-outlined " + styles["icons"]}>
               {" "}
               deployed_code{" "}
@@ -43,28 +82,48 @@ const ToolMenu = () => {
           </div> */}
         </div>
 
-        <button id="rotate-object" type="button" title="[E] Rotate Object">
+        <button
+          id="rotate-object"
+          type="button"
+          title="[E] Rotate Object"
+          onClick={ToolHandlers.rotateObject}
+        >
           <span className={"material-symbols-outlined " + styles["icons"]}>
             {" "}
             rotate_90_degrees_cw{" "}
           </span>
         </button>
 
-        <button id="reset-position" type="button" title="[R] Reset Position">
+        <button
+          id="reset-position"
+          type="button"
+          title="[R] Reset Position"
+          onClick={ToolHandlers.resetPosition}
+        >
           <span className={"material-symbols-outlined " + styles["icons"]}>
             {" "}
             sync{" "}
           </span>
         </button>
 
-        <button id="z-clipping" type="button" title="[T] Clipping Object">
+        <button
+          id="z-clipping"
+          type="button"
+          title="[T] Clipping Object"
+          onClick={ToolHandlers.clippingObject}
+        >
           <span className={"material-icons " + styles["icons"]}>
             {" "}
             content_cut{" "}
           </span>
         </button>
 
-        <button id="bounding-box" type="button" title="[B] Show Bounding Box">
+        <button
+          id="bounding-box"
+          type="button"
+          title="[B] Show Bounding Box"
+          onClick={ToolHandlers.showBbox}
+        >
           <span className={"material-icons " + styles["icons"]}>
             {" "}
             view_in_ar{" "}

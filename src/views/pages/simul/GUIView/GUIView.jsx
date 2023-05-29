@@ -1,6 +1,6 @@
-import Settings from "./Settings";
-import Model from "./Model";
-import Plane from "./Plane";
+import GuiSettings from "./primary/GuiSettings";
+import Model from "./primary/Model";
+import Plane from "./primary/Plane";
 
 import * as THREE from "three";
 import { STLLoader } from "three/examples/jsm/loaders/STLLoader";
@@ -23,7 +23,7 @@ const GUIView = () => {
   //view
   return (
     <Canvas camera={cameraConfig} shadows>
-      <Settings />
+      <GuiSettings />
       <Model url={url} />
       <Plane />
     </Canvas>
