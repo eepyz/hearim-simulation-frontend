@@ -1,8 +1,8 @@
 const GuiSettings = () => {
   return (
     <>
-      <directionalLight castShadow position={[-1, 1, 0]} intensity={1} />
-      <ambientLight intensity={0.5} />
+      <directionalLight position={[0, 1, 0]} intensity={0.5} />
+      <ambientLight intensity={1} />
     </>
   );
 };

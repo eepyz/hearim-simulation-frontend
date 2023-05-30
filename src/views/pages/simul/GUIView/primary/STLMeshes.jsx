@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { useSelector } from "react-redux";
 
 import { useFrame } from "@react-three/fiber";
-import { Html, useCursor } from "@react-three/drei";
+import { Html, useCursor, Resize } from "@react-three/drei";
 
 import * as THREE from "three";
 
@@ -22,7 +22,7 @@ const STLMeshes = (props) => {
   //functions
   const resetColor = () => {
     const colors = [];
-    const color = new THREE.Color("red");
+    const color = new THREE.Color("white");
     const positionAttribute =
       modelRef.current.geometry.getAttribute("position");
     for (let i = 0; i < positionAttribute.count; i += 3) {
@@ -121,36 +121,59 @@ const STLMeshes = (props) => {
     }
   };
 
+  //event functions
+  const meshClick = (e) => {
+    e.stopPropagation(),
+      setClicked(!clicked),
+      resetColor(),
+      toolState.findBoundary &&
+        SelectAndPaintFaces(e.face, new THREE.Color("#f16464"));
+  };
+
+  const meshHover = (e) => {
+    e.stopPropagation(), setHovered(true);
+  };
+
+  const meshLeave = (e) => {
+    setHovered(false);
+  };
+
+  //useCursor
   useCursor(hovered);
+
+  //useEffect
+  useEffect(() => {
+    resetColor();
+  }, []);
 
   useEffect(() => {
     setMeshInfo(props.meshInfo);
   }, [meshInfo]);
 
   return (
-    <mesh
-      {...props}
-      ref={modelRef}
-      receiveShadow
-      castShadow
-      onClick={(e) => (
-        e.stopPropagation(),
-        setClicked(!clicked),
-        resetColor(),
-        SelectAndPaintFaces(e.face, new THREE.Color("#12f"))
-      )}
-      onPointerOver={(e) => (e.stopPropagation(), setHovered(true))}
-      onPointerOut={(e) => setHovered(false)}
-      position={[-3, 0, 5]}
-    >
-      <meshStandardMaterial
-        roughness={1}
-        opacity={hovered ? 0.8 : 1}
-        color={clicked ? "pink" : hovered ? "pink" : "lightblue"}
-        // color={hovered ? "pink" : "lightblue"}
-        side={THREE.DoubleSide}
-      />
-      {clicked && (
+    <Resize width height>
+      <mesh
+        {...props}
+        ref={modelRef}
+        onClick={(e) => {
+          meshClick(e);
+        }}
+        onPointerOver={(e) => {
+          meshHover(e);
+        }}
+        onPointerOut={(e) => {
+          meshLeave(e);
+        }}
+      >
+        <meshStandardMaterial
+          roughness={1}
+          opacity={hovered ? 0.8 : 1}
+          // color={clicked ? "pink" : hovered ? "pink" : "lightblue"}
+          color={hovered ? "pink" : "lightblue"}
+          side={THREE.DoubleSide}
+          vertexColors={true}
+        />
+        {/* {clicked && (
         <Html
           position={[20, 5, 0]}
           wrapperClass="label"
@@ -160,19 +183,15 @@ const STLMeshes = (props) => {
         >
           <BoundaryDetail />
         </Html>
-      )}
+      )} */}
 
-      {toolState.showLine && (
-        <mesh {...props} ref={lineRef}>
-          <meshStandardMaterial
-            roughness={0.01}
-            color="#292828"
-            wireframe
-            vertexColors={true}
-          />
-        </mesh>
-      )}
-    </mesh>
+        {toolState.showLine && (
+          <mesh {...props} ref={lineRef}>
+            <meshStandardMaterial roughness={0.01} color="gray" wireframe />
+          </mesh>
+        )}
+      </mesh>
+    </Resize>
   );
 };
 export default STLMeshes;

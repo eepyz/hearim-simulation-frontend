@@ -19,6 +19,7 @@ const cameraConfig = {
 
 const GUIView = () => {
   const [url, setUrl] = useState("/models/duct_matched_ascii.stl");
+  // const [url, setUrl] = useState("/models/Manfold_solid_ascii.stl");
 
   //view
   return (
