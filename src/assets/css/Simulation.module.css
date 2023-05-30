@@ -174,7 +174,7 @@ input[type="text"] {
 
 .flow-settings-box {
   max-width: 500px;
-  margin: 15rem auto;
+  margin: 10rem auto;
   padding: 10px;
   background-color: rgba(231, 238, 253, 0.9);
   background-clip: padding-box;
@@ -258,14 +258,16 @@ input[type="text"] {
   transform: scale(1);
 }
 
+.flow-settings-done-div {
+  display: flex;
+  justify-content: end;
+  width: 100%;
+}
+
 .flow-settings-done-btn {
-  position: inherit;
-  width: 80px;
-  height: 40px;
   border: none;
   background-color: transparent;
   transition: all ease-out 0.1s;
-  font-weight: bold;
   color: #5575d4;
 }
 

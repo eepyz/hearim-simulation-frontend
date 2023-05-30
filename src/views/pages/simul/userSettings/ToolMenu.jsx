@@ -183,7 +183,11 @@ const ToolMenu = () => {
           </span>
         </button>
 
-        <button id="settings" title="[S] Open Flow Settings">
+        <button
+          id="settings"
+          title="[S] Open Flow Settings"
+          onClick={ToolHandlers.showFlowSettings}
+        >
           <span className={"material-symbols-outlined " + styles["icons"]}>
             {" "}
             settings{" "}

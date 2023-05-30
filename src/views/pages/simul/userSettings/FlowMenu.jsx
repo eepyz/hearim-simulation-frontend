@@ -1,8 +1,15 @@
 import { Fragment } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { toolStateActions } from "../../../../store/state/toolState";
 
 import styles from "../../../../assets/css/Simulation.module.css";
 
 const FlowMenu = () => {
+  const dispatch = useDispatch();
+  const closeFlowMenu = () => {
+    dispatch(toolStateActions.showFlowSettings());
+  };
+
   return (
     <Fragment>
       <div className={styles["flow-settings-container"]}>
@@ -111,8 +118,12 @@ const FlowMenu = () => {
               </div>
             </div>
           </div>
-          <div>
-            <button type="button" className={styles["flow-settings-done-btn"]}>
+          <div className={styles["flow-settings-done-div"]}>
+            <button
+              type="button"
+              className={styles["flow-settings-done-btn"]}
+              onClick={closeFlowMenu}
+            >
               DONE
             </button>
           </div>
