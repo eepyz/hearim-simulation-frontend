@@ -31,6 +31,9 @@ const ToolMenu = () => {
     showBbox: () => {
       dispatch(toolStateActions.showBbox());
     },
+    showIndicator: () => {
+      dispatch(toolStateActions.showIndicator());
+    },
     showLookupTable: () => {
       dispatch(toolStateActions.showLookupTable());
     },
@@ -134,6 +137,7 @@ const ToolMenu = () => {
           id="indicator-activated"
           type="button"
           title="[I] Indicator Activate"
+          onClick={ToolHandlers.showIndicator}
         >
           <span className={"material-icons " + styles["icons"]}> near_me </span>
         </button>

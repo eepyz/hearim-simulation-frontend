@@ -1,10 +1,7 @@
 import * as THREE from "three";
 import { Edges } from "@react-three/drei";
 const BoundingBox = (props) => {
-  const stlGeometry = props.stlGeometry;
-  stlGeometry.computeBoundingBox();
-
-  const box = stlGeometry.boundingBox;
+  const box = props.box;
   const boxMax = Math.max(
     box.max.x - box.min.x,
     box.max.y - box.min.y,

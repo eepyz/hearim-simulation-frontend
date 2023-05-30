@@ -8,7 +8,10 @@ import * as THREE from "three";
 import { DragControls } from "three/examples/jsm/controls/DragControls";
 import { STLLoader } from "three/examples/jsm/loaders/STLLoader";
 
-import BoundingBox from "../indicator/BoundingBox";
+import BoundingBox from "../helpers/BoundingBox";
+import BoundingSphere from "../helpers/BoundingSphere";
+import Arrow from "../helpers/Arrow";
+
 import MeshInfo from "../../../../../util/math/info/MeshInfo";
 import BoundaryInfo from "../../../../../util/math/info/BoundaryInfo";
 import STLMeshes from "./STLMeshes";
@@ -24,7 +27,6 @@ const Model = (props) => {
   const orbitControlRef = useRef();
 
   //state
-
   const [modelUrl, setModelUrl] = useState(props.url);
   const [meshList, setMeshList] = useState([]);
   const [lineList, setLineList] = useState([]);
@@ -34,6 +36,7 @@ const Model = (props) => {
   //variables
   const { camera, gl, viewport } = useThree();
   const stlGeometry = useLoader(STLLoader, modelUrl);
+  stlGeometry.computeBoundingBox();
 
   //animate
   useFrame((state, delta) => {
@@ -43,7 +46,6 @@ const Model = (props) => {
   });
 
   //functions
-
   const createMeshes = (geometries) => {
     const clippingSize = -1;
     return geometries.map((geometry, i) => (
@@ -52,7 +54,7 @@ const Model = (props) => {
           geometry={geometry}
           key={i}
           name={"stlMesh-" + (i + 1)}
-          position={[0, 0, 0]}
+          meshInfo={meshInfoList[i]}
         />
       </>
     ));
@@ -129,8 +131,14 @@ const Model = (props) => {
   //jsx
   return (
     <>
-      {toolState.showBbox && <BoundingBox stlGeometry={stlGeometry} />}
+      {toolState.showBbox && <BoundingBox box={stlGeometry.boundingBox} />}
       <group ref={groupRef}>{createMeshes(meshList)}</group>
+      {toolState.showIndicator && (
+        <group>
+          <BoundingSphere box={stlGeometry.boundingBox} />
+          <Arrow />
+        </group>
+      )}
       <OrbitControls ref={orbitControlRef} args={[camera, gl.domElement]} />
     </>
   );
