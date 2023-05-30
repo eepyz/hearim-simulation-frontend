@@ -8,17 +8,11 @@ const FlowMenu = () => {
       <div className={styles["flow-settings-container"]}>
         <div className={styles["flow-settings-box"]}>
           <div>
-            <div className={styles["flow-settings-title"]}>
-              <span className={styles["material-symbols-outlined icon"]}>
-                {" "}
-                water{" "}
-              </span>
-              Flow Settings
-            </div>
+            <div className={styles["flow-settings-title"]}>Flow Settings</div>
           </div>
-          <table className={styles["flow-settings-table"]}>
-            <thead>
-              <td>
+          <div className={styles["flow-settings-table"]}>
+            <div className="flex">
+              <div className={styles["flow-settings-checkbox"]}>
                 <input
                   name="inout"
                   type="radio"
@@ -28,8 +22,8 @@ const FlowMenu = () => {
                 <label htmlFor="internal" className={styles["modal-checkbox"]}>
                   Internal Flow
                 </label>
-              </td>
-              <td>
+              </div>
+              <div>
                 <input
                   name="inout"
                   type="radio"
@@ -39,10 +33,10 @@ const FlowMenu = () => {
                 <label htmlFor="external" className={styles["modal-checkbox"]}>
                   External Flow
                 </label>
-              </td>
-            </thead>
-            <thead>
-              <td>
+              </div>
+            </div>
+            <div className="flex">
+              <div className={styles["flow-settings-checkbox"]}>
                 <input
                   name="continuity"
                   type="radio"
@@ -52,8 +46,8 @@ const FlowMenu = () => {
                 <label htmlFor="transient" className={styles["modal-checkbox"]}>
                   Transient Flow
                 </label>
-              </td>
-              <td>
+              </div>
+              <div>
                 <input
                   name="continuity"
                   type="radio"
@@ -64,20 +58,22 @@ const FlowMenu = () => {
                 <label htmlFor="steady" className={styles["modal-checkbox"]}>
                   Steady Flow
                 </label>
-              </td>
-            </thead>
-            <thead>
-              <td v-show="flowSettings.continuity.physicalFlowTime.show">
+              </div>
+            </div>
+            <div className="flex">
+              <div
+              // v-show="flowSettings.continuity.physicalFlowTime.show"
+              >
                 <input
                   type="number"
                   name="physicalFlow"
                   placeholder="physical flow time(s)"
                   className={styles["flow-detail-input"]}
                 />
-              </td>
-            </thead>
-            <thead>
-              <td>
+              </div>
+            </div>
+            <div className="flex">
+              <div className={styles["flow-settings-checkbox"]}>
                 <input
                   name="gravity"
                   type="radio"
@@ -87,9 +83,9 @@ const FlowMenu = () => {
                 <label htmlFor="gravity" className={styles["modal-checkbox"]}>
                   Gravity
                 </label>
-              </td>
+              </div>
 
-              <td>
+              <div>
                 <input
                   name="gravity"
                   type="radio"
@@ -102,19 +98,19 @@ const FlowMenu = () => {
                 >
                   No Gravity
                 </label>
-              </td>
-            </thead>
-            <thead>
-              <td>
+              </div>
+            </div>
+            <div className="flex">
+              <div>
                 <input
                   type="number"
                   name="gravityForce"
                   placeholder="gravity force(m/s^2)"
                   className={styles["flow-detail-input"]}
                 />
-              </td>
-            </thead>
-          </table>
+              </div>
+            </div>
+          </div>
           <div>
             <button type="button" className={styles["flow-settings-done-btn"]}>
               DONE

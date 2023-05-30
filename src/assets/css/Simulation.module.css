@@ -189,22 +189,11 @@ input[type="text"] {
   color: #5575d4;
 }
 
-.icon {
-  color: white;
-  margin-right: 10px;
-  font-size: 30px;
-}
-
-.icon:hover {
-  color: #5575d4;
-}
-
 .flow-settings-table {
-  margin: 0 auto;
+  margin-left: 50px;
 }
 
-.flow-settings-table td {
-  padding: 5px;
+.flow-settings-checkbox {
   width: 200px;
 }
 
@@ -296,12 +285,16 @@ input[type="text"] {
 }
 
 .flow-detail-input {
+  width: 170px;
+  height: 20px;
   text-align: center;
   border: none;
   border-radius: 5px;
-  height: 25px;
-  transition: all ease-out 0.2s;
   margin-left: 20px;
+  margin-bottom: 20px;
+  font-size: 13px;
+  transition: all ease-out 0.2s;
+  padding: 5px;
 }
 
 /* boundary menu */
