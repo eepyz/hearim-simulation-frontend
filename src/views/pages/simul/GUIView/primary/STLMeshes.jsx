@@ -144,7 +144,7 @@ const STLMeshes = (props) => {
   //useEffect
   useEffect(() => {
     resetColor();
-  }, []);
+  }, [toolState.findBoundary]);
 
   useEffect(() => {
     setMeshInfo(props.meshInfo);
@@ -169,7 +169,7 @@ const STLMeshes = (props) => {
           roughness={1}
           opacity={hovered ? 0.8 : 1}
           // color={clicked ? "pink" : hovered ? "pink" : "lightblue"}
-          color={hovered ? "pink" : "lightblue"}
+          color={toolState.findBoundary && hovered ? "pink" : "lightblue"}
           side={THREE.DoubleSide}
           vertexColors={true}
         />

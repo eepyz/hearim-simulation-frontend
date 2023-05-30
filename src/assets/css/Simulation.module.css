@@ -71,7 +71,7 @@ input[type="text"] {
 
 .tool-menu button :hover,
 .tool-menu label:hover {
-  transform: translateY(-5px);
+  /* transform: translateY(-5px); */
   text-shadow: 0px 0px 3px rgb(103, 117, 209);
   cursor: pointer;
 }
@@ -84,6 +84,11 @@ input[type="text"] {
 
 .icons:hover {
   color: #d6deff;
+}
+
+.icons-clicked {
+  color: rgb(121, 119, 245);
+  font-size: 20px;
 }
 
 /* half edge angle range */

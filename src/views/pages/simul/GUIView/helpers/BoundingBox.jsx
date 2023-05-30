@@ -18,7 +18,7 @@ const BoundingBox = (props) => {
     <mesh>
       <boxGeometry args={[bboxX, bboxY, bboxZ]} />
       <meshBasicMaterial transparent opacity={0.5} />
-      <Edges />
+      <Edges color="gray" />
     </mesh>
   );
 };

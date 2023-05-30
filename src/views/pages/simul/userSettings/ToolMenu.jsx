@@ -6,6 +6,8 @@ import styles from "../../../../assets/css/Simulation.module.css";
 
 const ToolMenu = () => {
   const dispatch = useDispatch();
+  const toolState = useSelector((state) => state.toolState);
+
   const ToolHandlers = {
     showLine: () => {
       dispatch(toolStateActions.showLine());
@@ -52,7 +54,13 @@ const ToolMenu = () => {
         </button>
 
         <button id="show-Lines" type="button" onClick={ToolHandlers.showLine}>
-          <span className={"material-symbols-outlined " + styles["icons"]}>
+          <span
+            className={
+              toolState.showLine
+                ? "material-symbols-outlined " + styles["icons-clicked"]
+                : "material-symbols-outlined " + styles["icons"]
+            }
+          >
             {" "}
             change_history{" "}
           </span>
@@ -65,7 +73,13 @@ const ToolMenu = () => {
             title="[W] Find Boundary"
             onClick={ToolHandlers.findBoundary}
           >
-            <span className={"material-symbols-outlined " + styles["icons"]}>
+            <span
+              className={
+                toolState.findBoundary
+                  ? "material-symbols-outlined " + styles["icons-clicked"]
+                  : "material-symbols-outlined " + styles["icons"]
+              }
+            >
               {" "}
               deployed_code{" "}
             </span>
@@ -91,7 +105,13 @@ const ToolMenu = () => {
           title="[E] Rotate Object"
           onClick={ToolHandlers.rotateObject}
         >
-          <span className={"material-symbols-outlined " + styles["icons"]}>
+          <span
+            className={
+              toolState.rotateObject
+                ? "material-symbols-outlined " + styles["icons-clicked"]
+                : "material-symbols-outlined " + styles["icons"]
+            }
+          >
             {" "}
             rotate_90_degrees_cw{" "}
           </span>
@@ -115,7 +135,13 @@ const ToolMenu = () => {
           title="[T] Clipping Object"
           onClick={ToolHandlers.clippingObject}
         >
-          <span className={"material-icons " + styles["icons"]}>
+          <span
+            className={
+              toolState.clippingObject
+                ? "material-symbols-outlined " + styles["icons-clicked"]
+                : "material-symbols-outlined " + styles["icons"]
+            }
+          >
             {" "}
             content_cut{" "}
           </span>
@@ -127,7 +153,13 @@ const ToolMenu = () => {
           title="[B] Show Bounding Box"
           onClick={ToolHandlers.showBbox}
         >
-          <span className={"material-icons " + styles["icons"]}>
+          <span
+            className={
+              toolState.showBbox
+                ? "material-symbols-outlined " + styles["icons-clicked"]
+                : "material-symbols-outlined " + styles["icons"]
+            }
+          >
             {" "}
             view_in_ar{" "}
           </span>
@@ -139,11 +171,20 @@ const ToolMenu = () => {
           title="[I] Indicator Activate"
           onClick={ToolHandlers.showIndicator}
         >
-          <span className={"material-icons " + styles["icons"]}> near_me </span>
+          <span
+            className={
+              toolState.showIndicator
+                ? "material-symbols-outlined " + styles["icons-clicked"]
+                : "material-symbols-outlined " + styles["icons"]
+            }
+          >
+            {" "}
+            near_me{" "}
+          </span>
         </button>
 
         <button id="settings" title="[S] Open Flow Settings">
-          <span className={"material-icons " + styles["icons"]}>
+          <span className={"material-symbols-outlined " + styles["icons"]}>
             {" "}
             settings{" "}
           </span>
