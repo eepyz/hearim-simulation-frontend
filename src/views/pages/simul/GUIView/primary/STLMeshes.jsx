@@ -1,5 +1,6 @@
-import React, { useState, useRef, useEffect } from "react";
-import { useSelector } from "react-redux";
+import React, { useState, useRef, useEffect, useContext } from "react";
+
+import { useSelector, useDispatch } from "react-redux";
 
 import { useFrame } from "@react-three/fiber";
 import { Html, useCursor, Resize } from "@react-three/drei";
@@ -7,19 +8,31 @@ import { Html, useCursor, Resize } from "@react-three/drei";
 import * as THREE from "three";
 
 import BoundingSphere from "../helpers/BoundingSphere";
-import BoundaryDetail from "../../userSettings/BoundarySettings";
+
+import BoundaryInfo from "../../../../../util/math/info/BoundaryInfo";
+
+import { boundaryActions } from "../../../../../store/config/boundary";
+
+import { BoundariesContext } from "./Model";
 
 const STLMeshes = (props) => {
+  const dispatch = useDispatch();
   const toolState = useSelector((state) => state.toolState);
 
+  const [setBoundaries, setBoundary, boundaries, boundary] =
+    useContext(BoundariesContext);
+  //useRef----------------------------------------------------------------------------------
   const modelRef = useRef();
   const lineRef = useRef();
 
+  //useState---------------------------------------------------------------------------------
   const [hovered, setHovered] = useState(false);
   const [clicked, setClicked] = useState(false);
+  const [faceClicked, setFaceClicked] = useState(false);
   const [meshInfo, setMeshInfo] = useState(null);
+  const [currentMesh, setCurrentMesh] = useState(null);
 
-  //functions
+  //functions------------------------------------------------------------------------------
   const resetColor = () => {
     const colors = [];
     const color = new THREE.Color("white");
@@ -38,18 +51,23 @@ const STLMeshes = (props) => {
   };
 
   const SelectAndPaintFaces = (face, color) => {
+    //change color of clicked face
     const colorAttribute = modelRef.current.geometry.getAttribute("color");
     colorAttribute.setXYZ(face.a, color.r, color.g, color.b);
     colorAttribute.setXYZ(face.b, color.r, color.g, color.b);
     colorAttribute.setXYZ(face.c, color.r, color.g, color.b);
     colorAttribute.needsUpdate = true;
 
+    //change color of halfedge triangles which is neighbor with face
     if (meshInfo) {
       let first = meshInfo.getTriangle(face.a, face.b, face.c);
       let last = undefined;
       let twinT;
       let searchedTriangles = [];
       let detectedTriangles = {};
+
+      let boundaryID;
+      const updatedBoundaries = {};
 
       let currentTriangles = {};
       function saveSurfaceTriangle(triangle) {
@@ -118,14 +136,33 @@ const STLMeshes = (props) => {
       let key = Object.keys(detectedTriangles);
       let firstTi = key[0];
       let lastTi = key[key.length - 1];
+
+      boundaryID = [firstTi, lastTi];
+
+      if (!([boundaryID] in updatedBoundaries)) {
+        updatedBoundaries[boundaryID] = new BoundaryInfo();
+        updatedBoundaries[boundaryID].id = boundaryID;
+        updatedBoundaries[boundaryID].mesh = currentMesh;
+        Object.assign(updatedBoundaries[boundaryID].triangle, currentTriangles);
+      }
+
+      setBoundary(updatedBoundaries[boundaryID]);
+      setBoundaries((prev) => ({ ...prev, ...updatedBoundaries }));
+      console.log(boundaries);
+      console.log(boundary);
     }
+
+    setFaceClicked(true);
   };
 
-  //event functions
+  //event functions---------------------------------------------------------------------------
   const meshClick = (e) => {
+    // console.log(Number(e.object.name.substr(-1)));
     e.stopPropagation(),
-      setClicked(!clicked),
+      // setClicked(!clicked),
+      setClicked(true),
       resetColor(),
+      setCurrentMesh(e.object.name),
       toolState.findBoundary &&
         SelectAndPaintFaces(e.face, new THREE.Color("#f16464"));
   };
@@ -138,10 +175,10 @@ const STLMeshes = (props) => {
     setHovered(false);
   };
 
-  //useCursor
+  //useCursor------------------------------------------------------------------------------
   useCursor(hovered);
 
-  //useEffect
+  //useEffect------------------------------------------------------------------------------
   useEffect(() => {
     resetColor();
   }, [toolState.findBoundary]);
@@ -150,6 +187,10 @@ const STLMeshes = (props) => {
     setMeshInfo(props.meshInfo);
   }, [meshInfo]);
 
+  //useFrame------------------------------------------------------------------------------
+  useFrame((_, delta) => {});
+
+  //----------------------------------------------------------------------------------------
   return (
     <Resize width height>
       <mesh
@@ -173,18 +214,6 @@ const STLMeshes = (props) => {
           side={THREE.DoubleSide}
           vertexColors={true}
         />
-        {/* {clicked && (
-        <Html
-          position={[20, 5, 0]}
-          wrapperClass="label"
-          center
-          //   distanceFactor={8}
-          distanceFactor={30}
-        >
-          <BoundaryDetail />
-        </Html>
-      )} */}
-
         {toolState.showLine && (
           <mesh {...props} ref={lineRef}>
             <meshStandardMaterial roughness={0.01} color="gray" wireframe />

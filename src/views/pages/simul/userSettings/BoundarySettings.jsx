@@ -1,13 +1,20 @@
-import { Html } from "@react-three/drei";
 import { Fragment, useState } from "react";
+
+import { Html } from "@react-three/drei";
 
 import styles from "../../../../assets/css/Simulation.module.css";
 
 const BoundarySettings = (props) => {
   //이거 Model에서 설정하고 boundaryMenu, BoundarySettings로 넘겨줘야함
-  const [wallSelected, setWallSelected] = useState(true);
-  const [inflowSelected, setInflowSelected] = useState(true);
-  const [outflowSelected, setOutflowSelected] = useState(true);
+  const [wallSelected, setWallSelected] = useState(
+    props.boundary.wall.selected
+  );
+  const [inflowSelected, setInflowSelected] = useState(
+    props.boundary.inflow.selected
+  );
+  const [outflowSelected, setOutflowSelected] = useState(
+    props.boundary.outflow.selected
+  );
 
   return (
     <Fragment>
@@ -126,7 +133,7 @@ const BoundarySettings = (props) => {
           </div>
         </div>
       )}
-      {!inflowSelected && (
+      {inflowSelected && (
         <div className={styles["boundary-settings-box"]}>
           <div className={styles["settings-title"]}>Inflow Settings</div>
           <select id="subsFluid" className={styles["boundary-settings-select"]}>
@@ -194,7 +201,7 @@ const BoundarySettings = (props) => {
           </button>
           <div className={styles["boundary-settings-detail"]}>
             <input type="radio" id="inflowP-nv-btn" name="inflowV" />
-            <label for="inflowP-nv-btn">
+            <label htmlFor="inflowP-nv-btn">
               Normal Velocity
               <br />
             </label>
@@ -207,7 +214,7 @@ const BoundarySettings = (props) => {
               className={styles["title"]}
               name="inflowV"
             />
-            <label for="inflowP-cv-btn">
+            <label htmlFor="inflowP-cv-btn">
               Cartesian Velocity
               <br />
             </label>
@@ -223,7 +230,7 @@ const BoundarySettings = (props) => {
           </div>
         </div>
       )}
-      {!outflowSelected && (
+      {outflowSelected && (
         <div className={styles["boundary-settings-box"]}>
           <div className={styles["settings-title"]}>Outflow Settings</div>
           <div className={styles["border"]}>
@@ -244,7 +251,7 @@ const BoundarySettings = (props) => {
               </button>
 
               <input id="outflowP-nsv-btn" type="radio" name="outflowV" />
-              <label for="outflowP-nsv-btn">
+              <label htmlFor="outflowP-nsv-btn">
                 Normal Suction Velocity
                 <br />
               </label>
@@ -252,7 +259,7 @@ const BoundarySettings = (props) => {
               <span>[m/s]</span>
 
               <input id="outflowP-cv-btn" type="radio" name="outflowV" />
-              <label for="outflowP-cv-btn">
+              <label htmlFor="outflowP-cv-btn">
                 Cartessian Velocity
                 <br />
               </label>
