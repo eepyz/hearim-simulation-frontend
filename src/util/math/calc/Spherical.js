@@ -85,4 +85,4 @@ class Spherical {
   }
 }
 
-export { Spherical };
+export default Spherical;

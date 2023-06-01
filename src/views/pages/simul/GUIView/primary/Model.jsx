@@ -1,28 +1,21 @@
-import React, {
-  useState,
-  useRef,
-  useEffect,
-  createContext,
-  useContext,
-} from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 
 import { useSelector } from "react-redux";
 
 import { extend, useThree, useFrame, useLoader } from "@react-three/fiber";
-import { Html, OrbitControls, CycleRaycast } from "@react-three/drei";
+import { OrbitControls, CycleRaycast } from "@react-three/drei";
 
 import * as THREE from "three";
 import { DragControls } from "three/examples/jsm/controls/DragControls";
 import { STLLoader } from "three/examples/jsm/loaders/STLLoader";
 
 import BoundingBox from "../helpers/BoundingBox";
-import BoundingSphere from "../helpers/BoundingSphere";
-import Arrow from "../helpers/Arrow";
+import FlowAngleIndicator from "../helpers/FlowAngleIndicator";
+
+import { BoundariesContext } from "../../Simulation";
 
 import MeshInfo from "../../../../../util/math/info/MeshInfo";
-import BoundaryInfo from "../../../../../util/math/info/BoundaryInfo";
 import STLMeshes from "./STLMeshes";
-import BoundarySettings from "../../userSettings/BoundarySettings";
 
 //convert to jsx
 extend({ DragControls });
@@ -30,7 +23,9 @@ extend({ DragControls });
 const Model = (props) => {
   //useSelector
   const toolState = useSelector((state) => state.toolState);
-
+  //useContext
+  const [setBoundaries, setBoundary, boundaries, boundary] =
+    useContext(BoundariesContext);
   //ref
   const groupRef = useRef();
   const orbitControlRef = useRef();
@@ -41,8 +36,6 @@ const Model = (props) => {
   const [lineList, setLineList] = useState([]);
   const [meshInfoList, setMeshInfoList] = useState([]);
   const [meshPosition, setMeshPosition] = useState([0, 0, 0]);
-  const [boundaries, setBoundaries] = useState({});
-  const [boundary, setBoundary] = useState(new BoundaryInfo());
 
   //variables
   const { camera, gl, viewport } = useThree();
@@ -61,6 +54,9 @@ const Model = (props) => {
     const clippingSize = -1;
     return geometries.map((geometry, i) => (
       <STLMeshes
+        setBoundaries={setBoundaries}
+        setBoundary={setBoundary}
+        boundary={boundary}
         geometry={geometry}
         key={i}
         name={"stlMesh-" + (i + 1)}
@@ -138,34 +134,16 @@ const Model = (props) => {
 
   //jsx
   return (
-    <BoundariesContext.Provider
-      value={[setBoundaries, setBoundary, boundaries, boundary]}
-    >
+    <>
       {toolState.showBbox && <BoundingBox box={stlGeometry.boundingBox} />}
-      <group ref={groupRef}>
-        {createMeshes(meshList)}
-        {
-          <Html
-            wrapperClass="label"
-            // center
-            //   distanceFactor={8}
-            // distanceFactor={8}
-          >
-            {/* <BoundarySettings /> */}
-          </Html>
-        }
-      </group>
+      <group ref={groupRef}>{createMeshes(meshList)}</group>
 
       {toolState.showIndicator && (
-        <group>
-          <BoundingSphere box={stlGeometry.boundingBox} />
-          <Arrow />
-        </group>
+        <FlowAngleIndicator box={stlGeometry.boundingBox} />
       )}
       <OrbitControls ref={orbitControlRef} args={[camera, gl.domElement]} />
-    </BoundariesContext.Provider>
+    </>
   );
 };
 
 export default Model;
-export const BoundariesContext = createContext(null);

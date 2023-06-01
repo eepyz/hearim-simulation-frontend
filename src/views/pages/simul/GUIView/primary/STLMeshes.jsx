@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useContext } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 import { useSelector, useDispatch } from "react-redux";
 
@@ -7,20 +7,16 @@ import { Html, useCursor, Resize } from "@react-three/drei";
 
 import * as THREE from "three";
 
-import BoundingSphere from "../helpers/BoundingSphere";
+import BoundingSphere from "../helpers/FlowAngleIndicator";
 
 import BoundaryInfo from "../../../../../util/math/info/BoundaryInfo";
 
 import { boundaryActions } from "../../../../../store/config/boundary";
 
-import { BoundariesContext } from "./Model";
-
 const STLMeshes = (props) => {
   const dispatch = useDispatch();
   const toolState = useSelector((state) => state.toolState);
 
-  const [setBoundaries, setBoundary, boundaries, boundary] =
-    useContext(BoundariesContext);
   //useRef----------------------------------------------------------------------------------
   const modelRef = useRef();
   const lineRef = useRef();
@@ -146,10 +142,8 @@ const STLMeshes = (props) => {
         Object.assign(updatedBoundaries[boundaryID].triangle, currentTriangles);
       }
 
-      setBoundary(updatedBoundaries[boundaryID]);
-      setBoundaries((prev) => ({ ...prev, ...updatedBoundaries }));
-      console.log(boundaries);
-      console.log(boundary);
+      props.setBoundary(updatedBoundaries[boundaryID]);
+      props.setBoundaries((prev) => ({ ...prev, ...updatedBoundaries }));
     }
 
     setFaceClicked(true);
@@ -192,7 +186,7 @@ const STLMeshes = (props) => {
 
   //----------------------------------------------------------------------------------------
   return (
-    <Resize width height>
+    <>
       <mesh
         {...props}
         ref={modelRef}
@@ -220,7 +214,7 @@ const STLMeshes = (props) => {
           </mesh>
         )}
       </mesh>
-    </Resize>
+    </>
   );
 };
 export default STLMeshes;

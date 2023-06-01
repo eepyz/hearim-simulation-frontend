@@ -1,20 +1,17 @@
-import { Fragment, useState } from "react";
+import { Fragment, useState, useContext } from "react";
 
 import { Html } from "@react-three/drei";
 
+import { BoundariesContext } from "../Simulation";
+
 import styles from "../../../../assets/css/Simulation.module.css";
 
-const BoundarySettings = (props) => {
-  //이거 Model에서 설정하고 boundaryMenu, BoundarySettings로 넘겨줘야함
-  const [wallSelected, setWallSelected] = useState(
-    props.boundary.wall.selected
-  );
-  const [inflowSelected, setInflowSelected] = useState(
-    props.boundary.inflow.selected
-  );
-  const [outflowSelected, setOutflowSelected] = useState(
-    props.boundary.outflow.selected
-  );
+const BoundarySettings = () => {
+  const [boundary] = useContext(BoundariesContext);
+
+  const [wallSelected, setWallSelected] = useState(true);
+  const [inflowSelected, setInflowSelected] = useState(false);
+  const [outflowSelected, setOutflowSelected] = useState(false);
 
   return (
     <Fragment>

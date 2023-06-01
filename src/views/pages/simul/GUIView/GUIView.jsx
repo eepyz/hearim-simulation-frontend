@@ -31,7 +31,7 @@ const GUIView = () => {
     >
       <GuiSettings />
       <Model url={url} />
-      <Plane />
+      {/* <Plane /> */}
     </Canvas>
   );
 };
