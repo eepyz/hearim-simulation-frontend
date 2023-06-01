@@ -1,20 +1,19 @@
 import React, { useState, useRef, useEffect } from "react";
 
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 import { useFrame } from "@react-three/fiber";
 import { Html, useCursor, Resize } from "@react-three/drei";
 
 import * as THREE from "three";
 
-import BoundingSphere from "../helpers/FlowAngleIndicator";
+import BoundingSphere from "../helpers/AngleIndicator";
 
 import BoundaryInfo from "../../../../../util/math/info/BoundaryInfo";
 
 import { boundaryActions } from "../../../../../store/config/boundary";
 
 const STLMeshes = (props) => {
-  const dispatch = useDispatch();
   const toolState = useSelector((state) => state.toolState);
 
   //useRef----------------------------------------------------------------------------------

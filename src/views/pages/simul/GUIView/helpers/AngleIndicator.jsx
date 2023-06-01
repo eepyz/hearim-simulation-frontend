@@ -1,12 +1,23 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { useThree, useFrame } from "@react-three/fiber";
 import { Resize } from "@react-three/drei";
 import * as THREE from "three";
 
+import { anglesActions } from "../../../../../store/config/angle";
+
 import Spherical from "../../../../../util/math/calc/Spherical";
 import { radToDeg } from "three/src/math/MathUtils";
 
-const FlowAngleIndicator = (props) => {
+const AngleIndicator = (props) => {
+  const dispatch = useDispatch();
+
+  const flowSelected = useSelector((state) => state.angles.flowSelected);
+  const gravitySelected = useSelector((state) => state.angles.gravitySelected);
+
+  const flowAngle = useSelector((state) => state.angles.flow);
+  const gravityAngle = useSelector((state) => state.angles.gravity);
+
   const coneRef = useRef();
   const stickRef = useRef();
   const arrowRef = useRef();
@@ -31,7 +42,7 @@ const FlowAngleIndicator = (props) => {
   const sphere = box.getBoundingSphere(new THREE.Sphere(boxCenter));
 
   //functions--------------------------------------------------------------------------
-  const searchFlowAngle = () => {
+  const searchAngle = () => {
     const intersection = {
       intersects: false,
       point: new THREE.Vector3(),
@@ -67,7 +78,15 @@ const FlowAngleIndicator = (props) => {
     }
   };
 
-  const moveFlowAngle = (userPhi, userTheta) => {
+  const moveAngle = () => {
+    const flowSelected = useSelector((state) => state.angles.flowSelected);
+    const gravitySelected = useSelector(
+      (state) => state.angles.gravitySelected
+    );
+
+    const flowAngle = useSelector((state) => state.angles.flow);
+    const gravityAngle = useSelector((state) => state.angles.gravity);
+
     // let phi = Number(userPhi);
     // let theta = Number(userTheta);
 
@@ -80,9 +99,15 @@ const FlowAngleIndicator = (props) => {
     arrowRef.current.lookAt(limitRef.current.position);
   };
 
-  const getFlowAngle = () => {
-    let phi = radToDeg(spherical.phi);
-    let theta = radToDeg(spherical.theta);
+  const getAngle = () => {
+    let phi = radToDeg(spherical.phi).toFixed();
+    let theta = radToDeg(spherical.theta).toFixed();
+    if (flowSelected) {
+      dispatch(anglesActions.updateFlowAngles({ phi: phi, theta: theta }));
+    }
+    if (gravitySelected) {
+      dispatch(anglesActions.updateGravityAngles({ phi: phi, theta: theta }));
+    }
   };
 
   //event functions----------------------------------------------------------------------
@@ -112,8 +137,8 @@ const FlowAngleIndicator = (props) => {
 
   useFrame(() => {
     if (!angleSelected) {
-      searchFlowAngle();
-      getFlowAngle();
+      searchAngle();
+      getAngle();
     }
   });
 
@@ -147,4 +172,4 @@ const FlowAngleIndicator = (props) => {
     </>
   );
 };
-export default FlowAngleIndicator;
+export default AngleIndicator;

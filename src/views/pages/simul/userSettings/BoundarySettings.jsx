@@ -2,7 +2,7 @@ import { Fragment, useState, useContext } from "react";
 
 import { Html } from "@react-three/drei";
 
-import { BoundariesContext } from "../Simulation";
+import { BoundariesContext } from "../../../../App";
 
 import styles from "../../../../assets/css/Simulation.module.css";
 

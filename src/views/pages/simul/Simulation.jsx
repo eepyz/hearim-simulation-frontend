@@ -7,37 +7,28 @@ import ToolMenu from "./userSettings/ToolMenu";
 import BoundaryMenu from "./userSettings/BoundaryMenu";
 import FlowMenu from "./userSettings/FlowMenu";
 import BoundarySettings from "./userSettings/BoundarySettings";
-import FlowAngleSettings from "./userSettings/FlowAngleSettings";
-
-import BoundaryInfo from "../../../util/math/info/BoundaryInfo";
+import AngleSettings from "./userSettings/AngleSettings";
 
 import styles from "../../../assets/css/Simulation.module.css";
 
 const Simulation = () => {
+  const toolState = useSelector((state) => state.toolState);
+
   const showFlowSettings = useSelector(
     (state) => state.toolState.showFlowSettings
   );
 
-  const [boundaries, setBoundaries] = useState({});
-  const [boundary, setBoundary] = useState(new BoundaryInfo());
-
   return (
     <Fragment>
-      <BoundariesContext.Provider
-        value={[setBoundaries, setBoundary, boundaries, boundary]}
-      >
-        <div className={styles["container"]}>
-          <GUIView />
-        </div>
-        {showFlowSettings && <FlowMenu />}
-        <ToolMenu />
-        <BoundaryMenu />
-        <FlowAngleSettings />
-
-        {/* <BoundarySettings /> */}
-      </BoundariesContext.Provider>
+      <div className={styles["container"]}>
+        <GUIView />
+      </div>
+      {showFlowSettings && <FlowMenu />}
+      <ToolMenu />
+      <BoundaryMenu />
+      {toolState.showIndicator && <AngleSettings />}
+      {/* <BoundarySettings /> */}
     </Fragment>
   );
 };
 export default Simulation;
-export const BoundariesContext = createContext(null);

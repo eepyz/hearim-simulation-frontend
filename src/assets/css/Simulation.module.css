@@ -433,6 +433,7 @@ input[type="text"] {
 }
 
 .show-settings-detail-btn {
+  height: 20px;
   color: #ffffff;
   background-color: #97aff8;
   border: none;
@@ -653,7 +654,13 @@ input[type="text"] {
   cursor: pointer;
 }
 
-.which-angle-btn:focus {
+.which-angle-btn-selected {
+  width: 60px;
+  height: 30px;
+  border: none;
+  font-size: 13px;
+  padding: 5px;
+  transition: all ease-out 0.2s;
   color: #ffffff;
   background-color: #4f60a7;
   box-shadow: none;
@@ -685,24 +692,25 @@ input[type="text"] {
   position: absolute;
   top: 50%;
   left: 50%;
+  width: 200px;
   user-select: none;
   opacity: 1;
-  text-align: right;
+  text-align: left;
   padding: 10px;
   border-radius: 10px;
   transition: opacity ease-out 0.2s;
+  background-color: rgba(255, 255, 255, 0.5);
 }
 
 .indicator-calculating-box p {
-  position: absolute;
-
+  /* position: absolute; */
   transition: all ease-out 0.2s;
   font-size: 15px;
   margin-top: 1px;
 }
 
-.indicator-calculating-box p:nth-child(1),
-.indicator-calculating-box p:nth-child(2) {
+.indicator-calculating-box p:nth-child(1) {
+  position: absolute;
   top: -20%;
   left: 9%;
   font-size: 15px;
@@ -717,20 +725,27 @@ input[type="text"] {
   border: none;
   transition: opacity ease-out 0.2s, color ease-out 0.1s;
   cursor: default;
-  opacity: 0;
   color: white;
   background-color: transparent;
   font-size: 15px;
 }
 
+.indicator-calculating-angle:hover {
+  background-color: transparent;
+}
+
 .indicator-save-angle-btn {
+  width: fit-content;
+  height: 20px;
   border: none;
   background-color: transparent;
   border-radius: 3px;
   font-size: 15px;
   color: white;
   transition: all ease-out 0.2s;
-  margin-right: 20px;
+  padding: 0;
+  margin: 0;
+  float: right;
 }
 
 .indicator-save-angle-btn i {
@@ -761,6 +776,7 @@ input[type="text"] {
   margin: 0;
   cursor: default;
 }
+
 .indicator-result {
   width: 130px;
   font-size: 13px;

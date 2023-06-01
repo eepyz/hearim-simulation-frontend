@@ -1,16 +1,18 @@
 import { configureStore } from "@reduxjs/toolkit";
 
+import flowStateReducer from "./state/flowState";
 import toolStateReducer from "./state/toolState";
 import pointerStateReducer from "./state/pointerState";
 import inidicatorStateReducer from "./state/indicatorState";
-import boundaryReducer from "./config/boundary";
+import AnglesReducer from "./config/angle";
 
 const store = configureStore({
   reducer: {
+    flowState: flowStateReducer,
     toolState: toolStateReducer,
     pointerState: pointerStateReducer,
     inidicatorState: inidicatorStateReducer,
-    boundaryState: boundaryReducer,
+    angles: AnglesReducer,
   },
 });
 

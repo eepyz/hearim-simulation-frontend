@@ -10,9 +10,9 @@ import { DragControls } from "three/examples/jsm/controls/DragControls";
 import { STLLoader } from "three/examples/jsm/loaders/STLLoader";
 
 import BoundingBox from "../helpers/BoundingBox";
-import FlowAngleIndicator from "../helpers/FlowAngleIndicator";
+import FlowAngleIndicator from "../helpers/AngleIndicator";
 
-import { BoundariesContext } from "../../Simulation";
+import { BoundariesContext } from "../../../../../App";
 
 import MeshInfo from "../../../../../util/math/info/MeshInfo";
 import STLMeshes from "./STLMeshes";
