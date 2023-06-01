@@ -4,6 +4,7 @@ import { Resize } from "@react-three/drei";
 import * as THREE from "three";
 
 import Spherical from "../../../../../util/math/calc/Spherical";
+import { radToDeg } from "three/src/math/MathUtils";
 
 const FlowAngleIndicator = (props) => {
   const coneRef = useRef();
@@ -12,9 +13,11 @@ const FlowAngleIndicator = (props) => {
   const sphereRef = useRef();
   const limitRef = useRef();
 
-  const [hovered, setHovered] = useState(false);
+  const [angleSelected, setAngleSelected] = useState(false);
 
   const { camera, raycaster, pointer, mouse } = useThree();
+
+  const spherical = new Spherical();
 
   const box = props.box;
   const boxMax = Math.max(
@@ -27,7 +30,8 @@ const FlowAngleIndicator = (props) => {
   box.getCenter(boxCenter);
   const sphere = box.getBoundingSphere(new THREE.Sphere(boxCenter));
 
-  const moveArrowAngle = () => {
+  //functions--------------------------------------------------------------------------
+  const searchFlowAngle = () => {
     const intersection = {
       intersects: false,
       point: new THREE.Vector3(),
@@ -53,7 +57,6 @@ const FlowAngleIndicator = (props) => {
       intersection.intersects = true;
 
       //make sub helper: spherical
-      const spherical = new Spherical();
       spherical.setFromVector3(intersection.point);
 
       // rotate arrow head when mouse moving
@@ -61,21 +64,57 @@ const FlowAngleIndicator = (props) => {
       arrowRef.current.lookAt(limitRef.current.position);
 
       intersects.length = 0;
-
-      // let x = getOriginalCoorX(mouse.x);
-      // let y = getOriginalCoorY(mouse.y);
-      // let sPhi = radToDeg(spherical.phi);
-      // let sTheta = radToDeg(spherical.theta);
     }
   };
 
+  const moveFlowAngle = (userPhi, userTheta) => {
+    // let phi = Number(userPhi);
+    // let theta = Number(userTheta);
+
+    let phi = 0;
+    let theta = 0;
+
+    setAngleSelected(true);
+    arrowRef.current.position.copy(spherical.getVector3(theta, phi));
+    arrowRef.current.rotateX(Math.PI / 2);
+    arrowRef.current.lookAt(limitRef.current.position);
+  };
+
+  const getFlowAngle = () => {
+    let phi = radToDeg(spherical.phi);
+    let theta = radToDeg(spherical.theta);
+  };
+
+  //event functions----------------------------------------------------------------------
+  const onLimitSphereHover = () => {
+    limitRef.current.visible = false;
+  };
+
+  const onLimitSphereNotHover = () => {
+    limitRef.current.visible = true;
+  };
+
+  const onLimitSphereClicked = () => {
+    setAngleSelected(!angleSelected);
+    if (angleSelected === true) {
+      coneRef.current.material.color = new THREE.Color("red");
+      stickRef.current.material.color = new THREE.Color("red");
+    } else {
+      coneRef.current.material.color = new THREE.Color("blue");
+      stickRef.current.material.color = new THREE.Color("blue");
+    }
+  };
+  //-------------------------------------------------------------------------------------
   useEffect(() => {
     coneRef.current.geometry.rotateX(Math.PI / 2);
     stickRef.current.geometry.rotateX(Math.PI / 2);
   }, []);
 
   useFrame(() => {
-    hovered && moveArrowAngle();
+    if (!angleSelected) {
+      searchFlowAngle();
+      getFlowAngle();
+    }
   });
 
   return (
@@ -84,17 +123,15 @@ const FlowAngleIndicator = (props) => {
         <sphereGeometry args={[sphere.radius, 100, 100]} />
         <meshBasicMaterial transparent color="white" opacity={0.3} />
       </mesh>
+
       <mesh
         ref={limitRef}
-        onPointerOver={() => {
-          setHovered(true);
-        }}
-        onPointerLeave={() => {
-          setHovered(false);
-        }}
+        onPointerOver={onLimitSphereHover}
+        onPointerLeave={onLimitSphereNotHover}
+        onClick={onLimitSphereClicked}
       >
-        <sphereGeometry args={[sphere.radius + sphere.radius / 3, 100, 100]} />
-        <meshBasicMaterial transparent color="white" opacity={0.3} />
+        <sphereGeometry args={[sphere.radius + sphere.radius / 2, 100, 100]} />
+        <meshBasicMaterial transparent color="red" opacity={0.2} />
       </mesh>
 
       <group ref={arrowRef}>

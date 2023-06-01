@@ -30,13 +30,8 @@ html {
   color: rgb(107, 104, 255);
 }
 
-input {
-  font: inherit;
-  font-size: 13px;
-}
-
 input[type="text"] {
-  margin-right: 20px;
+  height: 20px;
 }
 
 .tool-menu {
@@ -615,47 +610,43 @@ input[type="text"] {
 .indicator-angle-input-box {
   position: absolute;
   top: 10px;
-  left: 39%;
+  left: 30px;
   transition: opacity ease-out 0.2s;
-  text-align: center;
+  padding: 10px;
+  font-size: 13px;
+  border-radius: 10px;
 }
 
+.indicator-angle-input-box-title {
+  font-size: 13px;
+  color: rgb(178, 186, 221);
+}
 .indicator-angle-input {
   width: 100px;
-  font-size: 13px;
+  font-size: 12px;
   border: none;
   border-radius: 3px;
   user-select: none;
-  opacity: 1;
   text-align: center;
   padding: 3px;
 }
 
-.indicator-angle-move-btn {
-  border: none;
-  border-radius: 3px;
-  padding: 3px;
+.indicator-angle-input-title {
+  font-size: 13px;
   color: white;
-  transition: all ease-out 0.2s;
-  opacity: 1i;
-  font-size: 15px;
-  background-color: transparent;
-}
-
-.indicator-angle-move-btn:hover {
-  cursor: pointer;
+  margin-right: 10px;
 }
 
 .which-angle-btn {
+  width: 60px;
+  height: 30px;
   border: none;
-  border-radius: 50px;
-  margin-top: 10px;
-  margin-right: 20px;
   font-size: 13px;
   padding: 5px;
+  color: #bebdbd;
+  background-color: #7d89be;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
   transition: all ease-out 0.2s;
-  width: 100px;
 }
 
 .which-angle-btn:hover {
@@ -663,7 +654,30 @@ input[type="text"] {
 }
 
 .which-angle-btn:focus {
+  color: #ffffff;
   background-color: #4f60a7;
+  box-shadow: none;
+}
+
+.indicator-angle-move-btn {
+  width: 60px;
+  height: 30px;
+  border: none;
+  border-radius: 50px;
+  font-size: 13px;
+  padding: 5px;
+  color: #d4d4d4;
+  background-color: #757575;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+  transition-duration: 0.1s;
+}
+
+.indicator-angle-move-btn:hover {
+  cursor: pointer;
+}
+
+.indicator-angle-move-btn:active {
+  background-color: #4e4e4e;
   box-shadow: none;
 }
 
@@ -672,7 +686,7 @@ input[type="text"] {
   top: 50%;
   left: 50%;
   user-select: none;
-  opacity: 0;
+  opacity: 1;
   text-align: right;
   padding: 10px;
   border-radius: 10px;
@@ -739,7 +753,7 @@ input[type="text"] {
   text-align: center;
   background-color: rgba(255, 255, 255, 0.5);
   padding: 0 10px 10px 10px;
-  font-size: 15px;
+  font-size: 13px;
   border-radius: 5px;
 }
 
@@ -812,69 +826,6 @@ input[type="text"] {
 
   .adj-angle-number {
     margin-top: 30px;
-  }
-
-  .click-surface {
-    font-size: 20px;
-  }
-
-  .boundary-menu {
-    left: 32%;
-  }
-
-  .boundary-menu-title {
-    margin-right: 50px;
-  }
-
-  .boundary-menu-elem {
-    font-size: 20px;
-    margin-right: 50px;
-  }
-
-  /*indicator*/
-  .indicator-angle-input-box {
-    font-size: 20px;
-    left: 40%;
-  }
-
-  .indicator-input {
-    width: 150px;
-    font-size: 17px;
-  }
-
-  .indicator-angle-move-btn {
-    font-size: 20px;
-  }
-
-  .which-angle-btn {
-    font-size: 15px;
-    width: 120px;
-  }
-
-  .indicator-calculating-box p {
-    font-size: 17px;
-  }
-
-  .indicator-calculating-box p:nth-child(1),
-  .indicator-calculating-box p:nth-child(2) {
-    font-size: 20px;
-  }
-
-  .indicator-save-angle-btn {
-    font-size: 18px;
-  }
-
-  .indicator-calculating-angle {
-    font-size: 20px;
-  }
-
-  .indicator-result-box {
-    font-size: 20px;
-  }
-
-  .indicator-result-box input[type="text"] {
-    font-size: 18px;
-    width: 150px;
   }
 }
 

@@ -7,6 +7,7 @@ import ToolMenu from "./userSettings/ToolMenu";
 import BoundaryMenu from "./userSettings/BoundaryMenu";
 import FlowMenu from "./userSettings/FlowMenu";
 import BoundarySettings from "./userSettings/BoundarySettings";
+import FlowAngleSettings from "./userSettings/FlowAngleSettings";
 
 import BoundaryInfo from "../../../util/math/info/BoundaryInfo";
 
@@ -31,6 +32,8 @@ const Simulation = () => {
         {showFlowSettings && <FlowMenu />}
         <ToolMenu />
         <BoundaryMenu />
+        <FlowAngleSettings />
+
         {/* <BoundarySettings /> */}
       </BoundariesContext.Provider>
     </Fragment>
