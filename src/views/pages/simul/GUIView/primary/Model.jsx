@@ -30,7 +30,7 @@ const Model = (props) => {
   //ref
   const groupRef = useRef();
   const orbitControlRef = useRef();
-
+  const stlMeshesRef = useRef();
   //state
   const [modelUrl, setModelUrl] = useState(props.url);
   const [meshList, setMeshList] = useState([]);
@@ -51,19 +51,6 @@ const Model = (props) => {
   });
 
   //functions
-  const resize = (mesh) => {
-    const box = new THREE.Box3().setFromObject(mesh);
-    const size = new THREE.Vector3();
-    box.getSize(size);
-
-    const desiredWidth = 10;
-    const desiredHeight = 20;
-    const scaleFactorX = desiredWidth / size.x;
-    const scaleFactorY = desiredHeight / size.y;
-    const scaleFactor = Math.min(scaleFactorX, scaleFactorY);
-    mesh.scale.set(scaleFactor, scaleFactor, scaleFactor);
-  };
-
   const createMeshes = (geometries) => {
     const clippingSize = -1;
     return geometries.map((geometry, i) => (
@@ -119,6 +106,7 @@ const Model = (props) => {
   //useEffect
   useEffect(() => {
     setMeshInfos(stlGeometry);
+    groupRef.current.position.set(0, 0, 0);
   }, []);
 
   useEffect(() => {

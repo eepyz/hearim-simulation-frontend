@@ -30,9 +30,11 @@ const STLMeshes = (props) => {
   const [currentMesh, setCurrentMesh] = useState(null);
 
   //useThree---------------------------------------------------------------------------------
-  const { gl } = useThree();
+  const { gl, camera } = useThree();
 
   //functions------------------------------------------------------------------------------
+  const fitObjectInCamera = () => {};
+
   const resetColor = () => {
     const colors = [];
     const color = new THREE.Color("white");
@@ -178,6 +180,9 @@ const STLMeshes = (props) => {
 
   //useEffect------------------------------------------------------------------------------
   useEffect(() => {
+    fitObjectInCamera();
+  }, []);
+  useEffect(() => {
     resetColor();
   }, [toolState.findBoundary]);
 
@@ -188,6 +193,7 @@ const STLMeshes = (props) => {
       gl.localClippingEnabled = false;
     }
   }, [toolState.clippingObject]);
+
   useEffect(() => {
     setMeshInfo(props.meshInfo);
   }, [meshInfo]);

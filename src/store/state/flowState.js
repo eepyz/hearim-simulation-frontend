@@ -7,8 +7,8 @@ const initialState = {
   steady: false,
   gravity: true,
   noGravity: false,
-  physicalFlowTime: null,
-  gravityForce: null,
+  physicalFlowTime: "",
+  gravityForce: "",
 };
 
 const flowStateSlice = createSlice({

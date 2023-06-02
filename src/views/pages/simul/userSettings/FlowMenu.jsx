@@ -121,6 +121,7 @@ const FlowMenu = () => {
                     placeholder="physical flow time(s)"
                     className={styles["flow-detail-input"]}
                     onChange={updateFlowDetails}
+                    value={flowState.physicalFlowTime}
                   />
                 </div>
               </div>
@@ -165,6 +166,7 @@ const FlowMenu = () => {
                     placeholder="gravity force(m/s^2)"
                     className={styles["flow-detail-input"]}
                     onChange={updateFlowDetails}
+                    value={flowState.gravityForce}
                   />
                 </div>
               </div>

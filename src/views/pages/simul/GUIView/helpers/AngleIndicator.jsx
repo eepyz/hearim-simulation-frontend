@@ -25,6 +25,7 @@ const AngleIndicator = (props) => {
   const limitRef = useRef();
 
   const [angleSelected, setAngleSelected] = useState(false);
+  const [sphereHovered, setSphereHovered] = useState(false);
 
   const { camera, raycaster, pointer, mouse } = useThree();
 
@@ -112,10 +113,12 @@ const AngleIndicator = (props) => {
 
   //event functions----------------------------------------------------------------------
   const onLimitSphereHover = () => {
+    setSphereHovered(true);
     limitRef.current.visible = false;
   };
 
   const onLimitSphereNotHover = () => {
+    setSphereHovered(false);
     limitRef.current.visible = true;
   };
 
@@ -136,7 +139,7 @@ const AngleIndicator = (props) => {
   }, []);
 
   useFrame(() => {
-    if (!angleSelected) {
+    if (!angleSelected && sphereHovered) {
       searchAngle();
       getAngle();
     }
