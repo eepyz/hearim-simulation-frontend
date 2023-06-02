@@ -1,4 +1,4 @@
-import { Fragment, useState, createContext, useContext } from "react";
+import React, { Fragment, useState, createContext, useContext } from "react";
 import { useSelector } from "react-redux";
 import { Leva } from "leva";
 
@@ -9,14 +9,15 @@ import FlowMenu from "./userSettings/FlowMenu";
 import BoundarySettings from "./userSettings/BoundarySettings";
 import AngleSettings from "./userSettings/AngleSettings";
 
+import AngleSettingsResult from "./userSettings/AngleSettingsResult";
+
 import styles from "../../../assets/css/Simulation.module.css";
 
 const Simulation = () => {
-  const toolState = useSelector((state) => state.toolState);
-
   const showFlowSettings = useSelector(
     (state) => state.toolState.showFlowSettings
   );
+  const showIndicator = useSelector((state) => state.toolState.showIndicator);
 
   return (
     <Fragment>
@@ -26,7 +27,8 @@ const Simulation = () => {
       {showFlowSettings && <FlowMenu />}
       <ToolMenu />
       <BoundaryMenu />
-      {toolState.showIndicator && <AngleSettings />}
+      {showIndicator && <AngleSettings />}
+      <AngleSettingsResult />
       {/* <BoundarySettings /> */}
     </Fragment>
   );

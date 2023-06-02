@@ -23,6 +23,7 @@ extend({ DragControls });
 const Model = (props) => {
   //useSelector
   const toolState = useSelector((state) => state.toolState);
+  const flowState = useSelector((state) => state.flowState);
   //useContext
   const [setBoundaries, setBoundary, boundaries, boundary] =
     useContext(BoundariesContext);
@@ -50,6 +51,19 @@ const Model = (props) => {
   });
 
   //functions
+  const resize = (mesh) => {
+    const box = new THREE.Box3().setFromObject(mesh);
+    const size = new THREE.Vector3();
+    box.getSize(size);
+
+    const desiredWidth = 10;
+    const desiredHeight = 20;
+    const scaleFactorX = desiredWidth / size.x;
+    const scaleFactorY = desiredHeight / size.y;
+    const scaleFactor = Math.min(scaleFactorX, scaleFactorY);
+    mesh.scale.set(scaleFactor, scaleFactor, scaleFactor);
+  };
+
   const createMeshes = (geometries) => {
     const clippingSize = -1;
     return geometries.map((geometry, i) => (

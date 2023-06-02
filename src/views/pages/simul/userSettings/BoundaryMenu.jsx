@@ -1,8 +1,12 @@
-import { Fragment } from "react";
+import { Fragment, useContext } from "react";
+import { BoundariesContext } from "../../../../App";
 
 import styles from "../../../../assets/css/Simulation.module.css";
 
 const BoundaryMenu = () => {
+  const [boundary] = useContext(BoundariesContext);
+  const currentBoundary = boundary.boundary;
+
   return (
     <Fragment>
       <div className={styles["boundary-menu"]}>

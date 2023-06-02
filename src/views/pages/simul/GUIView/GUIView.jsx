@@ -23,12 +23,7 @@ const GUIView = () => {
 
   //view
   return (
-    <Canvas
-      gl={{ localClippingEnabled: true }}
-      camera={cameraConfig}
-      raycaster
-      shadows
-    >
+    <Canvas camera={cameraConfig} raycaster shadows>
       <GuiSettings />
       <Model url={url} />
       {/* <Plane /> */}

@@ -1,12 +1,14 @@
 import { Fragment, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
+import { toolStateActions } from "../../../../store/state/toolState";
 import { anglesActions } from "../../../../store/config/angle";
 
 import styles from "../../../../assets/css/Simulation.module.css";
 
 const FlowAngleSettings = () => {
   const dispatch = useDispatch();
+  const toolState = useSelector((state) => state.toolState);
 
   const flowSelected = useSelector((state) => state.angles.flowSelected);
   const gravitySelected = useSelector((state) => state.angles.gravitySelected);
@@ -18,6 +20,9 @@ const FlowAngleSettings = () => {
     theta: "",
   });
 
+  const decideHandler = () => {
+    dispatch(toolStateActions.showIndicator());
+  };
   const flowSelectedHandler = () => {
     dispatch(anglesActions.setFlowSelected());
   };
@@ -109,44 +114,12 @@ const FlowAngleSettings = () => {
           <p>{flowSelected ? "flow angle" : "gravity angle"}</p>
           <p>phi : {flowSelected ? flowAngle.phi : gravityAngle.phi}</p>
           <p>theta : {flowSelected ? flowAngle.theta : gravityAngle.theta}</p>
-          <button className={styles["indicator-save-angle-btn"]}>
+          <button
+            className={styles["indicator-save-angle-btn"]}
+            onClick={decideHandler}
+          >
             decide&nbsp;<i className={styles["bi bi-check2-circle"]}></i>
           </button>
-        </div>
-
-        <div className={styles["indicator-result-box"]}>
-          <div>
-            <p>flow angle</p>
-            <input
-              type="text"
-              className={styles["indicator-result"]}
-              placeholder="phi: empty"
-              readOnly
-            />
-            &nbsp;
-            <input
-              type="text"
-              className={styles["indicator-result"]}
-              placeholder="theta: empty"
-              readOnly
-            />
-          </div>
-          <div>
-            <p>gravity angle</p>
-            <input
-              type="text"
-              className={styles["indicator-result"]}
-              placeholder="phi: empty"
-              readOnly
-            />
-            &nbsp;
-            <input
-              type="text"
-              className={styles["indicator-result"]}
-              placeholder="theta: empty"
-              readOnly
-            />
-          </div>
         </div>
       </div>
     </Fragment>

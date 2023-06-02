@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 
 import { useSelector } from "react-redux";
 
-import { useFrame } from "@react-three/fiber";
+import { useFrame, useThree } from "@react-three/fiber";
 import { Html, useCursor, Resize } from "@react-three/drei";
 
 import * as THREE from "three";
@@ -20,12 +20,17 @@ const STLMeshes = (props) => {
   const modelRef = useRef();
   const lineRef = useRef();
 
+  const setBoundary = props.setBoundary;
+  const setBoundaries = props.setBoundaries;
   //useState---------------------------------------------------------------------------------
   const [hovered, setHovered] = useState(false);
   const [clicked, setClicked] = useState(false);
   const [faceClicked, setFaceClicked] = useState(false);
   const [meshInfo, setMeshInfo] = useState(null);
   const [currentMesh, setCurrentMesh] = useState(null);
+
+  //useThree---------------------------------------------------------------------------------
+  const { gl } = useThree();
 
   //functions------------------------------------------------------------------------------
   const resetColor = () => {
@@ -141,8 +146,8 @@ const STLMeshes = (props) => {
         Object.assign(updatedBoundaries[boundaryID].triangle, currentTriangles);
       }
 
-      props.setBoundary(updatedBoundaries[boundaryID]);
-      props.setBoundaries((prev) => ({ ...prev, ...updatedBoundaries }));
+      setBoundary(updatedBoundaries[boundaryID]);
+      setBoundaries((prev) => ({ ...prev, ...updatedBoundaries }));
     }
 
     setFaceClicked(true);
@@ -177,6 +182,13 @@ const STLMeshes = (props) => {
   }, [toolState.findBoundary]);
 
   useEffect(() => {
+    if (toolState.clippingObject) {
+      gl.localClippingEnabled = true;
+    } else {
+      gl.localClippingEnabled = false;
+    }
+  }, [toolState.clippingObject]);
+  useEffect(() => {
     setMeshInfo(props.meshInfo);
   }, [meshInfo]);
 
@@ -206,10 +218,20 @@ const STLMeshes = (props) => {
           color={toolState.findBoundary && hovered ? "pink" : "lightblue"}
           side={THREE.DoubleSide}
           vertexColors={true}
-        />
+          clipShadows
+        >
+          <plane attach="clippingPlanes-0" normal={[0, 0, -1]} constant={0} />
+        </meshStandardMaterial>
         {toolState.showLine && (
           <mesh {...props} ref={lineRef}>
-            <meshStandardMaterial roughness={0.01} color="gray" wireframe />
+            <meshStandardMaterial roughness={0.01} color="gray" wireframe>
+              <plane
+                attach="clippingPlanes-0"
+                normal={[0, 0, 1]}
+                position={[0, 0, 0]}
+                constant={0}
+              />
+            </meshStandardMaterial>
           </mesh>
         )}
       </mesh>

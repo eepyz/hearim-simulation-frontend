@@ -30,10 +30,6 @@ html {
   color: rgb(107, 104, 255);
 }
 
-input[type="text"] {
-  height: 20px;
-}
-
 .tool-menu {
   position: absolute;
   top: 10%;
@@ -618,6 +614,10 @@ input[type="text"] {
   border-radius: 10px;
 }
 
+.indicator-angle-input-box input[type="text"] {
+  height: 20px;
+}
+
 .indicator-angle-input-box-title {
   font-size: 13px;
   color: rgb(178, 186, 221);
@@ -775,6 +775,7 @@ input[type="text"] {
 .indicator-result-box input[type="text"] {
   margin: 0;
   cursor: default;
+  height: 20px;
 }
 
 .indicator-result {
