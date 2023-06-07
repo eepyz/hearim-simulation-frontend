@@ -30,19 +30,35 @@ const EachMesh = (props) => {
   const [boundaries, setBoundaries] = useState({});
   const [boundary, setBoundary] = useState(Boundary);
   const [initPosition, setInitPosition] = useState();
+  const [initCameraPosition, setInitCameraPosition] = useState();
 
   //useThree---------------------------------------------------------------------------------
   const { gl, camera } = useThree();
 
   //functions------------------------------------------------------------------------------
-  const resetPosition = () => {
+  const saveInitPosition = () => {
     const box = props.box;
+    const boxMax = Math.max(
+      box.max.x - box.min.x,
+      box.max.y - box.min.y,
+      box.max.z - box.min.z
+    );
     const boxCenter = new THREE.Vector3();
     box.getCenter(boxCenter);
 
     modelRef.current.position.sub(boxCenter);
     const initPosition = modelRef.current.getWorldPosition(new THREE.Vector3());
+
+    boxCenter.normalize();
+    const initCameraPosition = new THREE.Vector3(
+      boxCenter.x,
+      boxCenter.y + 5,
+      boxMax * 3
+    );
+
     setInitPosition(initPosition);
+    setInitCameraPosition(initCameraPosition);
+    camera.position.copy(initCameraPosition);
   };
 
   const resetColor = () => {
@@ -191,7 +207,7 @@ const EachMesh = (props) => {
 
   //useEffect------------------------------------------------------------------------------
   useEffect(() => {
-    resetPosition();
+    saveInitPosition();
   }, []);
 
   useEffect(() => {
@@ -201,6 +217,7 @@ const EachMesh = (props) => {
   useEffect(() => {
     if (initPosition !== undefined) {
       modelRef.current.position.copy(initPosition);
+      camera.position.copy(initCameraPosition);
     }
   }, [toolState.resetPosition]);
 
