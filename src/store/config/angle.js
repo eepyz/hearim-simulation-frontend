@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  flowSelected: true,
-  gravitySelected: false,
+  flowSelected: false,
+  gravitySelected: true,
   flow: { phi: 0, theta: 0 },
   gravity: { phi: 0, theta: 0 },
   moveBtnClicked: false,

@@ -29,7 +29,7 @@ const AngleSettingsResult = () => {
               className={styles["indicator-result"]}
               placeholder="phi: empty"
               readOnly
-              value={flowAngle.phi}
+              value={flowAngle.phi + "°"}
             />
             &nbsp; &nbsp; &nbsp; &nbsp;
             <span>theta: </span>
@@ -38,7 +38,7 @@ const AngleSettingsResult = () => {
               className={styles["indicator-result"]}
               placeholder="theta: empty"
               readOnly
-              value={flowAngle.theta}
+              value={flowAngle.theta + "°"}
             />
           </div>
         )}
@@ -57,7 +57,7 @@ const AngleSettingsResult = () => {
               className={styles["indicator-result"]}
               placeholder="phi: empty"
               readOnly
-              value={gravityAngle.phi}
+              value={gravityAngle.phi + "°"}
             />
             &nbsp; &nbsp; &nbsp; &nbsp;
             <span>theta: </span>
@@ -66,7 +66,7 @@ const AngleSettingsResult = () => {
               className={styles["indicator-result"]}
               placeholder="theta: empty"
               readOnly
-              value={gravityAngle.theta}
+              value={gravityAngle.theta + "°"}
             />
           </div>
         )}

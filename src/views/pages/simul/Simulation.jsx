@@ -18,18 +18,21 @@ const Simulation = () => {
     (state) => state.toolState.showFlowSettings
   );
   const showIndicator = useSelector((state) => state.toolState.showIndicator);
-
+  const findBoundary = useSelector((state) => state.toolState.findBoundary);
   return (
     <Fragment>
       <div className={styles["container"]}>
         <GUIView />
       </div>
+
       {showFlowSettings && <FlowMenu />}
       <ToolMenu />
-      <BoundaryMenu />
+
+      {findBoundary && <BoundaryMenu />}
+      {findBoundary && <BoundarySettings />}
+
       {showIndicator && <AngleSettings />}
       <AngleSettingsResult />
-      <BoundarySettings />
     </Fragment>
   );
 };

@@ -102,7 +102,6 @@ const EachMesh = (props) => {
       function saveSurfaceTriangle(triangle) {
         currentTriangles[triangle.triIndex] = {
           abc: triangle.abc,
-          normal: triangle.normal,
           triIndex: triangle.triIndex,
         };
       }
@@ -177,8 +176,9 @@ const EachMesh = (props) => {
 
       setBoundaries((prev) => ({ ...prev, ...updatedBoundaries }));
       setBoundary(updateBoundary);
-      console.log(boundary);
-      console.log(boundaries);
+
+      dispatch(boundaryActions.updateBoundary(boundary));
+      dispatch(boundariesActions.updateBoundaries(boundaries));
     }
 
     setFaceClicked(true);
@@ -186,9 +186,7 @@ const EachMesh = (props) => {
 
   //event functions---------------------------------------------------------------------------
   const meshClick = (e) => {
-    // console.log(Number(e.object.name.substr(-1)));
     e.stopPropagation(),
-      // setClicked(!clicked),
       setClicked(true),
       resetColor(),
       setCurrentMesh(e.object.name),

@@ -116,6 +116,7 @@ const AngleIndicator = (props) => {
     }
   };
 
+  const changeArrowColor = () => {};
   //event functions----------------------------------------------------------------------
   const onLimitSphereHover = () => {
     setSphereHovered(true);
@@ -145,6 +146,7 @@ const AngleIndicator = (props) => {
 
   useEffect(() => {
     goToAngle();
+    setAngleSelected(true);
   }, [moveBtnClicked]);
 
   useFrame(() => {
