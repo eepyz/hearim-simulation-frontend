@@ -29,7 +29,7 @@ const Simulation = () => {
       <BoundaryMenu />
       {showIndicator && <AngleSettings />}
       <AngleSettingsResult />
-      {/* <BoundarySettings /> */}
+      <BoundarySettings />
     </Fragment>
   );
 };

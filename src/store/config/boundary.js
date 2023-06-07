@@ -1,20 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
+import Boundary from "../../util/math/info/Boundary";
 
-import BoundaryInfo from "../../util/math/info/BoundaryInfo";
-
-const initialState = { boundaries: {}, boundary: null };
 const boundarySlice = createSlice({
-  name: "boundaryState",
-  initialState: initialState,
+  name: "boundary",
+  initialState: Boundary,
   reducers: {
-    updateBoundaries(state, action) {
-      state.boundaries = action.payload;
-      return state;
-    },
     updateBoundary(state, action) {
-      state.boundary = action.payload;
-      // console.log(state.boundary);
-      return state;
+      return action.payload;
+      console.log(state);
     },
   },
 });

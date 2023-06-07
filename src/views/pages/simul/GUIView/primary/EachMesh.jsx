@@ -1,39 +1,49 @@
 import React, { useState, useRef, useEffect } from "react";
-
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import { useFrame, useThree } from "@react-three/fiber";
-import { Html, useCursor, Resize } from "@react-three/drei";
+import { useCursor } from "@react-three/drei";
 
 import * as THREE from "three";
 
 import BoundingSphere from "../helpers/AngleIndicator";
 
-import BoundaryInfo from "../../../../../util/math/info/BoundaryInfo";
+import Boundary from "../../../../../util/math/info/Boundary";
 
+import { boundariesActions } from "../../../../../store/config/boundaries";
 import { boundaryActions } from "../../../../../store/config/boundary";
 
-const STLMeshes = (props) => {
+const EachMesh = (props) => {
+  const dispatch = useDispatch();
   const toolState = useSelector((state) => state.toolState);
 
   //useRef----------------------------------------------------------------------------------
   const modelRef = useRef();
   const lineRef = useRef();
 
-  const setBoundary = props.setBoundary;
-  const setBoundaries = props.setBoundaries;
   //useState---------------------------------------------------------------------------------
   const [hovered, setHovered] = useState(false);
   const [clicked, setClicked] = useState(false);
   const [faceClicked, setFaceClicked] = useState(false);
   const [meshInfo, setMeshInfo] = useState(null);
   const [currentMesh, setCurrentMesh] = useState(null);
+  const [boundaries, setBoundaries] = useState({});
+  const [boundary, setBoundary] = useState(Boundary);
+  const [initPosition, setInitPosition] = useState();
 
   //useThree---------------------------------------------------------------------------------
   const { gl, camera } = useThree();
 
   //functions------------------------------------------------------------------------------
-  const fitObjectInCamera = () => {};
+  const resetPosition = () => {
+    const box = props.box;
+    const boxCenter = new THREE.Vector3();
+    box.getCenter(boxCenter);
+
+    modelRef.current.position.sub(boxCenter);
+    const initPosition = modelRef.current.getWorldPosition(new THREE.Vector3());
+    setInitPosition(initPosition);
+  };
 
   const resetColor = () => {
     const colors = [];
@@ -70,6 +80,7 @@ const STLMeshes = (props) => {
 
       let boundaryID;
       const updatedBoundaries = {};
+      const updateBoundary = { ...Boundary };
 
       let currentTriangles = {};
       function saveSurfaceTriangle(triangle) {
@@ -142,14 +153,14 @@ const STLMeshes = (props) => {
       boundaryID = [firstTi, lastTi];
 
       if (!([boundaryID] in updatedBoundaries)) {
-        updatedBoundaries[boundaryID] = new BoundaryInfo();
+        updatedBoundaries[boundaryID] = updateBoundary;
         updatedBoundaries[boundaryID].id = boundaryID;
         updatedBoundaries[boundaryID].mesh = currentMesh;
-        Object.assign(updatedBoundaries[boundaryID].triangle, currentTriangles);
+        updatedBoundaries[boundaryID].triangle = currentTriangles;
       }
 
-      setBoundary(updatedBoundaries[boundaryID]);
       setBoundaries((prev) => ({ ...prev, ...updatedBoundaries }));
+      setBoundary(updateBoundary);
     }
 
     setFaceClicked(true);
@@ -180,11 +191,18 @@ const STLMeshes = (props) => {
 
   //useEffect------------------------------------------------------------------------------
   useEffect(() => {
-    fitObjectInCamera();
+    resetPosition();
   }, []);
+
   useEffect(() => {
     resetColor();
   }, [toolState.findBoundary]);
+
+  useEffect(() => {
+    if (initPosition !== undefined) {
+      modelRef.current.position.copy(initPosition);
+    }
+  }, [toolState.resetPosition]);
 
   useEffect(() => {
     if (toolState.clippingObject) {
@@ -244,4 +262,4 @@ const STLMeshes = (props) => {
     </>
   );
 };
-export default STLMeshes;
+export default EachMesh;

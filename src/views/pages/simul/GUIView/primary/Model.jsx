@@ -12,10 +12,8 @@ import { STLLoader } from "three/examples/jsm/loaders/STLLoader";
 import BoundingBox from "../helpers/BoundingBox";
 import FlowAngleIndicator from "../helpers/AngleIndicator";
 
-import { BoundariesContext } from "../../../../../App";
-
 import MeshInfo from "../../../../../util/math/info/MeshInfo";
-import STLMeshes from "./STLMeshes";
+import EachMesh from "./EachMesh";
 
 //convert to jsx
 extend({ DragControls });
@@ -25,18 +23,16 @@ const Model = (props) => {
   const toolState = useSelector((state) => state.toolState);
   const flowState = useSelector((state) => state.flowState);
   //useContext
-  const [setBoundaries, setBoundary, boundaries, boundary] =
-    useContext(BoundariesContext);
+
   //ref
   const groupRef = useRef();
   const orbitControlRef = useRef();
-  const stlMeshesRef = useRef();
+  const EachMeshRef = useRef();
   //state
   const [modelUrl, setModelUrl] = useState(props.url);
   const [meshList, setMeshList] = useState([]);
   const [lineList, setLineList] = useState([]);
   const [meshInfoList, setMeshInfoList] = useState([]);
-  const [meshPosition, setMeshPosition] = useState([0, 0, 0]);
 
   //variables
   const { camera, gl, viewport } = useThree();
@@ -54,14 +50,12 @@ const Model = (props) => {
   const createMeshes = (geometries) => {
     const clippingSize = -1;
     return geometries.map((geometry, i) => (
-      <STLMeshes
-        setBoundaries={setBoundaries}
-        setBoundary={setBoundary}
-        boundary={boundary}
+      <EachMesh
         geometry={geometry}
         key={i}
         name={"stlMesh-" + (i + 1)}
         meshInfo={meshInfoList[i]}
+        box={stlGeometry.boundingBox}
       />
     ));
   };

@@ -1,17 +1,19 @@
-import { Fragment, useState, useContext } from "react";
+import { Fragment, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 import { Html } from "@react-three/drei";
 
-import { BoundariesContext } from "../../../../App";
+import { boundaryActions } from "../../../../store/config/boundary";
 
 import styles from "../../../../assets/css/Simulation.module.css";
 
 const BoundarySettings = () => {
-  const [boundary] = useContext(BoundariesContext);
+  const dispatch = useDispatch();
+  const boundary = useSelector((state) => state.boundary);
 
-  const [wallSelected, setWallSelected] = useState(true);
-  const [inflowSelected, setInflowSelected] = useState(false);
-  const [outflowSelected, setOutflowSelected] = useState(false);
+  const wallSelected = boundary.wall.selected;
+  const inflowSelected = boundary.inflow.selected;
+  const outflowSelected = boundary.outflow.selected;
 
   return (
     <Fragment>

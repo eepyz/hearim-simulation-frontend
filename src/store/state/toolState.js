@@ -24,6 +24,7 @@ const toolStateSlice = createSlice({
       state.findBoundary = !state.findBoundary;
     },
     resetPosition(state, action) {
+      state.resetPosition = !state.resetPosition;
       state.showLine = false;
       state.findBoundary = false;
       state.rotateObject = false;

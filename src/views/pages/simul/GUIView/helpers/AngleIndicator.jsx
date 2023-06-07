@@ -148,7 +148,7 @@ const AngleIndicator = (props) => {
   return (
     <>
       <mesh ref={sphereRef}>
-        <sphereGeometry args={[sphere.radius, 100, 100]} />
+        <sphereGeometry args={[sphere.radius + sphere.radius / 2, 100, 100]} />
         <meshBasicMaterial transparent color="white" opacity={0.3} />
       </mesh>
 
@@ -158,7 +158,7 @@ const AngleIndicator = (props) => {
         onPointerLeave={onLimitSphereNotHover}
         onClick={onLimitSphereClicked}
       >
-        <sphereGeometry args={[sphere.radius + sphere.radius / 2, 100, 100]} />
+        <sphereGeometry args={[sphere.radius + sphere.radius, 100, 100]} />
         <meshBasicMaterial transparent color="red" opacity={0.2} />
       </mesh>
 
