@@ -177,6 +177,8 @@ const EachMesh = (props) => {
 
       setBoundaries((prev) => ({ ...prev, ...updatedBoundaries }));
       setBoundary(updateBoundary);
+      console.log(boundary);
+      console.log(boundaries);
     }
 
     setFaceClicked(true);

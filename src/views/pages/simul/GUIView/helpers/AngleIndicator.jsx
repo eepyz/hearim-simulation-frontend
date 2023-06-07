@@ -1,13 +1,15 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useThree, useFrame } from "@react-three/fiber";
-import { Resize } from "@react-three/drei";
+import { Resize, Html } from "@react-three/drei";
 import * as THREE from "three";
 
 import { anglesActions } from "../../../../../store/config/angle";
 
 import Spherical from "../../../../../util/math/calc/Spherical";
 import { radToDeg } from "three/src/math/MathUtils";
+
+import FlowAngleSettings from "../../userSettings/AngleSettings";
 
 const AngleIndicator = (props) => {
   const dispatch = useDispatch();

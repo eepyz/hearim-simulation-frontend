@@ -1,17 +1,25 @@
 import { Fragment, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { toolStateActions } from "../../../../store/state/toolState";
 
 import styles from "../../../../assets/css/Simulation.module.css";
 
 const AngleSettingsResult = () => {
+  const dispatch = useDispatch();
+  const toolState = useSelector((state) => state.toolState);
   const flowAngle = useSelector((state) => state.angles.flow);
   const gravityAngle = useSelector((state) => state.angles.gravity);
+
+  const decideHandler = () => {
+    dispatch(toolStateActions.showIndicator());
+  };
 
   return (
     <Fragment>
       <div className={styles["indicator-result-box"]}>
         <div>
-          <p>flow angle</p>
+          <div className={styles["indicator-result-box-title"]}>flow angle</div>
+          <span>phi: </span>
           <input
             type="text"
             className={styles["indicator-result"]}
@@ -19,7 +27,8 @@ const AngleSettingsResult = () => {
             readOnly
             value={flowAngle.phi}
           />
-          &nbsp;
+          &nbsp; &nbsp; &nbsp; &nbsp;
+          <span>theta: </span>
           <input
             type="text"
             className={styles["indicator-result"]}
@@ -28,8 +37,13 @@ const AngleSettingsResult = () => {
             value={flowAngle.theta}
           />
         </div>
+
+        <hr className={styles["hr"]} />
         <div>
-          <p>gravity angle</p>
+          <div className={styles["indicator-result-box-title"]}>
+            gravity angle
+          </div>
+          <span>phi: </span>
           <input
             type="text"
             className={styles["indicator-result"]}
@@ -37,7 +51,8 @@ const AngleSettingsResult = () => {
             readOnly
             value={gravityAngle.phi}
           />
-          &nbsp;
+          &nbsp; &nbsp; &nbsp; &nbsp;
+          <span>theta: </span>
           <input
             type="text"
             className={styles["indicator-result"]}
@@ -46,6 +61,14 @@ const AngleSettingsResult = () => {
             value={gravityAngle.theta}
           />
         </div>
+        {toolState.showIndicator && (
+          <div
+            className={styles["indicator-save-angle-btn"]}
+            onClick={decideHandler}
+          >
+            decide
+          </div>
+        )}
       </div>
     </Fragment>
   );

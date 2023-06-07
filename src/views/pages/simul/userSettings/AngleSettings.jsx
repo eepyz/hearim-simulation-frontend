@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useState, useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { toolStateActions } from "../../../../store/state/toolState";
@@ -23,6 +23,7 @@ const FlowAngleSettings = () => {
   const decideHandler = () => {
     dispatch(toolStateActions.showIndicator());
   };
+
   const flowSelectedHandler = () => {
     dispatch(anglesActions.setFlowSelected());
   };
@@ -110,7 +111,7 @@ const FlowAngleSettings = () => {
           </button>
         </div>
 
-        <div className={styles["indicator-calculating-box"]}>
+        {/* <div className={styles["indicator-calculating-box"]}>
           <p>{flowSelected ? "flow angle" : "gravity angle"}</p>
           <p>phi : {flowSelected ? flowAngle.phi : gravityAngle.phi}</p>
           <p>theta : {flowSelected ? flowAngle.theta : gravityAngle.theta}</p>
@@ -120,7 +121,7 @@ const FlowAngleSettings = () => {
           >
             decide&nbsp;<i className={styles["bi bi-check2-circle"]}></i>
           </button>
-        </div>
+        </div> */}
       </div>
     </Fragment>
   );
