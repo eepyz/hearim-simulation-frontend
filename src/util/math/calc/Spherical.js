@@ -2,7 +2,7 @@ import * as THREE from "three";
 import { degToRad } from "three/src/math/MathUtils";
 
 class Spherical {
-  constructor(radius = 1, phi = 0, theta = 0) {
+  constructor(radius, phi = 0, theta = 0) {
     this.radius = radius;
     this.phi = phi; // polar angle
     this.theta = theta; // azimuthal angle

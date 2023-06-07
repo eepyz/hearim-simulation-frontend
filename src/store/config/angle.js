@@ -5,6 +5,7 @@ const initialState = {
   gravitySelected: false,
   flow: { phi: 0, theta: 0 },
   gravity: { phi: 0, theta: 0 },
+  moveBtnClicked: false,
 };
 
 const anglesSlice = createSlice({
@@ -24,6 +25,10 @@ const anglesSlice = createSlice({
     },
     updateGravityAngles(state, action) {
       state.gravity = action.payload;
+    },
+    setMoveBtnClicked(state) {
+      state.moveBtnClicked = !state.moveBtnClicked;
+      console.log(state.moveBtnClicked);
     },
   },
 });

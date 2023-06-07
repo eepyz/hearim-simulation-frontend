@@ -54,6 +54,7 @@ const FlowAngleSettings = () => {
       if (gravitySelected) {
         dispatch(anglesActions.updateGravityAngles(userInputAngles));
       }
+      dispatch(anglesActions.setMoveBtnClicked());
     }
   };
 

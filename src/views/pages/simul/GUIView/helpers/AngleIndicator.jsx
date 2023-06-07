@@ -20,6 +20,8 @@ const AngleIndicator = (props) => {
   const flowAngle = useSelector((state) => state.angles.flow);
   const gravityAngle = useSelector((state) => state.angles.gravity);
 
+  const moveBtnClicked = useSelector((state) => state.angles.moveBtnClicked);
+
   const coneRef = useRef();
   const stickRef = useRef();
   const arrowRef = useRef();
@@ -31,8 +33,6 @@ const AngleIndicator = (props) => {
 
   const { camera, raycaster, pointer, mouse } = useThree();
 
-  const spherical = new Spherical();
-
   const box = props.box;
   const boxMax = Math.max(
     box.max.x - box.min.x,
@@ -43,6 +43,7 @@ const AngleIndicator = (props) => {
   const boxCenter = new THREE.Vector3();
   box.getCenter(boxCenter);
   const sphere = box.getBoundingSphere(new THREE.Sphere(boxCenter));
+  const spherical = new Spherical(sphere.radius * 2);
 
   //functions--------------------------------------------------------------------------
   const searchAngle = () => {
@@ -81,23 +82,26 @@ const AngleIndicator = (props) => {
     }
   };
 
-  const moveAngle = () => {
-    const flowSelected = useSelector((state) => state.angles.flowSelected);
-    const gravitySelected = useSelector(
-      (state) => state.angles.gravitySelected
+  const goToAngle = () => {
+    let phi, theta, userPhiInput, userThetaInput;
+
+    if (flowSelected) {
+      phi = flowAngle.phi;
+      theta = flowAngle.theta;
+      userPhiInput = Number(phi);
+      userThetaInput = Number(theta);
+    }
+
+    if (gravitySelected) {
+      phi = gravityAngle.phi;
+      theta = gravityAngle.theta;
+      userPhiInput = Number(phi);
+      userThetaInput = Number(theta);
+    }
+
+    arrowRef.current.position.copy(
+      spherical.getVector3(userThetaInput, userPhiInput)
     );
-
-    const flowAngle = useSelector((state) => state.angles.flow);
-    const gravityAngle = useSelector((state) => state.angles.gravity);
-
-    // let phi = Number(userPhi);
-    // let theta = Number(userTheta);
-
-    let phi = 0;
-    let theta = 0;
-
-    setAngleSelected(true);
-    arrowRef.current.position.copy(spherical.getVector3(theta, phi));
     arrowRef.current.rotateX(Math.PI / 2);
     arrowRef.current.lookAt(limitRef.current.position);
   };
@@ -140,6 +144,10 @@ const AngleIndicator = (props) => {
     stickRef.current.geometry.rotateX(Math.PI / 2);
   }, []);
 
+  useEffect(() => {
+    goToAngle();
+  }, [moveBtnClicked]);
+
   useFrame(() => {
     if (!angleSelected && sphereHovered) {
       searchAngle();
@@ -160,7 +168,7 @@ const AngleIndicator = (props) => {
         onPointerLeave={onLimitSphereNotHover}
         onClick={onLimitSphereClicked}
       >
-        <sphereGeometry args={[sphere.radius + sphere.radius, 100, 100]} />
+        <sphereGeometry args={[sphere.radius * 2, 100, 100]} />
         <meshBasicMaterial transparent color="red" opacity={0.2} />
       </mesh>
 
