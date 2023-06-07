@@ -9,7 +9,7 @@ import styles from "../../../../assets/css/Simulation.module.css";
 const FlowAngleSettings = () => {
   const dispatch = useDispatch();
   const toolState = useSelector((state) => state.toolState);
-
+  const flowState = useSelector((state) => state.flowState);
   const flowSelected = useSelector((state) => state.angles.flowSelected);
   const gravitySelected = useSelector((state) => state.angles.gravitySelected);
   const flowAngle = useSelector((state) => state.angles.flow);
@@ -90,39 +90,31 @@ const FlowAngleSettings = () => {
           >
             move
           </button>
-          <button
-            className={
-              flowSelected
-                ? styles["which-angle-btn-selected"]
-                : styles["which-angle-btn"]
-            }
-            onClick={flowSelectedHandler}
-          >
-            flow
-          </button>
-          <button
-            className={
-              gravitySelected
-                ? styles["which-angle-btn-selected"]
-                : styles["which-angle-btn"]
-            }
-            onClick={gravitySelectedHandler}
-          >
-            gravity
-          </button>
+          {flowState.external && (
+            <button
+              className={
+                flowSelected
+                  ? styles["which-angle-btn-selected"]
+                  : styles["which-angle-btn"]
+              }
+              onClick={flowSelectedHandler}
+            >
+              flow
+            </button>
+          )}
+          {flowState.gravity && (
+            <button
+              className={
+                gravitySelected
+                  ? styles["which-angle-btn-selected"]
+                  : styles["which-angle-btn"]
+              }
+              onClick={gravitySelectedHandler}
+            >
+              gravity
+            </button>
+          )}
         </div>
-
-        {/* <div className={styles["indicator-calculating-box"]}>
-          <p>{flowSelected ? "flow angle" : "gravity angle"}</p>
-          <p>phi : {flowSelected ? flowAngle.phi : gravityAngle.phi}</p>
-          <p>theta : {flowSelected ? flowAngle.theta : gravityAngle.theta}</p>
-          <button
-            className={styles["indicator-save-angle-btn"]}
-            onClick={decideHandler}
-          >
-            decide&nbsp;<i className={styles["bi bi-check2-circle"]}></i>
-          </button>
-        </div> */}
       </div>
     </Fragment>
   );

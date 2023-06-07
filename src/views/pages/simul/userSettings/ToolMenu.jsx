@@ -7,6 +7,7 @@ import styles from "../../../../assets/css/Simulation.module.css";
 const ToolMenu = () => {
   const dispatch = useDispatch();
   const toolState = useSelector((state) => state.toolState);
+  const flowState = useSelector((state) => state.flowState);
 
   const ToolHandlers = {
     showLine: () => {
@@ -146,42 +147,44 @@ const ToolMenu = () => {
             content_cut{" "}
           </span>
         </button>
-
-        <button
-          id="bounding-box"
-          type="button"
-          title="[B] Show Bounding Box"
-          onClick={ToolHandlers.showBbox}
-        >
-          <span
-            className={
-              toolState.showBbox
-                ? "material-symbols-outlined " + styles["icons-clicked"]
-                : "material-symbols-outlined " + styles["icons"]
-            }
+        {flowState.external && (
+          <button
+            id="bounding-box"
+            type="button"
+            title="[B] Show Bounding Box"
+            onClick={ToolHandlers.showBbox}
           >
-            {" "}
-            view_in_ar{" "}
-          </span>
-        </button>
-
-        <button
-          id="indicator-activated"
-          type="button"
-          title="[I] Indicator Activate"
-          onClick={ToolHandlers.showIndicator}
-        >
-          <span
-            className={
-              toolState.showIndicator
-                ? "material-symbols-outlined " + styles["icons-clicked"]
-                : "material-symbols-outlined " + styles["icons"]
-            }
+            <span
+              className={
+                toolState.showBbox
+                  ? "material-symbols-outlined " + styles["icons-clicked"]
+                  : "material-symbols-outlined " + styles["icons"]
+              }
+            >
+              {" "}
+              view_in_ar{" "}
+            </span>
+          </button>
+        )}
+        {(flowState.external || flowState.gravity) && (
+          <button
+            id="indicator-activated"
+            type="button"
+            title="[I] Indicator Activate"
+            onClick={ToolHandlers.showIndicator}
           >
-            {" "}
-            near_me{" "}
-          </span>
-        </button>
+            <span
+              className={
+                toolState.showIndicator
+                  ? "material-symbols-outlined " + styles["icons-clicked"]
+                  : "material-symbols-outlined " + styles["icons"]
+              }
+            >
+              {" "}
+              near_me{" "}
+            </span>
+          </button>
+        )}
 
         <button
           id="settings"

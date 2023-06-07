@@ -25,7 +25,6 @@ const AngleIndicator = (props) => {
   const coneRef = useRef();
   const stickRef = useRef();
   const arrowRef = useRef();
-  const sphereRef = useRef();
   const limitRef = useRef();
 
   const [angleSelected, setAngleSelected] = useState(false);
@@ -157,11 +156,6 @@ const AngleIndicator = (props) => {
 
   return (
     <>
-      <mesh ref={sphereRef}>
-        <sphereGeometry args={[sphere.radius + sphere.radius / 2, 100, 100]} />
-        <meshBasicMaterial transparent color="white" opacity={0.3} />
-      </mesh>
-
       <mesh
         ref={limitRef}
         onPointerOver={onLimitSphereHover}
@@ -169,15 +163,15 @@ const AngleIndicator = (props) => {
         onClick={onLimitSphereClicked}
       >
         <sphereGeometry args={[sphere.radius * 2, 100, 100]} />
-        <meshBasicMaterial transparent color="red" opacity={0.2} />
+        <meshBasicMaterial transparent color="white" opacity={0.2} />
       </mesh>
 
       <group ref={arrowRef}>
-        <mesh ref={coneRef} scale={0.3}>
+        <mesh ref={coneRef} scale={0.2}>
           <coneGeometry args={[3, 10, 30]} />
           <meshBasicMaterial color="red" />
         </mesh>
-        <mesh ref={stickRef} scale={0.3} position={[0, 0, -5]}>
+        <mesh ref={stickRef} scale={0.2} position={[0, 0, -3]}>
           <cylinderGeometry args={[1, 1, 23, 32]} />
           <meshBasicMaterial color="red" />
         </mesh>

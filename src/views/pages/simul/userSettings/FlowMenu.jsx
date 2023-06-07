@@ -1,6 +1,7 @@
 import { Fragment } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { toolStateActions } from "../../../../store/state/toolState";
+import { anglesActions } from "../../../../store/config/angle";
 import { flowStateActions } from "../../../../store/state/flowState";
 
 import styles from "../../../../assets/css/Simulation.module.css";
@@ -18,9 +19,11 @@ const FlowMenu = () => {
     switch (e.target.id) {
       case "internal":
         dispatch(flowStateActions.internalFlow());
+        dispatch(anglesActions.setGravitySelected);
         break;
       case "external":
         dispatch(flowStateActions.externalFlow());
+        dispatch(anglesActions.setFlowSelected);
         break;
       case "transient":
         dispatch(flowStateActions.transientFlow());
@@ -30,9 +33,11 @@ const FlowMenu = () => {
         break;
       case "gravity":
         dispatch(flowStateActions.gravity());
+        dispatch(anglesActions.setGravitySelected);
         break;
       case "no-gravity":
         dispatch(flowStateActions.noGravity());
+        dispatch(anglesActions.setFlowSelected);
         break;
     }
   };
