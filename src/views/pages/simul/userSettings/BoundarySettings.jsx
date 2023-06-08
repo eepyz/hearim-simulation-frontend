@@ -3,17 +3,83 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { Html } from "@react-three/drei";
 
-import { boundaryActions } from "../../../../store/config/boundary";
-
 import styles from "../../../../assets/css/Simulation.module.css";
 
 const BoundarySettings = () => {
   const dispatch = useDispatch();
-  const boundary = useSelector((state) => state.boundary);
+  const boundary = useSelector((state) => state.boundaries.currentBoundary);
+  const [updatedBoundary, setUpdatedBoundary] = useState(boundary);
 
   const wallSelected = boundary.wall.selected;
   const inflowSelected = boundary.inflow.selected;
   const outflowSelected = boundary.outflow.selected;
+
+  const storeBoundarySetValues = (id, value) => {
+    let updatedBoundaryState = {};
+    if (id === "wallV-nv") {
+      updatedBoundaryState = {
+        wall: {
+          ...updatedBoundary.wall,
+          wallV: {
+            ...updatedBondary.wall.wallV,
+            normalV: { ...updatedBoundary.wall.wallV.normalV, value: value },
+          },
+        },
+      };
+    } else if (id === "wallV-tv") {
+      updatedBoundaryState = {};
+    } else if (id === "wallV-cv-x") {
+      updatedBoundaryState = {};
+    } else if (id === "wallV-cv-y") {
+      updatedBoundaryState = {};
+    } else if (id === "wallV-cv-z") {
+      updatedBoundaryState = {};
+    } else if (id === "ambientT-highT") {
+      updatedBoundaryState = {};
+    } else if (id === "highT-radiative") {
+      updatedBoundaryState = {};
+    } else if (id === "ambientT-naturalV") {
+      updatedBoundaryState = {};
+    } else if (id === "naturalV-convective") {
+      updatedBoundaryState = {};
+    } else if (id === "ambientT-highV") {
+      updatedBoundaryState = {};
+    } else if (id === "highV-convective") {
+      updatedBoundaryState = {};
+    } else if (id === "constantST-t") {
+      updatedBoundaryState = {};
+    } else if (id === "fluidUser-density") {
+      updatedBoundaryState = {};
+    } else if (id === "fluidUser-viscosity") {
+      updatedBoundaryState = {};
+    } else if (id === "fluidUser-cp") {
+      updatedBoundaryState = {};
+    } else if (id === "fluidUser-thermal") {
+      updatedBoundaryState = {};
+    } else if (id === "inflowP-inflowT") {
+      updatedBoundaryState = {};
+    } else if (id === "inflowP-sp") {
+      updatedBoundaryState = {};
+    } else if (id === "inflowP-nv") {
+      updatedBoundaryState = {};
+    } else if (id === "inflowP-cv-x") {
+      updatedBoundaryState = {};
+    } else if (id === "inflowP-cv-y") {
+      updatedBoundaryState = {};
+    } else if (id === "inflowP-cv-z") {
+      updatedBoundaryState = {};
+    } else if (id === "outflowP-sp") {
+      updatedBoundaryState = {};
+    } else if (id === "outflowP-nsv") {
+      updatedBoundaryState = {};
+    } else if (id === "outflowP-cv-x") {
+      updatedBoundaryState = {};
+    } else if (id === "outflowP-cv-y") {
+      updatedBoundaryState = {};
+    } else if (id === "outflowP-cv-z") {
+      this.boundary.outflow.outflowP.cartesianV.Zvalue = value;
+    }
+  };
 
   return (
     <Fragment>
@@ -36,24 +102,44 @@ const BoundarySettings = () => {
             <div className={styles["boundary-settings-detail"]}>
               <input id="wallV-nv-btn" type="radio" name="wallV" />
               <label htmlFor="wallV-nv-btn">Normal Velocity</label>
-              <input id="wallV-nv" type="text" />
+              <input
+                id="wallV-nv"
+                type="text"
+                onChange={storeBoundarySetValues}
+              />
               <span>[m/s]</span>
-
               <input id="wallV-tv-btn" type="radio" name="wallV" />
               <label htmlFor="wallV-tv-btn">Tangential Velocity</label>
-              <input id="wallV-tv" type="text" />
+              <input
+                id="wallV-tv"
+                type="text"
+                onChange={storeBoundarySetValues}
+              />
               <span>[m/s]</span>
-
               <input id="wallV-cv-btn" type="radio" name="wallV" />
               <label htmlFor="wallV-cv-btn">Cartesian Velocity</label>
-              <input id="wallV-cv-x" type="text" placeholder="X" />
+              <input
+                id="wallV-cv-x"
+                type="text"
+                placeholder="X"
+                onChange={storeBoundarySetValues}
+              />
               <span v-show="boundary.wall.wallV.cartesianV.selected">
                 [m/s]
               </span>
-              <input id="wallV-cv-y" type="text" placeholder="Y" />
+              <input
+                id="wallV-cv-y"
+                type="text"
+                placeholder="Y"
+                onChange={storeBoundarySetValues}
+              />
               <span>[m/s]</span>
-
-              <input id="wallV-cv-z" type="text" placeholder="Z" />
+              <input
+                id="wallV-cv-z"
+                type="text"
+                placeholder="Z"
+                onChange={storeBoundarySetValues}
+              />
               <span>[m/s]</span>
             </div>
           </div>
@@ -72,7 +158,11 @@ const BoundarySettings = () => {
               Temperature
             </button>
             <div className={styles["boundary-settings-detail"]}>
-              <input id="constantST-t" type="text" />
+              <input
+                id="constantST-t"
+                type="text"
+                onChange={storeBoundarySetValues}
+              />
               <span>[℃]</span>
             </div>
           </div>
@@ -83,7 +173,11 @@ const BoundarySettings = () => {
             </button>
             <input id="ambientT-highT-btn" type="radio" name="wallT" />
             <label htmlFor="ambientT-highT-btn">High Temperature </label>
-            <input id="ambientT-highT" type="text" />
+            <input
+              id="ambientT-highT"
+              type="text"
+              onChange={storeBoundarySetValues}
+            />
             <span>[℃]</span>
 
             <div className={styles["checkbox-div"]}>
@@ -92,7 +186,11 @@ const BoundarySettings = () => {
                 Radiative Heat Transfer Coefficient
               </label>
               <br />
-              <input id="highT-radiative" type="text" />
+              <input
+                id="highT-radiative"
+                type="text"
+                onChange={storeBoundarySetValues}
+              />
               <span>[W/m^2-K]</span>
             </div>
 
@@ -100,7 +198,11 @@ const BoundarySettings = () => {
             <label htmlFor="ambientT-naturalV-btn">
               Temperature & Nature Velocity
             </label>
-            <input id="ambientT-naturalV" type="text" />
+            <input
+              id="ambientT-naturalV"
+              type="text"
+              onChange={storeBoundarySetValues}
+            />
             <span>[℃]</span>
 
             <div className={styles["checkbox-div"]}>
@@ -109,7 +211,11 @@ const BoundarySettings = () => {
                 Convective Heat Transfer Coefficient
               </label>
               <br />
-              <input id="naturalV-convective" type="text" />
+              <input
+                id="naturalV-convective"
+                type="text"
+                onChange={storeBoundarySetValues}
+              />
               <span>[W/m^2-K]</span>
             </div>
 
@@ -117,7 +223,11 @@ const BoundarySettings = () => {
             <label htmlFor="ambientT-highV-btn">
               Temperature & High Velocity
             </label>
-            <input id="ambientT-highV" type="text" />
+            <input
+              id="ambientT-highV"
+              type="text"
+              onChange={storeBoundarySetValues}
+            />
             <span>[℃]</span>
 
             <div className={styles["checkbox-div"]}>
@@ -126,7 +236,11 @@ const BoundarySettings = () => {
                 Convective Heat Transfer Coefficient
               </label>
               <br />
-              <input id="highV-convective" type="text" />
+              <input
+                id="highV-convective"
+                type="text"
+                onChange={storeBoundarySetValues}
+              />
               <span>[W/m^2-K]</span>
             </div>
           </div>
@@ -154,19 +268,35 @@ const BoundarySettings = () => {
           </button>
           <div className={styles["boundary-settings-detail"]}>
             <div className={styles["title"]}>Density</div>
-            <input id="fluidUser-density" type="text" />
+            <input
+              id="fluidUser-density"
+              type="text"
+              onChange={storeBoundarySetValues}
+            />
             <span>[kg/m^3]</span>
 
             <div className={styles["title"]}>Viscosity</div>
-            <input id="fluidUser-viscosity" type="text" />
+            <input
+              id="fluidUser-viscosity"
+              type="text"
+              onChange={storeBoundarySetValues}
+            />
             <span>[kg/m-s]</span>
 
             <div className={styles["title"]}>Cp</div>
-            <input id="fluidUser-cp" type="text" />
+            <input
+              id="fluidUser-cp"
+              type="text"
+              onChange={storeBoundarySetValues}
+            />
             <span>[j/kg-K]</span>
 
             <div className={styles["title"]}>Thermal Conductivity</div>
-            <input id="fluidUser-thermal" type="text" />
+            <input
+              id="fluidUser-thermal"
+              type="text"
+              onChange={storeBoundarySetValues}
+            />
             <span>[w/m-K]</span>
           </div>
 
@@ -182,7 +312,11 @@ const BoundarySettings = () => {
           </button>
           <div className={styles["boundary-settings-detail"]}>
             <div className={styles["title"]}>Inflow Temperature</div>
-            <input id="inflowP-inflowT" type="text" />
+            <input
+              id="inflowP-inflowT"
+              type="text"
+              onChange={storeBoundarySetValues}
+            />
             <span>[℃]</span>
           </div>
 
@@ -191,7 +325,11 @@ const BoundarySettings = () => {
           </button>
           <div className={styles["boundary-settings-detail"]}>
             <div className={styles["title"]}>Static Pressure(Gage)</div>
-            <input id="inflowP-sp" type="text" />
+            <input
+              id="inflowP-sp"
+              type="text"
+              onChange={storeBoundarySetValues}
+            />
             <span>[Pa]</span>
           </div>
 
@@ -204,7 +342,11 @@ const BoundarySettings = () => {
               Normal Velocity
               <br />
             </label>
-            <input id="inflowP-nv" type="text" />
+            <input
+              id="inflowP-nv"
+              type="text"
+              onChange={storeBoundarySetValues}
+            />
             <span>[m/s]</span>
 
             <input
@@ -218,13 +360,29 @@ const BoundarySettings = () => {
               <br />
             </label>
 
-            <input id="inflowP-cv-x" type="text" placeholder="X" />
+            <input
+              id="inflowP-cv-x"
+              type="text"
+              placeholder="X"
+              onChange={storeBoundarySetValues}
+            />
+
             <span>[m/s]</span>
 
-            <input id="inflowP-cv-y" type="text" placeholder="Y" />
+            <input
+              id="inflowP-cv-y"
+              type="text"
+              placeholder="Y"
+              onChange={storeBoundarySetValues}
+            />
             <span>[m/s]</span>
 
-            <input id="inflowP-cv-z" type="text" placeholder="Z" />
+            <input
+              id="inflowP-cv-z"
+              type="text"
+              placeholder="Z"
+              onChange={storeBoundarySetValues}
+            />
             <span>[m/s]</span>
           </div>
         </div>
@@ -242,7 +400,11 @@ const BoundarySettings = () => {
             </button>
             <div className={styles["boundary-settings-detail"]}>
               <div className={styles["title"]}>Static Pressure (Gage)</div>
-              <input id="outflowP-sp" type="text" />
+              <input
+                id="outflowP-sp"
+                type="text"
+                onChange={storeBoundarySetValues}
+              />
               <span>[Pa]</span>
 
               <button className={styles["show-settings-detail-btn"]}>
@@ -254,7 +416,11 @@ const BoundarySettings = () => {
                 Normal Suction Velocity
                 <br />
               </label>
-              <input id="outflowP-nsv" type="text" />
+              <input
+                id="outflowP-nsv"
+                type="text"
+                onChange={storeBoundarySetValues}
+              />
               <span>[m/s]</span>
 
               <input id="outflowP-cv-btn" type="radio" name="outflowV" />
@@ -262,13 +428,28 @@ const BoundarySettings = () => {
                 Cartessian Velocity
                 <br />
               </label>
-              <input id="outflowP-cv-x" type="text" placeholder="X" />
+              <input
+                id="outflowP-cv-x"
+                type="text"
+                placeholder="X"
+                onChange={storeBoundarySetValues}
+              />
               <span>[m/s]</span>
 
-              <input id="outflowP-cv-y" type="text" placeholder="Y" />
+              <input
+                id="outflowP-cv-y"
+                type="text"
+                placeholder="Y"
+                onChange={storeBoundarySetValues}
+              />
               <span>[m/s]</span>
 
-              <input id="outflowP-cv-z" type="text" placeholder="Z" />
+              <input
+                id="outflowP-cv-z"
+                type="text"
+                placeholder="Z"
+                onChange={storeBoundarySetValues}
+              />
               <span>[m/s]</span>
             </div>
           </div>

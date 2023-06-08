@@ -1,13 +1,17 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { toolStateActions } from "../../../../store/state/toolState";
 
+import { STLLoader } from "three/examples/jsm/loaders/STLLoader";
+import * as THREE from "three";
 import styles from "../../../../assets/css/Simulation.module.css";
 
-const ToolMenu = () => {
+const ToolMenu = ({ onFileChange }) => {
   const dispatch = useDispatch();
   const toolState = useSelector((state) => state.toolState);
   const flowState = useSelector((state) => state.flowState);
+
+  const [selectedFile, setSelectedFile] = useState(null);
 
   const ToolHandlers = {
     showLine: () => {
@@ -42,6 +46,21 @@ const ToolMenu = () => {
     },
   };
 
+  const changeSTLfile = (e) => {
+    const loader = new STLLoader();
+    const uploadFile = e.target.files[0];
+    const fileReader = new FileReader();
+
+    fileReader.onload = function (e) {
+      const target = e.target;
+      let stlGeometry = loader.parse(target.result);
+      setSelectedFile(stlGeometry);
+      onFileChange(stlGeometry);
+      THREE.Cache.clear();
+    };
+    fileReader.readAsArrayBuffer(uploadFile);
+  };
+
   return (
     <Fragment>
       <div className={styles["tool-menu"]}>
@@ -51,7 +70,7 @@ const ToolMenu = () => {
               folder_supervised
             </span>
           </label>
-          <input type="file" id="stlfile" />
+          <input onChange={changeSTLfile} type="file" id="stlfile" />
         </button>
 
         <button id="show-Lines" type="button" onClick={ToolHandlers.showLine}>

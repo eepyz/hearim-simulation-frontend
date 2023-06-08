@@ -5,7 +5,6 @@ import toolStateReducer from "./state/toolState";
 import pointerStateReducer from "./state/pointerState";
 import AnglesReducer from "./config/angle";
 import boundariesReducer from "./config/boundaries";
-import boundaryReducer from "./config/boundary";
 
 const store = configureStore({
   reducer: {
@@ -14,7 +13,6 @@ const store = configureStore({
     pointerState: pointerStateReducer,
     angles: AnglesReducer,
     boundaries: boundariesReducer,
-    boundary: boundaryReducer,
   },
 });
 

@@ -1,12 +1,12 @@
 import { Fragment, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { boundaryActions } from "../../../../store/config/boundary";
+import { boundariesActions } from "../../../../store/config/boundaries";
+
 import styles from "../../../../assets/css/Simulation.module.css";
 
 const BoundaryMenu = () => {
   const dispatch = useDispatch();
-  const boundary = useSelector((state) => state.boundary);
-  const [updatedBoundary, setBoundary] = useState(boundary);
+  const boundary = useSelector((state) => state.boundaries.currentBoundary);
 
   const updateBoundaryType = (e) => {
     let updatedBoundaryState = {};
@@ -14,55 +14,51 @@ const BoundaryMenu = () => {
     switch (e.target.id) {
       case "wall":
         updatedBoundaryState = {
-          wall: { ...updatedBoundary.wall, selected: true },
-          inflow: { ...updatedBoundary.inflow, selected: false },
-          outflow: { ...updatedBoundary.outflow, selected: false },
-          farField: { ...updatedBoundary.farField, selected: false },
-          symmetry: { ...updatedBoundary.symmetry, selected: false },
+          wall: { ...boundary.wall, selected: true },
+          inflow: { ...boundary.inflow, selected: false },
+          outflow: { ...boundary.outflow, selected: false },
+          farField: { ...boundary.farField, selected: false },
+          symmetry: { ...boundary.symmetry, selected: false },
         };
         break;
       case "inflow":
         updatedBoundaryState = {
-          wall: { ...updatedBoundary.wall, selected: false },
-          inflow: { ...updatedBoundary.inflow, selected: true },
-          outflow: { ...updatedBoundary.outflow, selected: false },
-          farField: { ...updatedBoundary.farField, selected: false },
-          symmetry: { ...updatedBoundary.symmetry, selected: false },
+          wall: { ...boundary.wall, selected: false },
+          inflow: { ...boundary.inflow, selected: true },
+          outflow: { ...boundary.outflow, selected: false },
+          farField: { ...boundary.farField, selected: false },
+          symmetry: { ...boundary.symmetry, selected: false },
         };
         break;
       case "outflow":
         updatedBoundaryState = {
-          wall: { ...updatedBoundary.wall, selected: false },
-          inflow: { ...updatedBoundary.inflow, selected: false },
-          outflow: { ...updatedBoundary.outflow, selected: true },
-          farField: { ...updatedBoundary.farField, selected: false },
-          symmetry: { ...updatedBoundary.symmetry, selected: false },
+          wall: { ...boundary.wall, selected: false },
+          inflow: { ...boundary.inflow, selected: false },
+          outflow: { ...boundary.outflow, selected: true },
+          farField: { ...boundary.farField, selected: false },
+          symmetry: { ...boundary.symmetry, selected: false },
         };
         break;
       case "far-field":
         updatedBoundaryState = {
-          wall: { ...updatedBoundary.wall, selected: false },
-          inflow: { ...updatedBoundary.inflow, selected: false },
-          outflow: { ...updatedBoundary.outflow, selected: false },
-          farField: { ...updatedBoundary.farField, selected: true },
-          symmetry: { ...updatedBoundary.symmetry, selected: false },
+          wall: { ...boundary.wall, selected: false },
+          inflow: { ...boundary.inflow, selected: false },
+          outflow: { ...boundary.outflow, selected: false },
+          farField: { ...boundary.farField, selected: true },
+          symmetry: { ...boundary.symmetry, selected: false },
         };
         break;
       case "symmetry":
         updatedBoundaryState = {
-          wall: { ...updatedBoundary.wall, selected: false },
-          inflow: { ...updatedBoundary.inflow, selected: false },
-          outflow: { ...updatedBoundary.outflow, selected: false },
-          farField: { ...updatedBoundary.farField, selected: false },
-          symmetry: { ...updatedBoundary.symmetry, selected: true },
+          wall: { ...boundary.wall, selected: false },
+          inflow: { ...boundary.inflow, selected: false },
+          outflow: { ...boundary.outflow, selected: false },
+          farField: { ...boundary.farField, selected: false },
+          symmetry: { ...boundary.symmetry, selected: true },
         };
         break;
-      default:
-        updatedBoundaryState = updatedBoundary;
     }
-
-    setBoundary(updatedBoundaryState);
-    dispatch(boundaryActions.updateBoundary(updatedBoundaryState));
+    dispatch(boundariesActions.updateBoundaryType(updatedBoundaryState));
   };
 
   return (

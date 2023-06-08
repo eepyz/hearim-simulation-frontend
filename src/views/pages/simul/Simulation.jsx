@@ -19,6 +19,7 @@ const Simulation = () => {
   );
   const showIndicator = useSelector((state) => state.toolState.showIndicator);
   const findBoundary = useSelector((state) => state.toolState.findBoundary);
+
   return (
     <Fragment>
       <div className={styles["container"]}>

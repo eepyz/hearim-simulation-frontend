@@ -11,11 +11,11 @@ import BoundingSphere from "../helpers/AngleIndicator";
 import Boundary from "../../../../../util/math/info/Boundary";
 
 import { boundariesActions } from "../../../../../store/config/boundaries";
-import { boundaryActions } from "../../../../../store/config/boundary";
 
 const EachMesh = (props) => {
   const dispatch = useDispatch();
   const toolState = useSelector((state) => state.toolState);
+  const boundaries = useSelector((state) => state.boundaries.boundaries);
 
   //useRef----------------------------------------------------------------------------------
   const modelRef = useRef();
@@ -23,12 +23,8 @@ const EachMesh = (props) => {
 
   //useState---------------------------------------------------------------------------------
   const [hovered, setHovered] = useState(false);
-  const [clicked, setClicked] = useState(false);
-  const [faceClicked, setFaceClicked] = useState(false);
   const [meshInfo, setMeshInfo] = useState(null);
-  const [currentMesh, setCurrentMesh] = useState(null);
-  const [boundaries, setBoundaries] = useState({});
-  const [boundary, setBoundary] = useState(Boundary);
+
   const [initPosition, setInitPosition] = useState();
   const [initCameraPosition, setInitCameraPosition] = useState();
 
@@ -78,25 +74,23 @@ const EachMesh = (props) => {
     );
   };
 
-  const SelectAndPaintFaces = (face, color) => {
+  const SelectAndPaintFaces = (e, color) => {
     //change color of clicked face
     const colorAttribute = modelRef.current.geometry.getAttribute("color");
-    colorAttribute.setXYZ(face.a, color.r, color.g, color.b);
-    colorAttribute.setXYZ(face.b, color.r, color.g, color.b);
-    colorAttribute.setXYZ(face.c, color.r, color.g, color.b);
+    colorAttribute.setXYZ(e.face.a, color.r, color.g, color.b);
+    colorAttribute.setXYZ(e.face.b, color.r, color.g, color.b);
+    colorAttribute.setXYZ(e.face.c, color.r, color.g, color.b);
     colorAttribute.needsUpdate = true;
 
-    //change color of halfedge triangles which is neighbor with face
+    //change color of halfedge triangles which is neighbor with e.face
     if (meshInfo) {
-      let first = meshInfo.getTriangle(face.a, face.b, face.c);
+      let first = meshInfo.getTriangle(e.face.a, e.face.b, e.face.c);
       let last = undefined;
       let twinT;
       let searchedTriangles = [];
       let detectedTriangles = {};
 
       let boundaryID;
-      const updatedBoundaries = {};
-      const updateBoundary = { ...Boundary };
 
       let currentTriangles = {};
       function saveSurfaceTriangle(triangle) {
@@ -166,32 +160,29 @@ const EachMesh = (props) => {
       let lastTi = key[key.length - 1];
 
       boundaryID = [firstTi, lastTi];
+      dispatch(boundariesActions.saveCurrentId(boundaryID));
 
-      if (!([boundaryID] in updatedBoundaries)) {
-        updatedBoundaries[boundaryID] = updateBoundary;
-        updatedBoundaries[boundaryID].id = boundaryID;
-        updatedBoundaries[boundaryID].mesh = currentMesh;
-        updatedBoundaries[boundaryID].triangle = currentTriangles;
+      if (!([boundaryID] in boundaries)) {
+        dispatch(
+          boundariesActions.saveNewBoundary({
+            boundary: { ...Boundary },
+            id: boundaryID,
+            mesh: e.object.name,
+            triangle: currentTriangles,
+          })
+        );
       }
 
-      setBoundaries((prev) => ({ ...prev, ...updatedBoundaries }));
-      setBoundary(updateBoundary);
-
-      dispatch(boundaryActions.updateBoundary(boundary));
-      dispatch(boundariesActions.updateBoundaries(boundaries));
+      dispatch(boundariesActions.updateBoundary());
     }
-
-    setFaceClicked(true);
   };
 
   //event functions---------------------------------------------------------------------------
   const meshClick = (e) => {
-    e.stopPropagation(),
-      setClicked(true),
-      resetColor(),
-      setCurrentMesh(e.object.name),
-      toolState.findBoundary &&
-        SelectAndPaintFaces(e.face, new THREE.Color("#f16464"));
+    e.stopPropagation();
+    resetColor();
+    toolState.findBoundary &&
+      SelectAndPaintFaces(e, new THREE.Color("#6495f1"));
   };
 
   const meshHover = (e) => {
