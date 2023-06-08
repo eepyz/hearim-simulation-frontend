@@ -2,83 +2,413 @@ import { Fragment, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { Html } from "@react-three/drei";
-
+import { boundariesActions } from "../../../../store/config/boundaries";
 import styles from "../../../../assets/css/Simulation.module.css";
 
 const BoundarySettings = () => {
   const dispatch = useDispatch();
   const boundary = useSelector((state) => state.boundaries.currentBoundary);
-  const [updatedBoundary, setUpdatedBoundary] = useState(boundary);
 
   const wallSelected = boundary.wall.selected;
   const inflowSelected = boundary.inflow.selected;
   const outflowSelected = boundary.outflow.selected;
 
-  const storeBoundarySetValues = (id, value) => {
+  const storeBoundarySetValues = (e) => {
     let updatedBoundaryState = {};
-    if (id === "wallV-nv") {
-      updatedBoundaryState = {
-        wall: {
-          ...updatedBoundary.wall,
-          wallV: {
-            ...updatedBondary.wall.wallV,
-            normalV: { ...updatedBoundary.wall.wallV.normalV, value: value },
+
+    switch (e.target.id) {
+      case "wallV-nv":
+        updatedBoundaryState = {
+          ...boundary,
+          wall: {
+            ...boundary.wall,
+            wallV: {
+              ...boundary.wall.wallV,
+              normalV: {
+                ...boundary.wall.wallV.normalV,
+                value: e.target.value,
+              },
+            },
           },
-        },
-      };
-    } else if (id === "wallV-tv") {
-      updatedBoundaryState = {};
-    } else if (id === "wallV-cv-x") {
-      updatedBoundaryState = {};
-    } else if (id === "wallV-cv-y") {
-      updatedBoundaryState = {};
-    } else if (id === "wallV-cv-z") {
-      updatedBoundaryState = {};
-    } else if (id === "ambientT-highT") {
-      updatedBoundaryState = {};
-    } else if (id === "highT-radiative") {
-      updatedBoundaryState = {};
-    } else if (id === "ambientT-naturalV") {
-      updatedBoundaryState = {};
-    } else if (id === "naturalV-convective") {
-      updatedBoundaryState = {};
-    } else if (id === "ambientT-highV") {
-      updatedBoundaryState = {};
-    } else if (id === "highV-convective") {
-      updatedBoundaryState = {};
-    } else if (id === "constantST-t") {
-      updatedBoundaryState = {};
-    } else if (id === "fluidUser-density") {
-      updatedBoundaryState = {};
-    } else if (id === "fluidUser-viscosity") {
-      updatedBoundaryState = {};
-    } else if (id === "fluidUser-cp") {
-      updatedBoundaryState = {};
-    } else if (id === "fluidUser-thermal") {
-      updatedBoundaryState = {};
-    } else if (id === "inflowP-inflowT") {
-      updatedBoundaryState = {};
-    } else if (id === "inflowP-sp") {
-      updatedBoundaryState = {};
-    } else if (id === "inflowP-nv") {
-      updatedBoundaryState = {};
-    } else if (id === "inflowP-cv-x") {
-      updatedBoundaryState = {};
-    } else if (id === "inflowP-cv-y") {
-      updatedBoundaryState = {};
-    } else if (id === "inflowP-cv-z") {
-      updatedBoundaryState = {};
-    } else if (id === "outflowP-sp") {
-      updatedBoundaryState = {};
-    } else if (id === "outflowP-nsv") {
-      updatedBoundaryState = {};
-    } else if (id === "outflowP-cv-x") {
-      updatedBoundaryState = {};
-    } else if (id === "outflowP-cv-y") {
-      updatedBoundaryState = {};
-    } else if (id === "outflowP-cv-z") {
-      this.boundary.outflow.outflowP.cartesianV.Zvalue = value;
+        };
+        break;
+      case "wallV-tv":
+        updatedBoundaryState = {
+          ...boundary,
+          wall: {
+            ...boundary.wall,
+            wallV: {
+              ...boundary.wall.wallV,
+              tangentialV: {
+                ...boundary.wall.wallV.tangentialV,
+                value: e.target.value,
+              },
+            },
+          },
+        };
+        break;
+      case "wallV-cv-x":
+        updatedBoundaryState = {
+          ...boundary,
+          wall: {
+            ...boundary.wall,
+            wallV: {
+              ...boundary.wall.wallV,
+              cartesianV: {
+                ...boundary.wall.wallV.cartesianV,
+                Xvalue: e.target.value,
+              },
+            },
+          },
+        };
+        break;
+      case "wallV-cv-y":
+        updatedBoundaryState = {
+          ...boundary,
+          wall: {
+            ...boundary.wall,
+            wallV: {
+              ...boundary.wall.wallV,
+              cartesianV: {
+                ...boundary.wall.wallV.cartesianV,
+                Yvalue: e.target.value,
+              },
+            },
+          },
+        };
+        break;
+      case "wallV-cv-z":
+        updatedBoundaryState = {
+          ...boundary,
+          wall: {
+            ...boundary.wall,
+            wallV: {
+              ...boundary.wall.wallV,
+              cartesianV: {
+                ...boundary.wall.wallV.cartesianV,
+                Zvalue: e.target.value,
+              },
+            },
+          },
+        };
+        break;
+      case "constantST-t":
+        updatedBoundaryState = {
+          ...boundary,
+          wall: {
+            ...boundary.wall,
+            constantST: {
+              ...boundary.wall.constantST,
+              temperature: e.target.value,
+            },
+          },
+        };
+        break;
+      case "ambientT-highT":
+        updatedBoundaryState = {
+          ...boundary,
+          wall: {
+            ...boundary.wall,
+            ambientT: {
+              ...boundary.wall.ambientT,
+              highT: {
+                ...boundary.wall.ambientT.highT,
+                value: e.target.value,
+              },
+            },
+          },
+        };
+        break;
+      case "highT-radiative":
+        updatedBoundaryState = {
+          ...boundary,
+          wall: {
+            ...boundary.wall,
+            ambientT: {
+              ...boundary.wall.ambientT,
+              highT: {
+                ...boundary.wall.ambientT.highT,
+                radiative: {
+                  ...boundary.wall.ambientT.highT.radiative,
+                  value: e.target.value,
+                },
+              },
+            },
+          },
+        };
+        break;
+      case "ambientT-naturalV":
+        updatedBoundaryState = {
+          ...boundary,
+          wall: {
+            ...boundary.wall,
+            ambientT: {
+              ...boundary.wall.ambientT,
+              naturalV: {
+                ...boundary.wall.ambientT.naturalV,
+                value: e.target.value,
+              },
+            },
+          },
+        };
+        break;
+      case "naturalV-convective":
+        updatedBoundaryState = {
+          ...boundary,
+          wall: {
+            ...boundary.wall,
+            ambientT: {
+              ...boundary.wall.ambientT,
+              naturalV: {
+                ...boundary.wall.ambientT.naturalV,
+                convective: {
+                  ...boundary.wall.ambientT.naturalV.convective,
+                  value: e.target.value,
+                },
+              },
+            },
+          },
+        };
+        break;
+      case "ambientT-highV":
+        updatedBoundaryState = {
+          ...boundary,
+          wall: {
+            ...boundary.wall,
+            ambientT: {
+              ...boundary.wall.ambientT,
+              highV: {
+                ...boundary.wall.ambientT.highV,
+                value: e.target.value,
+              },
+            },
+          },
+        };
+        break;
+      case "highV-convective":
+        updatedBoundaryState = {
+          ...boundary,
+          wall: {
+            ...boundary.wall,
+            ambientT: {
+              ...boundary.wall.ambientT,
+              highV: {
+                ...boundary.wall.ambientT.highV,
+                convective: {
+                  ...boundary.wall.ambientT.highV.convective,
+                  value: e.target.value,
+                },
+              },
+            },
+          },
+        };
+        break;
+      case "fluidUser-density":
+        updatedBoundaryState = {
+          ...boundary,
+          inflow: {
+            ...boundary.inflow,
+            user: {
+              ...boundary.inflow.user,
+              density: e.target.value,
+            },
+          },
+        };
+        break;
+      case "fluidUser-viscosity":
+        updatedBoundaryState = {
+          ...boundary,
+          inflow: {
+            ...boundary.inflow,
+            user: {
+              ...boundary.inflow.user,
+              viscosity: e.target.value,
+            },
+          },
+        };
+        break;
+      case "fluidUser-cp":
+        updatedBoundaryState = {
+          ...boundary,
+          inflow: {
+            ...boundary.inflow,
+            user: {
+              ...boundary.inflow.user,
+              cp: e.target.value,
+            },
+          },
+        };
+        break;
+      case "fluidUser-thermal":
+        updatedBoundaryState = {
+          ...boundary,
+          inflow: {
+            ...boundary.inflow,
+            user: {
+              ...boundary.inflow.user,
+              thermalC: e.target.value,
+            },
+          },
+        };
+        break;
+      case "inflowP-inflowT":
+        updatedBoundaryState = {
+          ...boundary,
+          inflow: {
+            ...boundary.inflow,
+            inflowP: {
+              ...boundary.inflow.inflowP,
+              inflowT: e.target.value,
+            },
+          },
+        };
+        break;
+      case "inflowP-sp":
+        updatedBoundaryState = {
+          ...boundary,
+          inflow: {
+            ...boundary.inflow,
+            inflowP: {
+              ...boundary.inflow.inflowP,
+              staticP: e.target.value,
+            },
+          },
+        };
+        break;
+      case "inflowP-nv":
+        updatedBoundaryState = {
+          ...boundary,
+          inflow: {
+            ...boundary.inflow,
+            inflowP: {
+              ...boundary.inflow.inflowP,
+              normalV: {
+                ...boundary.inflow.inflowP.normalV,
+                value: e.target.value,
+              },
+            },
+          },
+        };
+        break;
+      case "inflowP-cv-x":
+        updatedBoundaryState = {
+          ...boundary,
+          inflow: {
+            ...boundary.inflow,
+            inflowP: {
+              ...boundary.inflow.inflowP,
+              cartesianV: {
+                ...boundary.inflow.inflowP.cartesianV,
+                Xvalue: e.target.value,
+              },
+            },
+          },
+        };
+        break;
+      case "inflowP-cv-y":
+        updatedBoundaryState = {
+          ...boundary,
+          inflow: {
+            ...boundary.inflow,
+            inflowP: {
+              ...boundary.inflow.inflowP,
+              cartesianV: {
+                ...boundary.inflow.inflowP.cartesianV,
+                Yvalue: e.target.value,
+              },
+            },
+          },
+        };
+        break;
+      case "inflowP-cv-z":
+        updatedBoundaryState = {
+          ...boundary,
+          inflow: {
+            ...boundary.inflow,
+            inflowP: {
+              ...boundary.inflow.inflowP,
+              cartesianV: {
+                ...boundary.inflow.inflowP.cartesianV,
+                Zvalue: e.target.value,
+              },
+            },
+          },
+        };
+        break;
+      case "outflowP-sp":
+        updatedBoundaryState = {
+          ...boundary,
+          outflow: {
+            ...boundary.outflow,
+            outflowP: {
+              ...boundary.outflow.outflowP,
+              staticP: e.target.value,
+            },
+          },
+        };
+        break;
+      case "outflowP-nsv":
+        updatedBoundaryState = {
+          ...boundary,
+          outflow: {
+            ...boundary.outflow,
+            outflowP: {
+              ...boundary.outflow.outflowP,
+              normalSV: {
+                ...boundary.outflow.normalSV,
+                value: e.target.value,
+              },
+            },
+          },
+        };
+        break;
+      case "outflowP-cv-x":
+        updatedBoundaryState = {
+          ...boundary,
+          outflow: {
+            ...boundary.outflow,
+            outflowP: {
+              ...boundary.outflow.outflowP,
+              cartesianV: {
+                ...boundary.outflow.cartesianV,
+                Xvalue: e.target.value,
+              },
+            },
+          },
+        };
+        break;
+      case "outflowP-cv-y":
+        updatedBoundaryState = {
+          ...boundary,
+          outflow: {
+            ...boundary.outflow,
+            outflowP: {
+              ...boundary.outflow.outflowP,
+              cartesianV: {
+                ...boundary.outflow.cartesianV,
+                Yvalue: e.target.value,
+              },
+            },
+          },
+        };
+        break;
+      case "outflowP-cv-z":
+        updatedBoundaryState = {
+          ...boundary,
+          outflow: {
+            ...boundary.outflow,
+            outflowP: {
+              ...boundary.outflow.outflowP,
+              cartesianV: {
+                ...boundary.outflow.cartesianV,
+                Zvalue: e.target.value,
+              },
+            },
+          },
+        };
+        break;
     }
+    dispatch(boundariesActions.updateBoundaryValue(updatedBoundaryState));
   };
 
   return (
@@ -106,6 +436,7 @@ const BoundarySettings = () => {
                 id="wallV-nv"
                 type="text"
                 onChange={storeBoundarySetValues}
+                value={boundary.wall.wallV.normalV.value}
               />
               <span>[m/s]</span>
               <input id="wallV-tv-btn" type="radio" name="wallV" />
@@ -114,6 +445,7 @@ const BoundarySettings = () => {
                 id="wallV-tv"
                 type="text"
                 onChange={storeBoundarySetValues}
+                value={boundary.wall.wallV.tangentialV.value}
               />
               <span>[m/s]</span>
               <input id="wallV-cv-btn" type="radio" name="wallV" />
@@ -123,6 +455,7 @@ const BoundarySettings = () => {
                 type="text"
                 placeholder="X"
                 onChange={storeBoundarySetValues}
+                value={boundary.wall.wallV.cartesianV.Xvalue}
               />
               <span v-show="boundary.wall.wallV.cartesianV.selected">
                 [m/s]
@@ -132,6 +465,7 @@ const BoundarySettings = () => {
                 type="text"
                 placeholder="Y"
                 onChange={storeBoundarySetValues}
+                value={boundary.wall.wallV.cartesianV.Yvalue}
               />
               <span>[m/s]</span>
               <input
@@ -139,6 +473,7 @@ const BoundarySettings = () => {
                 type="text"
                 placeholder="Z"
                 onChange={storeBoundarySetValues}
+                value={boundary.wall.wallV.cartesianV.Zvalue}
               />
               <span>[m/s]</span>
             </div>
@@ -162,6 +497,7 @@ const BoundarySettings = () => {
                 id="constantST-t"
                 type="text"
                 onChange={storeBoundarySetValues}
+                value={boundary.wall.constantST.temperature}
               />
               <span>[℃]</span>
             </div>
@@ -177,6 +513,7 @@ const BoundarySettings = () => {
               id="ambientT-highT"
               type="text"
               onChange={storeBoundarySetValues}
+              value={boundary.wall.ambientT.highT.value}
             />
             <span>[℃]</span>
 
@@ -190,6 +527,7 @@ const BoundarySettings = () => {
                 id="highT-radiative"
                 type="text"
                 onChange={storeBoundarySetValues}
+                value={boundary.wall.ambientT.highT.radiative.value}
               />
               <span>[W/m^2-K]</span>
             </div>
@@ -202,6 +540,7 @@ const BoundarySettings = () => {
               id="ambientT-naturalV"
               type="text"
               onChange={storeBoundarySetValues}
+              value={boundary.wall.ambientT.naturalV.value}
             />
             <span>[℃]</span>
 
@@ -215,6 +554,7 @@ const BoundarySettings = () => {
                 id="naturalV-convective"
                 type="text"
                 onChange={storeBoundarySetValues}
+                value={boundary.wall.ambientT.naturalV.convective.value}
               />
               <span>[W/m^2-K]</span>
             </div>
@@ -227,6 +567,7 @@ const BoundarySettings = () => {
               id="ambientT-highV"
               type="text"
               onChange={storeBoundarySetValues}
+              value={boundary.wall.ambientT.highV.value}
             />
             <span>[℃]</span>
 
@@ -240,6 +581,7 @@ const BoundarySettings = () => {
                 id="highV-convective"
                 type="text"
                 onChange={storeBoundarySetValues}
+                value={boundary.wall.ambientT.highV.convective.value}
               />
               <span>[W/m^2-K]</span>
             </div>
@@ -272,6 +614,7 @@ const BoundarySettings = () => {
               id="fluidUser-density"
               type="text"
               onChange={storeBoundarySetValues}
+              value={boundary.inflow.user.density}
             />
             <span>[kg/m^3]</span>
 
@@ -280,6 +623,7 @@ const BoundarySettings = () => {
               id="fluidUser-viscosity"
               type="text"
               onChange={storeBoundarySetValues}
+              value={boundary.inflow.user.viscosity}
             />
             <span>[kg/m-s]</span>
 
@@ -288,6 +632,7 @@ const BoundarySettings = () => {
               id="fluidUser-cp"
               type="text"
               onChange={storeBoundarySetValues}
+              value={boundary.inflow.user.cp}
             />
             <span>[j/kg-K]</span>
 
@@ -296,6 +641,7 @@ const BoundarySettings = () => {
               id="fluidUser-thermal"
               type="text"
               onChange={storeBoundarySetValues}
+              value={boundary.inflow.user.thermalC}
             />
             <span>[w/m-K]</span>
           </div>
@@ -316,6 +662,7 @@ const BoundarySettings = () => {
               id="inflowP-inflowT"
               type="text"
               onChange={storeBoundarySetValues}
+              value={boundary.inflow.inflowP.inflowT}
             />
             <span>[℃]</span>
           </div>
@@ -329,6 +676,7 @@ const BoundarySettings = () => {
               id="inflowP-sp"
               type="text"
               onChange={storeBoundarySetValues}
+              value={boundary.inflow.inflowP.staticP}
             />
             <span>[Pa]</span>
           </div>
@@ -346,6 +694,7 @@ const BoundarySettings = () => {
               id="inflowP-nv"
               type="text"
               onChange={storeBoundarySetValues}
+              value={boundary.inflow.inflowP.normalV.value}
             />
             <span>[m/s]</span>
 
@@ -365,6 +714,7 @@ const BoundarySettings = () => {
               type="text"
               placeholder="X"
               onChange={storeBoundarySetValues}
+              value={boundary.inflow.inflowP.cartesianV.Xvalue}
             />
 
             <span>[m/s]</span>
@@ -374,6 +724,7 @@ const BoundarySettings = () => {
               type="text"
               placeholder="Y"
               onChange={storeBoundarySetValues}
+              value={boundary.inflow.inflowP.cartesianV.Yvalue}
             />
             <span>[m/s]</span>
 
@@ -382,6 +733,7 @@ const BoundarySettings = () => {
               type="text"
               placeholder="Z"
               onChange={storeBoundarySetValues}
+              value={boundary.inflow.inflowP.cartesianV.Zvalue}
             />
             <span>[m/s]</span>
           </div>
@@ -404,6 +756,7 @@ const BoundarySettings = () => {
                 id="outflowP-sp"
                 type="text"
                 onChange={storeBoundarySetValues}
+                value={boundary.outflow.outflowP.staticP}
               />
               <span>[Pa]</span>
 
@@ -420,6 +773,7 @@ const BoundarySettings = () => {
                 id="outflowP-nsv"
                 type="text"
                 onChange={storeBoundarySetValues}
+                value={boundary.outflow.outflowP.normalSV.value}
               />
               <span>[m/s]</span>
 
@@ -433,6 +787,7 @@ const BoundarySettings = () => {
                 type="text"
                 placeholder="X"
                 onChange={storeBoundarySetValues}
+                value={boundary.outflow.outflowP.cartesianV.Xvalue}
               />
               <span>[m/s]</span>
 
@@ -441,6 +796,7 @@ const BoundarySettings = () => {
                 type="text"
                 placeholder="Y"
                 onChange={storeBoundarySetValues}
+                value={boundary.outflow.outflowP.cartesianV.Yvalue}
               />
               <span>[m/s]</span>
 
@@ -449,6 +805,7 @@ const BoundarySettings = () => {
                 type="text"
                 placeholder="Z"
                 onChange={storeBoundarySetValues}
+                value={boundary.outflow.outflowP.cartesianV.Zvalue}
               />
               <span>[m/s]</span>
             </div>

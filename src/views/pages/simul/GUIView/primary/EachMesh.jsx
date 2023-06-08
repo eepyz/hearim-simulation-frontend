@@ -159,7 +159,7 @@ const EachMesh = (props) => {
       let firstTi = key[0];
       let lastTi = key[key.length - 1];
 
-      boundaryID = [firstTi, lastTi];
+      boundaryID = [e.object.name, firstTi, lastTi];
       dispatch(boundariesActions.saveCurrentId(boundaryID));
 
       if (!([boundaryID] in boundaries)) {
@@ -171,6 +171,7 @@ const EachMesh = (props) => {
             triangle: currentTriangles,
           })
         );
+        dispatch(boundariesActions.updateBoundary());
       }
 
       dispatch(boundariesActions.updateBoundary());

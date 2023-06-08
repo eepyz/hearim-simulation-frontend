@@ -14,23 +14,23 @@ const boundariesSlice = createSlice({
     saveCurrentId(state, action) {
       state.currentId = action.payload;
     },
-
-    updateBoundary(state, action) {
-      state.currentBoundary = state.boundaries[state.currentId];
-    },
-
-    updateBoundaryType(state, action) {
-      state.boundaries[state.currentId] = action.payload;
-      state.currentBoundary = state.boundaries[state.currentId];
-      console.log(state.boundaries[state.currentId]);
-    },
-
     saveNewBoundary(state, action) {
       state.boundaries[action.payload.id] = action.payload.boundary;
       state.boundaries[action.payload.id].id = action.payload.id;
       state.boundaries[action.payload.id].mesh = action.payload.mesh;
       state.boundaries[action.payload.id].triangle = action.payload.triangle;
       state.currentBoundary = state.boundaries[action.payload.id];
+    },
+    updateBoundary(state, action) {
+      state.currentBoundary = state.boundaries[state.currentId];
+    },
+    updateBoundaryType(state, action) {
+      state.boundaries[state.currentId] = action.payload;
+      state.currentBoundary = state.boundaries[state.currentId];
+    },
+    updateBoundaryValue(state, action) {
+      state.boundaries[state.currentId] = action.payload;
+      state.currentBoundary = state.boundaries[state.currentId];
     },
   },
 });
