@@ -777,6 +777,10 @@ html {
   transition: opacity ease-out 0.2s;
 }
 
+.searching {
+  color: white;
+}
+
 .indicator-result-box input[type="text"] {
   height: 20px;
   margin: 0;

@@ -134,8 +134,8 @@ const AngleIndicator = (props) => {
       coneRef.current.material.color = new THREE.Color("red");
       stickRef.current.material.color = new THREE.Color("red");
     } else {
-      coneRef.current.material.color = new THREE.Color("blue");
-      stickRef.current.material.color = new THREE.Color("blue");
+      coneRef.current.material.color = new THREE.Color("#145eff");
+      stickRef.current.material.color = new THREE.Color("#145eff");
     }
   };
   //-------------------------------------------------------------------------------------
@@ -171,11 +171,11 @@ const AngleIndicator = (props) => {
       <group ref={arrowRef}>
         <mesh ref={coneRef} scale={0.2}>
           <coneGeometry args={[3, 10, 30]} />
-          <meshBasicMaterial color="red" />
+          <meshPhysicalMaterial color="red" />
         </mesh>
         <mesh ref={stickRef} scale={0.2} position={[0, 0, -3]}>
           <cylinderGeometry args={[1, 1, 23, 32]} />
-          <meshBasicMaterial color="red" />
+          <meshPhysicalMaterial color="red" />
         </mesh>
       </group>
     </>
