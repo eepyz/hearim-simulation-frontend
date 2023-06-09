@@ -8,7 +8,7 @@ const Boundary = {
     wallV: {
       selected: false,
       normalV: {
-        selected: false,
+        selected: true,
         value: "",
       },
       tangentialV: {
@@ -30,7 +30,7 @@ const Boundary = {
     ambientT: {
       selected: false,
       highT: {
-        selected: false,
+        selected: true,
         value: "",
         radiative: {
           selected: false,
@@ -140,7 +140,7 @@ const Boundary = {
       inflowT: "",
       staticP: "",
       normalV: {
-        selected: false,
+        selected: true,
         value: "",
       },
       cartesianV: {
@@ -157,7 +157,7 @@ const Boundary = {
       selected: true,
       staticP: "",
       normalSV: {
-        selected: false,
+        selected: true,
         value: "",
       },
       cartesianV: {

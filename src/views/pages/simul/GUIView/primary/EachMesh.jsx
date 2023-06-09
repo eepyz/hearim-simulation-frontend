@@ -183,14 +183,16 @@ const EachMesh = (props) => {
     e.stopPropagation();
     resetColor();
     toolState.findBoundary &&
-      SelectAndPaintFaces(e, new THREE.Color("#6495f1"));
+      SelectAndPaintFaces(e, new THREE.Color("#ff7e5e"));
   };
 
   const meshHover = (e) => {
-    e.stopPropagation(), setHovered(true);
+    e.stopPropagation();
+    setHovered(true);
   };
 
   const meshLeave = (e) => {
+    e.stopPropagation();
     setHovered(false);
   };
 
@@ -211,7 +213,7 @@ const EachMesh = (props) => {
       modelRef.current.position.copy(initPosition);
       camera.position.copy(initCameraPosition);
     }
-  }, [toolState.resetPosition]);
+  }, [toolState.resetPosition, toolState.showIndicator]);
 
   useEffect(() => {
     if (toolState.clippingObject) {
@@ -237,10 +239,10 @@ const EachMesh = (props) => {
         onClick={(e) => {
           meshClick(e);
         }}
-        onPointerOver={(e) => {
+        onPointerEnter={(e) => {
           meshHover(e);
         }}
-        onPointerOut={(e) => {
+        onPointerLeave={(e) => {
           meshLeave(e);
         }}
       >
