@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { toolStateActions } from "../../../../store/state/toolState";
 
@@ -10,8 +10,6 @@ const ToolMenu = ({ onFileChange }) => {
   const dispatch = useDispatch();
   const toolState = useSelector((state) => state.toolState);
   const flowState = useSelector((state) => state.flowState);
-
-  const [selectedFile, setSelectedFile] = useState(null);
 
   const ToolHandlers = {
     showLine: () => {
@@ -54,12 +52,50 @@ const ToolMenu = ({ onFileChange }) => {
     fileReader.onload = function (e) {
       const target = e.target;
       let stlGeometry = loader.parse(target.result);
-      setSelectedFile(stlGeometry);
       onFileChange(stlGeometry);
       THREE.Cache.clear();
     };
     fileReader.readAsArrayBuffer(uploadFile);
   };
+
+  useEffect(() => {
+    const keyBoardHandler = (e) => {
+      let key = e.key.toUpperCase();
+      switch (key) {
+        case "Q":
+          dispatch(toolStateActions.showLine());
+          break;
+        case "W":
+          dispatch(toolStateActions.findBoundary());
+          break;
+        case "R":
+          dispatch(toolStateActions.resetPosition());
+          break;
+        case "E":
+          dispatch(toolStateActions.rotateObject());
+          break;
+        case "T":
+          dispatch(toolStateActions.clippingObject());
+          break;
+        case "S":
+          dispatch(toolStateActions.showFlowSettings());
+          break;
+        case "B":
+          dispatch(toolStateActions.showBbox());
+          break;
+        case "I":
+          dispatch(toolStateActions.showIndicator());
+          break;
+        case "L":
+          dispatch(toolStateActions.showLookupTable());
+          break;
+      }
+    };
+    window.addEventListener("keydown", keyBoardHandler);
+    return () => {
+      window.removeEventListener("keydown", keyBoardHandler);
+    };
+  }, []);
 
   return (
     <Fragment>

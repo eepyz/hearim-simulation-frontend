@@ -19,15 +19,20 @@ const Simulation = () => {
   );
   const showIndicator = useSelector((state) => state.toolState.showIndicator);
   const findBoundary = useSelector((state) => state.toolState.findBoundary);
+  const [updatedFile, setUpdatedFile] = useState(null);
+  const onFileChange = (file) => {
+    setUpdatedFile(file);
+    console.log(updatedFile);
+  };
 
   return (
     <Fragment>
       <div className={styles["container"]}>
-        <GUIView />
+        <GUIView updatedFile={updatedFile} />
       </div>
 
       {showFlowSettings && <FlowMenu />}
-      <ToolMenu />
+      <ToolMenu onFileChange={onFileChange} />
 
       {findBoundary && <BoundaryMenu />}
       {findBoundary && <BoundarySettings />}
