@@ -777,8 +777,11 @@ html {
   transition: opacity ease-out 0.2s;
 }
 
-.searching {
+.to-search-click-please {
+  width: 200px;
+  font-size: 15px;
   color: white;
+  animation: pulse 2s infinite;
 }
 
 .indicator-result-box input[type="text"] {

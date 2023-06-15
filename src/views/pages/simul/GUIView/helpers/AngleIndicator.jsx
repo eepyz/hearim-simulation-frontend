@@ -11,6 +11,8 @@ import { radToDeg } from "three/src/math/MathUtils";
 
 import FlowAngleSettings from "../../userSettings/AngleSettings";
 
+import styles from "../../../../../assets/css/Simulation.module.css";
+
 const AngleIndicator = (props) => {
   const dispatch = useDispatch();
 
@@ -27,7 +29,7 @@ const AngleIndicator = (props) => {
   const arrowRef = useRef();
   const limitRef = useRef();
 
-  const [angleSelected, setAngleSelected] = useState(false);
+  const [angleStopped, setAngleStopped] = useState(false);
   const [sphereHovered, setSphereHovered] = useState(false);
 
   const { camera, raycaster, pointer, mouse } = useThree();
@@ -129,8 +131,8 @@ const AngleIndicator = (props) => {
   };
 
   const onLimitSphereClicked = () => {
-    setAngleSelected(!angleSelected);
-    if (angleSelected === true) {
+    setAngleStopped(!angleStopped);
+    if (angleStopped === true) {
       coneRef.current.material.color = new THREE.Color("red");
       stickRef.current.material.color = new THREE.Color("red");
     } else {
@@ -146,11 +148,13 @@ const AngleIndicator = (props) => {
 
   useEffect(() => {
     goToAngle();
-    setAngleSelected(true);
+    setAngleStopped(true);
+    coneRef.current.material.color = new THREE.Color("#145eff");
+    stickRef.current.material.color = new THREE.Color("#145eff");
   }, [moveBtnClicked]);
 
   useFrame(() => {
-    if (!angleSelected && sphereHovered) {
+    if (!angleStopped && sphereHovered) {
       searchAngle();
       getAngle();
     }
@@ -177,6 +181,11 @@ const AngleIndicator = (props) => {
           <cylinderGeometry args={[1, 1, 23, 32]} />
           <meshPhysicalMaterial color="red" />
         </mesh>
+        {angleStopped && (
+          <Html wrapperClass={styles["to-search-click-please"]}>
+            Click to caculate angle.
+          </Html>
+        )}
       </group>
     </>
   );
