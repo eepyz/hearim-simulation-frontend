@@ -72,6 +72,7 @@ const EachMesh = (props) => {
       "color",
       new THREE.Float32BufferAttribute(colors, 3)
     );
+    console.log("resetcolor");
   };
 
   const SelectAndPaintFaces = (e, color) => {
@@ -226,6 +227,11 @@ const EachMesh = (props) => {
   useEffect(() => {
     setMeshInfo(props.meshInfo);
   }, [meshInfo]);
+
+  useEffect(() => {
+    resetColor();
+    // camera.lookAt(modelRef);
+  }, [props.geometry]);
 
   //useFrame------------------------------------------------------------------------------
   useFrame((_, delta) => {});

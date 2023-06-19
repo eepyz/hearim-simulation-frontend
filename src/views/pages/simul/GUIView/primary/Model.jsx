@@ -104,6 +104,12 @@ const Model = (props) => {
   }, []);
 
   useEffect(() => {
+    if (props.updatedFile !== null) {
+      setMeshInfos(props.updatedFile);
+    }
+  }, [[props.updatedFile]]);
+
+  useEffect(() => {
     const dragControls = new DragControls(
       [groupRef.current],
       camera,

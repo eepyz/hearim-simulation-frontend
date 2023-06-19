@@ -12,7 +12,7 @@
 
 .main-title {
   color: white;
-  margin: 30px 0px;
+  margin-bottom: 20px;
   font-size: 40px;
   text-align: center;
 }
@@ -26,30 +26,30 @@
 /*- - - - - - - - - - */
 /*login page*/
 .login-box {
-  width: 450px;
+  width: 380px;
   margin: 0 auto;
   border-radius: 9px;
-  padding: 0px 30px;
+  padding: 30px;
   background-color: rgba(240, 240, 240, 0.3);
   z-index: 10;
 }
 
 .login-box-elem {
   width: 100%;
-  height: 45px;
+  height: 40px;
   margin: 0 auto;
   margin-bottom: 10px;
   border-radius: 5px;
   border: none;
-  padding: 0px 30px;
-  font-size: 18px;
+  padding: 0px 20px;
+  font-size: 15px;
   transition: all ease-out 0.2s;
 }
 
 .arrow-icon {
   position: absolute;
   top: 0px;
-  left: 20px;
+  left: 0px;
   color: white;
   font-size: 30px;
   transition: all ease-in 0.1s;
@@ -78,6 +78,7 @@ input:hover {
   color: rgb(120, 120, 120);
   font-weight: bold;
   cursor: pointer;
+  font-size: 15px;
   box-shadow: none;
 }
 
@@ -101,7 +102,8 @@ input:hover {
 
 .ask-signup {
   text-align: center;
-  margin: 20px auto;
+  margin: auto;
+  margin-top: 10px;
 }
 
 .ask-signup a {
@@ -117,41 +119,4 @@ input:hover {
 }
 
 @media (min-width: 1800px) {
-  /*login page*/
-
-  .login-box {
-    width: 500px;
-    min-height: 650px;
-    padding: 10px 50px;
-  }
-
-  .login-box-elem {
-    width: 100%;
-    height: 55px;
-    margin-bottom: 10px;
-    padding: 0px 30px;
-    font-size: 18px;
-  }
-
-  .login-btn {
-    margin-top: 20px;
-    text-align: center;
-    border-radius: 25px;
-  }
-
-  .login-btn:hover {
-    transform: scale(1.03);
-  }
-
-  .hr {
-    margin: 30px;
-  }
-
-  .ask-signup {
-    margin: 30px auto;
-  }
-
-  .ask-signup a {
-    font-size: 20px;
-  }
 }

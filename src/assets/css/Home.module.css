@@ -138,16 +138,3 @@
   clip: rect(0, 0, 0, 0);
   border: 0;
 }
-
-@media (min-width: 1800px) {
-  .threeJs {
-    position: absolute;
-    top: 30px;
-    height: 100%;
-    right: 1000px;
-  }
-
-  .change-stlfile-div {
-    right: -750px;
-  }
-}
