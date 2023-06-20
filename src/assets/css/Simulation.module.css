@@ -297,7 +297,7 @@ html {
   bottom: 10%;
   font-size: 18px;
   color: white;
-  /* animation: pulse 3s infinite; */
+  animation: pulse 3s infinite;
 }
 
 .boundary-menu {

@@ -11,11 +11,15 @@ import BoundingSphere from "../helpers/AngleIndicator";
 import Boundary from "../../../../../util/math/info/Boundary";
 
 import { boundariesActions } from "../../../../../store/config/boundaries";
+import { pointerStateActions } from "../../../../../store/state/pointerState";
 
 const EachMesh = (props) => {
   const dispatch = useDispatch();
   const toolState = useSelector((state) => state.toolState);
   const boundaries = useSelector((state) => state.boundaries.boundaries);
+  const pointerState = useSelector((state) => {
+    state.pointerState;
+  });
 
   //useRef----------------------------------------------------------------------------------
   const modelRef = useRef();
@@ -55,12 +59,6 @@ const EachMesh = (props) => {
     setInitPosition(initPosition);
     setInitCameraPosition(initCameraPosition);
     camera.position.copy(initCameraPosition);
-  };
-
-  const intersect = () => {
-    const intersects = [];
-    raycaster.setFromCamera(mouse, camera);
-    raycaster.intersectObject(modelRef.current, false, intersects);
   };
 
   const resetColor = () => {
@@ -188,9 +186,10 @@ const EachMesh = (props) => {
   const meshClick = (e) => {
     e.stopPropagation();
     props.onClick();
+    dispatch(pointerStateActions.objectClicked(true));
     resetColor();
     toolState.findBoundary &&
-      SelectAndPaintFaces(e, new THREE.Color("#ff7e5e"));
+      SelectAndPaintFaces(e, new THREE.Color("#9d94ce"));
   };
 
   const meshHover = (e) => {
@@ -202,18 +201,19 @@ const EachMesh = (props) => {
     e.stopPropagation();
     setHovered(false);
   };
-
   //useCursor------------------------------------------------------------------------------
   useCursor(hovered);
 
   //useEffect------------------------------------------------------------------------------
   useEffect(() => {
     saveInitPosition();
-    window.addEventListener("pointermove", intersect);
   }, []);
 
   useEffect(() => {
     resetColor();
+    if (!toolState.findBoundary) {
+      dispatch(pointerStateActions.objectClicked(false));
+    }
   }, [toolState.findBoundary]);
 
   useEffect(() => {
@@ -242,9 +242,7 @@ const EachMesh = (props) => {
   }, [props.resetColor]);
 
   //useFrame------------------------------------------------------------------------------
-  useFrame((_, delta) => {
-    // pointerMove();
-  });
+  useFrame((_, delta) => {});
 
   //----------------------------------------------------------------------------------------
   return (
@@ -266,7 +264,7 @@ const EachMesh = (props) => {
           roughness={1}
           opacity={hovered ? 0.8 : 1}
           // color={clicked ? "pink" : hovered ? "pink" : "lightblue"}
-          color={toolState.findBoundary && hovered ? "pink" : "lightblue"}
+          color={toolState.findBoundary && hovered ? "#bcb7db" : "lightblue"}
           side={THREE.DoubleSide}
           vertexColors={true}
           clipShadows

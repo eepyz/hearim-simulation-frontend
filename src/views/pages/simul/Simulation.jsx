@@ -1,4 +1,4 @@
-import React, { Fragment, useState, createContext, useContext } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Leva } from "leva";
 
@@ -19,6 +19,7 @@ const Simulation = () => {
   );
   const showIndicator = useSelector((state) => state.toolState.showIndicator);
   const findBoundary = useSelector((state) => state.toolState.findBoundary);
+  const pointerState = useSelector((state) => state.pointerState);
   const [updatedFile, setUpdatedFile] = useState(null);
 
   const onFileChange = (file) => {
@@ -34,8 +35,11 @@ const Simulation = () => {
       {showFlowSettings && <FlowMenu />}
       <ToolMenu onFileChange={onFileChange} />
 
-      {findBoundary && <BoundaryMenu />}
-      {findBoundary && <BoundarySettings />}
+      {findBoundary && pointerState.objectClicked && <BoundaryMenu />}
+      {findBoundary && pointerState.objectClicked && <BoundarySettings />}
+      {findBoundary && !pointerState.objectClicked && (
+        <div className={styles["click-surface"]}>Click the surface.</div>
+      )}
 
       {showIndicator && <AngleSettings />}
       <AngleSettingsResult />

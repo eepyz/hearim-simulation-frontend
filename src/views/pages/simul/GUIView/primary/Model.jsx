@@ -42,11 +42,6 @@ const Model = (props) => {
   stlGeometry.computeBoundingBox();
 
   //functions
-  const createMeshes = (meshList) => {
-    const clippingSize = -1;
-    return;
-  };
-
   const handleEachMeshClick = (index) => {
     setSelectedMeshIndex(index);
     setResetColorFlag(true);
