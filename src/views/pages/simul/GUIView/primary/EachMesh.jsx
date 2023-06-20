@@ -241,6 +241,9 @@ const EachMesh = (props) => {
     }
   }, [props.resetColor]);
 
+  useEffect(() => {
+    resetColor();
+  }, [props.geometry]);
   //useFrame------------------------------------------------------------------------------
   useFrame((_, delta) => {});
 

@@ -6,7 +6,7 @@ import { STLLoader } from "three/examples/jsm/loaders/STLLoader";
 import * as THREE from "three";
 import styles from "../../../../assets/css/Simulation.module.css";
 
-const ToolMenu = ({ onFileChange }) => {
+const ToolMenu = () => {
   const dispatch = useDispatch();
   const toolState = useSelector((state) => state.toolState);
   const flowState = useSelector((state) => state.flowState);
@@ -43,20 +43,6 @@ const ToolMenu = ({ onFileChange }) => {
       dispatch(toolStateActions.showLookupTable());
     },
   };
-
-  const changeSTLfile = useCallback(async (e) => {
-    const loader = new STLLoader();
-    const uploadFile = e.target.files[0];
-    const fileReader = new FileReader();
-
-    fileReader.onload = function (e) {
-      const target = e.target;
-      let stlGeometry = loader.parse(target.result);
-      onFileChange(stlGeometry);
-      THREE.Cache.clear();
-    };
-    fileReader.readAsArrayBuffer(uploadFile);
-  }, []);
 
   const colorRangeBar = () => {
     let value = toolState.angleValue;
@@ -117,14 +103,14 @@ const ToolMenu = ({ onFileChange }) => {
   return (
     <Fragment>
       <div className={styles["tool-menu"]}>
-        <button>
+        {/* <button>
           <label htmlFor="stlfile">
             <span className={"material-symbols-outlined " + styles["icons"]}>
               folder_supervised
             </span>
           </label>
-          <input onChange={changeSTLfile} type="file" id="stlfile" />
-        </button>
+          <input  type="file" id="stlfile" />
+        </button> */}
 
         <button id="show-Lines" type="button" onClick={ToolHandlers.showLine}>
           <span

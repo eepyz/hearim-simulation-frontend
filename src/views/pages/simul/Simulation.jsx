@@ -1,4 +1,10 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, {
+  Fragment,
+  useState,
+  useEffect,
+  createContext,
+  useContext,
+} from "react";
 import { useSelector } from "react-redux";
 import { Leva } from "leva";
 
@@ -20,20 +26,15 @@ const Simulation = () => {
   const showIndicator = useSelector((state) => state.toolState.showIndicator);
   const findBoundary = useSelector((state) => state.toolState.findBoundary);
   const pointerState = useSelector((state) => state.pointerState);
-  const [updatedFile, setUpdatedFile] = useState(null);
-
-  const onFileChange = (file) => {
-    setUpdatedFile(file);
-  };
 
   return (
     <Fragment>
       <div className={styles["container"]}>
-        <GUIView updatedFile={updatedFile} />
+        <GUIView />
       </div>
 
       {showFlowSettings && <FlowMenu />}
-      <ToolMenu onFileChange={onFileChange} />
+      <ToolMenu />
 
       {findBoundary && pointerState.objectClicked && <BoundaryMenu />}
       {findBoundary && pointerState.objectClicked && <BoundarySettings />}

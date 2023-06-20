@@ -20,7 +20,7 @@ const Model = ({ url }) => {
   }, []);
   return (
     <>
-      <Float speed={3} floatIntensity={3}>
+      <Float speed={2} floatIntensity={10}>
         <mesh ref={modelRef} geometry={stlGeometry} scale={0.03}>
           <meshStandardMaterial roughness={0} color="#97aff8" />
         </mesh>

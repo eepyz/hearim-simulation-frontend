@@ -17,7 +17,7 @@ const cameraConfig = {
   position: [0, 13, 30],
 };
 
-const GUIView = (props) => {
+const GUIView = () => {
   const [url, setUrl] = useState("/models/duct_matched_ascii.stl");
   // const [url, setUrl] = useState("/models/Manfold_solid_ascii.stl");
 
@@ -25,7 +25,7 @@ const GUIView = (props) => {
   return (
     <Canvas camera={cameraConfig} raycaster shadows>
       <GuiSettings />
-      <Model url={url} updatedFile={props.updatedFile} />
+      <Model url={url} />
       {/* <Plane /> */}
     </Canvas>
   );

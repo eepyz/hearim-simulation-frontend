@@ -9,6 +9,8 @@ const BoundarySettings = () => {
   const dispatch = useDispatch();
   const boundary = useSelector((state) => state.boundaries.currentBoundary);
 
+  const [position, setPosition] = useState({ x: 1270, y: 300 });
+
   const wallSelected = boundary.wall.selected;
   const inflowSelected = boundary.inflow.selected;
   const outflowSelected = boundary.outflow.selected;
@@ -1318,10 +1320,30 @@ const BoundarySettings = () => {
     dispatch(boundariesActions.updateBoundaryValue(updatedBoundaryState));
   };
 
+  const handleMouseDown = (event) => {
+    document.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mouseup", handleMouseUp);
+  };
+
+  const handleMouseMove = (event) => {
+    const newX = event.clientX;
+    const newY = event.clientY;
+    setPosition({ x: newX, y: newY });
+  };
+
+  const handleMouseUp = () => {
+    document.removeEventListener("mousemove", handleMouseMove);
+    document.removeEventListener("mouseup", handleMouseUp);
+  };
+
   return (
     <Fragment>
       {wallSelected && (
-        <div className={styles["boundary-settings-box"]}>
+        <div
+          style={{ top: position.y, left: position.x }}
+          className={styles["boundary-settings-box"]}
+          onMouseDown={handleMouseDown}
+        >
           <div className={styles["settings-title"]}>Wall Settings</div>
 
           <select
@@ -1559,7 +1581,11 @@ const BoundarySettings = () => {
         </div>
       )}
       {inflowSelected && (
-        <div className={styles["boundary-settings-box"]}>
+        <div
+          className={styles["boundary-settings-box"]}
+          style={{ top: position.y, left: position.x }}
+          onMouseDown={handleMouseDown}
+        >
           <div className={styles["settings-title"]}>Inflow Settings</div>
           <select
             id="subsFluid"
@@ -1753,7 +1779,11 @@ const BoundarySettings = () => {
         </div>
       )}
       {outflowSelected && (
-        <div className={styles["boundary-settings-box"]}>
+        <div
+          className={styles["boundary-settings-box"]}
+          style={{ top: position.y, left: position.x }}
+          onMouseDown={handleMouseDown}
+        >
           <div className={styles["settings-title"]}>Outflow Settings</div>
           <div className={styles["border"]}>
             <div className={styles["boundary-settings-select-one"]}>
