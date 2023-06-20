@@ -189,7 +189,7 @@ const EachMesh = (props) => {
     dispatch(pointerStateActions.objectClicked(true));
     resetColor();
     toolState.findBoundary &&
-      SelectAndPaintFaces(e, new THREE.Color("#9d94ce"));
+      SelectAndPaintFaces(e, new THREE.Color("#5599ff"));
   };
 
   const meshHover = (e) => {
@@ -267,7 +267,7 @@ const EachMesh = (props) => {
           roughness={1}
           opacity={hovered ? 0.8 : 1}
           // color={clicked ? "pink" : hovered ? "pink" : "lightblue"}
-          color={toolState.findBoundary && hovered ? "#bcb7db" : "lightblue"}
+          color={toolState.findBoundary && hovered ? "#fff495" : "lightblue"}
           side={THREE.DoubleSide}
           vertexColors={true}
           clipShadows
