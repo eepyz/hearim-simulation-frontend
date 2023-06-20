@@ -1,4 +1,4 @@
-import { Fragment, useState, useEffect } from "react";
+import { Fragment, useState, useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { toolStateActions } from "../../../../store/state/toolState";
 
@@ -44,7 +44,7 @@ const ToolMenu = ({ onFileChange }) => {
     },
   };
 
-  const changeSTLfile = (e) => {
+  const changeSTLfile = useCallback(async (e) => {
     const loader = new STLLoader();
     const uploadFile = e.target.files[0];
     const fileReader = new FileReader();
@@ -56,7 +56,7 @@ const ToolMenu = ({ onFileChange }) => {
       THREE.Cache.clear();
     };
     fileReader.readAsArrayBuffer(uploadFile);
-  };
+  }, []);
 
   useEffect(() => {
     const keyBoardHandler = (e) => {

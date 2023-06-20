@@ -29,7 +29,7 @@ const EachMesh = (props) => {
   const [initCameraPosition, setInitCameraPosition] = useState();
 
   //useThree---------------------------------------------------------------------------------
-  const { gl, camera } = useThree();
+  const { gl, camera, raycaster, mouse } = useThree();
 
   //functions------------------------------------------------------------------------------
   const saveInitPosition = () => {
@@ -57,6 +57,12 @@ const EachMesh = (props) => {
     camera.position.copy(initCameraPosition);
   };
 
+  const intersect = () => {
+    const intersects = [];
+    raycaster.setFromCamera(mouse, camera);
+    raycaster.intersectObject(modelRef.current, false, intersects);
+  };
+
   const resetColor = () => {
     const colors = [];
     const color = new THREE.Color("white");
@@ -72,7 +78,6 @@ const EachMesh = (props) => {
       "color",
       new THREE.Float32BufferAttribute(colors, 3)
     );
-    console.log("resetcolor");
   };
 
   const SelectAndPaintFaces = (e, color) => {
@@ -182,6 +187,7 @@ const EachMesh = (props) => {
   //event functions---------------------------------------------------------------------------
   const meshClick = (e) => {
     e.stopPropagation();
+    props.onClick();
     resetColor();
     toolState.findBoundary &&
       SelectAndPaintFaces(e, new THREE.Color("#ff7e5e"));
@@ -203,6 +209,7 @@ const EachMesh = (props) => {
   //useEffect------------------------------------------------------------------------------
   useEffect(() => {
     saveInitPosition();
+    window.addEventListener("pointermove", intersect);
   }, []);
 
   useEffect(() => {
@@ -229,12 +236,15 @@ const EachMesh = (props) => {
   }, [meshInfo]);
 
   useEffect(() => {
-    resetColor();
-    // camera.lookAt(modelRef);
-  }, [props.geometry]);
+    if (props.resetColor) {
+      resetColor();
+    }
+  }, [props.resetColor]);
 
   //useFrame------------------------------------------------------------------------------
-  useFrame((_, delta) => {});
+  useFrame((_, delta) => {
+    // pointerMove();
+  });
 
   //----------------------------------------------------------------------------------------
   return (

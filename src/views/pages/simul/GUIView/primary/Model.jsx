@@ -33,31 +33,23 @@ const Model = (props) => {
   const [meshList, setMeshList] = useState([]);
   const [lineList, setLineList] = useState([]);
   const [meshInfoList, setMeshInfoList] = useState([]);
+  const [selectedMeshIndex, setSelectedMeshIndex] = useState(null);
+  const [resetColorFlag, setResetColorFlag] = useState(false);
 
   //variables
-  const { camera, gl, viewport } = useThree();
+  const { camera, gl, viewport, raycaster, mouse } = useThree();
   const stlGeometry = useLoader(STLLoader, modelUrl);
   stlGeometry.computeBoundingBox();
 
-  //animate
-  useFrame((state, delta) => {
-    if (toolState.rotateObject) {
-      groupRef.current.rotation.y += delta;
-    }
-  });
-
   //functions
-  const createMeshes = (geometries) => {
+  const createMeshes = (meshList) => {
     const clippingSize = -1;
-    return geometries.map((geometry, i) => (
-      <EachMesh
-        geometry={geometry}
-        key={i}
-        name={"stlMesh-" + (i + 1)}
-        meshInfo={meshInfoList[i]}
-        box={stlGeometry.boundingBox}
-      />
-    ));
+    return;
+  };
+
+  const handleEachMeshClick = (index) => {
+    setSelectedMeshIndex(index);
+    setResetColorFlag(true);
   };
 
   const setMeshInfos = (stlGeometry) => {
@@ -97,6 +89,10 @@ const Model = (props) => {
     setMeshInfoList(separatedInfos);
   };
 
+  const resetColors = () => {
+    setResetColorFlag(true);
+  };
+
   //useEffect
   useEffect(() => {
     setMeshInfos(stlGeometry);
@@ -134,11 +130,31 @@ const Model = (props) => {
     };
   }, [camera, gl.domElement]);
 
+  //animate
+  useFrame((state, delta) => {
+    if (toolState.rotateObject) {
+      groupRef.current.rotation.y += delta;
+    }
+  });
   //jsx
   return (
     <>
       {toolState.showBbox && <BoundingBox box={stlGeometry.boundingBox} />}
-      <group ref={groupRef}>{createMeshes(meshList)}</group>
+      <group ref={groupRef}>
+        {meshList.map((geometry, i) => (
+          <EachMesh
+            geometry={geometry}
+            key={i}
+            name={"stlMesh-" + (i + 1)}
+            meshInfo={meshInfoList[i]}
+            box={stlGeometry.boundingBox}
+            onClick={() => {
+              handleEachMeshClick(i);
+            }}
+            resetColor={resetColorFlag && selectedMeshIndex !== i}
+          />
+        ))}
+      </group>
 
       {toolState.showIndicator && (
         <FlowAngleIndicator box={stlGeometry.boundingBox} />
