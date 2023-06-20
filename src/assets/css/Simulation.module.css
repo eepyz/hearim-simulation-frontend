@@ -30,6 +30,9 @@ html {
   color: rgb(107, 104, 255);
 }
 
+input:hover {
+  background-color: transparent;
+}
 .tool-menu {
   position: absolute;
   top: 10%;
@@ -92,11 +95,13 @@ html {
 .adj-angle-range {
   position: absolute;
   -webkit-appearance: none;
-  margin-left: 35px;
+  margin-top: 25px;
+  margin-left: 50px;
   appearance: none;
   height: 5px;
   border-radius: 5px;
   background-color: #ddd;
+  padding: 0;
 }
 
 .adj-angle-range::-webkit-slider-thumb {
@@ -107,12 +112,6 @@ html {
   border-radius: 50%;
   background: #bacbff;
   cursor: pointer;
-}
-
-.adj-angle-range::-webkit-slider-thumb:active {
-  /* background: rgb(128, 236, 203); */
-  width: 20px;
-  height: 20px;
 }
 
 .adj-angle-range::-moz-range-thumb {
@@ -126,7 +125,9 @@ html {
 .adj-angle-number {
   display: flex;
   position: absolute;
-  right: -180px;
+  margin-top: 15px;
+  left: 190px;
+  color: white;
 }
 
 .adj-angle-number > input {

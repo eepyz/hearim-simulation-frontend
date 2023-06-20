@@ -11,6 +11,7 @@ const initialState = {
   showBbox: false,
   showIndicator: false,
   showLookupTable: false,
+  angleValue: 90,
 };
 
 const toolStateSlice = createSlice({
@@ -52,6 +53,9 @@ const toolStateSlice = createSlice({
     },
     showLookupTable(state) {
       state.showLookupTable = !state.showLookupTable;
+    },
+    changeAngle(state, action) {
+      state.angleValue = action.payload;
     },
   },
 });

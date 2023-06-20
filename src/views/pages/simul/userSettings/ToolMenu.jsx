@@ -58,6 +58,23 @@ const ToolMenu = ({ onFileChange }) => {
     fileReader.readAsArrayBuffer(uploadFile);
   }, []);
 
+  const colorRangeBar = () => {
+    let value = toolState.angleValue;
+    const min = 0;
+    const max = 360;
+    const percentage = (value - min) / (max - min);
+    const bg = `linear-gradient(90deg, #85abfe ${percentage * 100}%, #ddd ${
+      percentage * 100
+    }%)`;
+    return {
+      background: bg,
+    };
+  };
+
+  const changeAngleValue = (e) => {
+    dispatch(toolStateActions.changeAngle(e.target.value));
+  };
+
   useEffect(() => {
     const keyBoardHandler = (e) => {
       let key = e.key.toUpperCase();
@@ -140,19 +157,24 @@ const ToolMenu = ({ onFileChange }) => {
               deployed_code{" "}
             </span>
           </button>
-          {/* <input
-            type="range"
-            min="0"
-            max="360"
-            step="1"
-            className="adj-angle-range"
-            placeholder="Angle (default : 90 deg)"
-          /> */}
-
-          {/* <div className="adj-angle-number">
-            <input />
-            <span>°</span>
-          </div> */}
+          {toolState.findBoundary && (
+            <>
+              <input
+                style={colorRangeBar()}
+                type="range"
+                min="0"
+                max="360"
+                step="1"
+                className={styles["adj-angle-range"]}
+                value={toolState.angleValue}
+                onChange={changeAngleValue}
+              />
+              <div className={styles["adj-angle-number"]}>
+                {toolState.angleValue}
+                <span>°</span>
+              </div>
+            </>
+          )}
         </div>
 
         <button

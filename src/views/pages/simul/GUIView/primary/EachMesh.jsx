@@ -138,7 +138,7 @@ const EachMesh = (props) => {
           if (
             meshInfo.getAngleBetween(first.normal, twinT[i].normal) <
             // adjAngle.value
-            90
+            toolState.angleValue
           ) {
             let tt = twinT[i].abc;
             colorAttribute.setXYZ(tt.a, color.r, color.g, color.b);
