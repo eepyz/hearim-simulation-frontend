@@ -33,9 +33,9 @@ const Simulation = () => {
         <GUIView />
       </div>
 
-      {showFlowSettings && <FlowMenu />}
       <ToolMenu />
 
+      {showFlowSettings && <FlowMenu />}
       {findBoundary && pointerState.objectClicked && <BoundaryMenu />}
       {findBoundary && pointerState.objectClicked && <BoundarySettings />}
       {findBoundary && !pointerState.objectClicked && (

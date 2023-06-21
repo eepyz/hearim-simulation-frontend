@@ -1,11 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Barlow:wght@400;600&family=Kanit:wght@100;500&family=Noto+Sans+KR:wght@100&family=Poppins&family=Quicksand:wght@300;400;500;600;700&family=Raleway&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;500&family=Orbit&display=swap");
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   /* user-select: none; */
   outline: none;
+  /* font-family: "Chakra Petch", sans-serif; */
   font-family: "Poppins", sans-serif;
 }
 

@@ -5,7 +5,7 @@ const Plane = () => {
     <>
       <mesh
         receiveShadow
-        position-y={-3}
+        position-y={-100}
         rotation-x={-Math.PI * 0.5}
         scale={100}
       >
@@ -13,7 +13,7 @@ const Plane = () => {
         <MeshReflectorMaterial
           resolution={512}
           mirror={0.5}
-          color="gray"
+          color="#c2d7eb"
           // side={THREE.DoubleSide}
         />
       </mesh>

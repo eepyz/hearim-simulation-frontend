@@ -26,7 +26,7 @@ const GUIView = () => {
     <Canvas camera={cameraConfig} raycaster shadows>
       <GuiSettings />
       <Model url={url} />
-      {/* <Plane /> */}
+      <Plane />
     </Canvas>
   );
 };

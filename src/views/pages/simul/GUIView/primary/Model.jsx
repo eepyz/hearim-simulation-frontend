@@ -179,7 +179,17 @@ const Model = (props) => {
       {toolState.showIndicator && (
         <FlowAngleIndicator box={stlGeometry.boundingBox} />
       )}
-      <OrbitControls ref={orbitControlRef} args={[camera, gl.domElement]} />
+      <OrbitControls
+        ref={orbitControlRef}
+        args={[camera, gl.domElement]}
+        enableDamping={true}
+        screenSpacePanning={false}
+        dampingFactor={0.2}
+        enableZoom={true}
+        target={[0, 0, 0]}
+        zoomSpeed={3}
+        rotateSpeed={1.5}
+      />
     </>
   );
 };

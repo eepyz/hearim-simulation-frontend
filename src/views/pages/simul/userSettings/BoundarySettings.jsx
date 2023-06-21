@@ -1339,11 +1339,7 @@ const BoundarySettings = () => {
   return (
     <Fragment>
       {wallSelected && (
-        <div
-          style={{ top: position.y, left: position.x }}
-          className={styles["boundary-settings-box"]}
-          onMouseDown={handleMouseDown}
-        >
+        <div className={styles["boundary-settings-box"]}>
           <div className={styles["settings-title"]}>Wall Settings</div>
 
           <select
@@ -1368,77 +1364,79 @@ const BoundarySettings = () => {
             </option>
           </select>
 
-          <div>
-            <button className={styles["show-settings-detail-btn"]}>
-              Velocity
-            </button>
-            <div className={styles["boundary-settings-detail"]}>
-              <input
-                id="wallV-nv-btn"
-                type="radio"
-                name="wallV"
-                onClick={selectBoundaryRadioOpitons}
-                checked={boundary.wall.wallV.normalV.selected}
-              />
-              <label htmlFor="wallV-nv-btn">Normal Velocity</label>
-              <input
-                id="wallV-nv"
-                type="text"
-                onChange={storeBoundarySetValues}
-                value={boundary.wall.wallV.normalV.value}
-              />
-              <span>[m/s]</span>
-              <input
-                id="wallV-tv-btn"
-                type="radio"
-                name="wallV"
-                onClick={selectBoundaryRadioOpitons}
-                checked={boundary.wall.wallV.tangentialV.selected}
-              />
-              <label htmlFor="wallV-tv-btn">Tangential Velocity</label>
-              <input
-                id="wallV-tv"
-                type="text"
-                onChange={storeBoundarySetValues}
-                value={boundary.wall.wallV.tangentialV.value}
-              />
-              <span>[m/s]</span>
-              <input
-                id="wallV-cv-btn"
-                type="radio"
-                name="wallV"
-                onClick={selectBoundaryRadioOpitons}
-                checked={boundary.wall.wallV.cartesianV.selected}
-              />
-              <label htmlFor="wallV-cv-btn">Cartesian Velocity</label>
-              <input
-                id="wallV-cv-x"
-                type="text"
-                placeholder="X"
-                onChange={storeBoundarySetValues}
-                value={boundary.wall.wallV.cartesianV.Xvalue}
-              />
-              <span v-show="boundary.wall.wallV.cartesianV.selected">
-                [m/s]
-              </span>
-              <input
-                id="wallV-cv-y"
-                type="text"
-                placeholder="Y"
-                onChange={storeBoundarySetValues}
-                value={boundary.wall.wallV.cartesianV.Yvalue}
-              />
-              <span>[m/s]</span>
-              <input
-                id="wallV-cv-z"
-                type="text"
-                placeholder="Z"
-                onChange={storeBoundarySetValues}
-                value={boundary.wall.wallV.cartesianV.Zvalue}
-              />
-              <span>[m/s]</span>
+          {boundary.wall.wallV.selected && (
+            <div>
+              <button className={styles["show-settings-detail-btn"]}>
+                Velocity
+              </button>
+              <div className={styles["boundary-settings-detail"]}>
+                <input
+                  id="wallV-nv-btn"
+                  type="radio"
+                  name="wallV"
+                  onClick={selectBoundaryRadioOpitons}
+                  checked={boundary.wall.wallV.normalV.selected}
+                />
+                <label htmlFor="wallV-nv-btn">Normal Velocity</label>
+                <input
+                  id="wallV-nv"
+                  type="text"
+                  onChange={storeBoundarySetValues}
+                  value={boundary.wall.wallV.normalV.value}
+                />
+                <span>[m/s]</span>
+                <input
+                  id="wallV-tv-btn"
+                  type="radio"
+                  name="wallV"
+                  onClick={selectBoundaryRadioOpitons}
+                  checked={boundary.wall.wallV.tangentialV.selected}
+                />
+                <label htmlFor="wallV-tv-btn">Tangential Velocity</label>
+                <input
+                  id="wallV-tv"
+                  type="text"
+                  onChange={storeBoundarySetValues}
+                  value={boundary.wall.wallV.tangentialV.value}
+                />
+                <span>[m/s]</span>
+                <input
+                  id="wallV-cv-btn"
+                  type="radio"
+                  name="wallV"
+                  onClick={selectBoundaryRadioOpitons}
+                  checked={boundary.wall.wallV.cartesianV.selected}
+                />
+                <label htmlFor="wallV-cv-btn">Cartesian Velocity</label>
+                <input
+                  id="wallV-cv-x"
+                  type="text"
+                  placeholder="X"
+                  onChange={storeBoundarySetValues}
+                  value={boundary.wall.wallV.cartesianV.Xvalue}
+                />
+                <span v-show="boundary.wall.wallV.cartesianV.selected">
+                  [m/s]
+                </span>
+                <input
+                  id="wallV-cv-y"
+                  type="text"
+                  placeholder="Y"
+                  onChange={storeBoundarySetValues}
+                  value={boundary.wall.wallV.cartesianV.Yvalue}
+                />
+                <span>[m/s]</span>
+                <input
+                  id="wallV-cv-z"
+                  type="text"
+                  placeholder="Z"
+                  onChange={storeBoundarySetValues}
+                  value={boundary.wall.wallV.cartesianV.Zvalue}
+                />
+                <span>[m/s]</span>
+              </div>
             </div>
-          </div>
+          )}
 
           <select
             id="temperature"
@@ -1462,130 +1460,129 @@ const BoundarySettings = () => {
             </option>
           </select>
 
-          <div>
-            <button className={styles["show-settings-detail-btn"]}>
-              Temperature
-            </button>
+          {boundary.wall.constantST.selected && (
+            <div>
+              <button className={styles["show-settings-detail-btn"]}>
+                Temperature
+              </button>
+              <div className={styles["boundary-settings-detail"]}>
+                <input
+                  id="constantST-t"
+                  type="text"
+                  onChange={storeBoundarySetValues}
+                  value={boundary.wall.constantST.temperature}
+                />
+                <span>[℃]</span>
+              </div>
+            </div>
+          )}
+          {boundary.wall.ambientT.selected && (
             <div className={styles["boundary-settings-detail"]}>
+              <button className={styles["show-settings-detail-btn"]}>
+                Temperature
+              </button>
               <input
-                id="constantST-t"
+                id="ambientT-highT-btn"
+                type="radio"
+                name="wallT"
+                onClick={selectBoundaryRadioOpitons}
+                checked={boundary.wall.ambientT.highT.selected}
+              />
+              <label htmlFor="ambientT-highT-btn">High Temperature </label>
+              <input
+                id="ambientT-highT"
                 type="text"
                 onChange={storeBoundarySetValues}
-                value={boundary.wall.constantST.temperature}
+                value={boundary.wall.ambientT.highT.value}
               />
               <span>[℃]</span>
-            </div>
-          </div>
 
-          <div className={styles["boundary-settings-detail"]}>
-            <button className={styles["show-settings-detail-btn"]}>
-              Temperature
-            </button>
-            <input
-              id="ambientT-highT-btn"
-              type="radio"
-              name="wallT"
-              onClick={selectBoundaryRadioOpitons}
-              checked={boundary.wall.ambientT.highT.selected}
-            />
-            <label htmlFor="ambientT-highT-btn">High Temperature </label>
-            <input
-              id="ambientT-highT"
-              type="text"
-              onChange={storeBoundarySetValues}
-              value={boundary.wall.ambientT.highT.value}
-            />
-            <span>[℃]</span>
+              <div className={styles["checkbox-div"]}>
+                <input type="checkbox" id="highT-radiative-btn" />
+                <label htmlFor="highT-radiative-btn">
+                  Radiative Heat Transfer Coefficient
+                </label>
+                <br />
+                <input
+                  id="highT-radiative"
+                  type="text"
+                  onChange={storeBoundarySetValues}
+                  value={boundary.wall.ambientT.highT.radiative.value}
+                />
+                <span>[W/m^2-K]</span>
+              </div>
 
-            <div className={styles["checkbox-div"]}>
-              <input type="checkbox" id="highT-radiative-btn" />
-              <label htmlFor="highT-radiative-btn">
-                Radiative Heat Transfer Coefficient
-              </label>
-              <br />
               <input
-                id="highT-radiative"
+                id="ambientT-naturalV-btn"
+                type="radio"
+                name="wallT"
+                onClick={selectBoundaryRadioOpitons}
+                checked={boundary.wall.ambientT.naturalV.selected}
+              />
+              <label htmlFor="ambientT-naturalV-btn">
+                Temperature & Nature Velocity
+              </label>
+              <input
+                id="ambientT-naturalV"
                 type="text"
                 onChange={storeBoundarySetValues}
-                value={boundary.wall.ambientT.highT.radiative.value}
+                value={boundary.wall.ambientT.naturalV.value}
               />
-              <span>[W/m^2-K]</span>
-            </div>
+              <span>[℃]</span>
 
-            <input
-              id="ambientT-naturalV-btn"
-              type="radio"
-              name="wallT"
-              onClick={selectBoundaryRadioOpitons}
-              checked={boundary.wall.ambientT.naturalV.selected}
-            />
-            <label htmlFor="ambientT-naturalV-btn">
-              Temperature & Nature Velocity
-            </label>
-            <input
-              id="ambientT-naturalV"
-              type="text"
-              onChange={storeBoundarySetValues}
-              value={boundary.wall.ambientT.naturalV.value}
-            />
-            <span>[℃]</span>
+              <div className={styles["checkbox-div"]}>
+                <input type="checkbox" id="naturalV-convective-btn" />
+                <label htmlFor="naturalV-convective-btn">
+                  Convective Heat Transfer Coefficient
+                </label>
+                <br />
+                <input
+                  id="naturalV-convective"
+                  type="text"
+                  onChange={storeBoundarySetValues}
+                  value={boundary.wall.ambientT.naturalV.convective.value}
+                />
+                <span>[W/m^2-K]</span>
+              </div>
 
-            <div className={styles["checkbox-div"]}>
-              <input type="checkbox" id="naturalV-convective-btn" />
-              <label htmlFor="naturalV-convective-btn">
-                Convective Heat Transfer Coefficient
-              </label>
-              <br />
               <input
-                id="naturalV-convective"
+                type="radio"
+                id="ambientT-highV-btn"
+                name="wallT"
+                onClick={selectBoundaryRadioOpitons}
+                checked={boundary.wall.ambientT.highV.selected}
+              />
+              <label htmlFor="ambientT-highV-btn">
+                Temperature & High Velocity
+              </label>
+              <input
+                id="ambientT-highV"
                 type="text"
                 onChange={storeBoundarySetValues}
-                value={boundary.wall.ambientT.naturalV.convective.value}
+                value={boundary.wall.ambientT.highV.value}
               />
-              <span>[W/m^2-K]</span>
-            </div>
+              <span>[℃]</span>
 
-            <input
-              type="radio"
-              id="ambientT-highV-btn"
-              name="wallT"
-              onClick={selectBoundaryRadioOpitons}
-              checked={boundary.wall.ambientT.highV.selected}
-            />
-            <label htmlFor="ambientT-highV-btn">
-              Temperature & High Velocity
-            </label>
-            <input
-              id="ambientT-highV"
-              type="text"
-              onChange={storeBoundarySetValues}
-              value={boundary.wall.ambientT.highV.value}
-            />
-            <span>[℃]</span>
-
-            <div className={styles["checkbox-div"]}>
-              <input type="checkbox" id="highV-convective-btn" />
-              <label htmlFor="highV-convective-btn">
-                Convective Heat Transfer Coefficient
-              </label>
-              <br />
-              <input
-                id="highV-convective"
-                type="text"
-                onChange={storeBoundarySetValues}
-                value={boundary.wall.ambientT.highV.convective.value}
-              />
-              <span>[W/m^2-K]</span>
+              <div className={styles["checkbox-div"]}>
+                <input type="checkbox" id="highV-convective-btn" />
+                <label htmlFor="highV-convective-btn">
+                  Convective Heat Transfer Coefficient
+                </label>
+                <br />
+                <input
+                  id="highV-convective"
+                  type="text"
+                  onChange={storeBoundarySetValues}
+                  value={boundary.wall.ambientT.highV.convective.value}
+                />
+                <span>[W/m^2-K]</span>
+              </div>
             </div>
-          </div>
+          )}
         </div>
       )}
       {inflowSelected && (
-        <div
-          className={styles["boundary-settings-box"]}
-          style={{ top: position.y, left: position.x }}
-          onMouseDown={handleMouseDown}
-        >
+        <div className={styles["boundary-settings-box"]}>
           <div className={styles["settings-title"]}>Inflow Settings</div>
           <select
             id="subsFluid"
@@ -1779,11 +1776,7 @@ const BoundarySettings = () => {
         </div>
       )}
       {outflowSelected && (
-        <div
-          className={styles["boundary-settings-box"]}
-          style={{ top: position.y, left: position.x }}
-          onMouseDown={handleMouseDown}
-        >
+        <div className={styles["boundary-settings-box"]}>
           <div className={styles["settings-title"]}>Outflow Settings</div>
           <div className={styles["border"]}>
             <div className={styles["boundary-settings-select-one"]}>

@@ -137,6 +137,7 @@ const EachMesh = (props) => {
         const colorAttribute = modelRef.current.geometry.getAttribute("color");
         for (let i = 0; i < twinT.length; i++) {
           if (
+            // meshInfo.getAngleBetween(currentT.normal, twinT[i].normal) <
             meshInfo.getAngleBetween(first.normal, twinT[i].normal) <
             // adjAngle.value
             toolState.angleValue
@@ -230,7 +231,7 @@ const EachMesh = (props) => {
 
   useEffect(() => {
     setMeshInfo(props.meshInfo);
-  }, [meshInfo]);
+  }, [props.meshInfo]);
 
   useEffect(() => {
     if (props.resetColor) {
@@ -262,10 +263,9 @@ const EachMesh = (props) => {
         }}
       >
         <meshStandardMaterial
-          roughness={1}
+          roughness={0.01}
           opacity={hovered ? 0.8 : 1}
-          // color={clicked ? "pink" : hovered ? "pink" : "lightblue"}
-          color={toolState.findBoundary && hovered ? "#fff495" : "lightblue"}
+          color={toolState.findBoundary && hovered ? "white" : "#748DA6"}
           side={THREE.DoubleSide}
           vertexColors={true}
           clipShadows
@@ -274,14 +274,14 @@ const EachMesh = (props) => {
         </meshStandardMaterial>
         {toolState.showLine && (
           <mesh {...props} ref={lineRef}>
-            <meshStandardMaterial roughness={0.01} color="gray" wireframe>
+            <meshBasicMaterial color="white" wireframe>
               <plane
                 attach="clippingPlanes-0"
                 normal={[0, 0, 1]}
                 position={[0, 0, 0]}
                 constant={0}
               />
-            </meshStandardMaterial>
+            </meshBasicMaterial>
           </mesh>
         )}
       </mesh>
