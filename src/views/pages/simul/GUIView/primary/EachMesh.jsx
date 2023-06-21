@@ -51,6 +51,7 @@ const EachMesh = (props) => {
     const initPosition = modelRef.current.getWorldPosition(new THREE.Vector3());
 
     boxCenter.normalize();
+
     const initCameraPosition = new THREE.Vector3(
       boxCenter.x,
       boxCenter.y + 5,
@@ -64,7 +65,7 @@ const EachMesh = (props) => {
 
   const resetColor = () => {
     const colors = [];
-    const color = new THREE.Color("white");
+    const color = new THREE.Color("#748DA6");
     const positionAttribute =
       modelRef.current.geometry.getAttribute("position");
     for (let i = 0; i < positionAttribute.count; i += 3) {
@@ -191,7 +192,7 @@ const EachMesh = (props) => {
     dispatch(pointerStateActions.objectClicked(true));
     resetColor();
     toolState.findBoundary &&
-      SelectAndPaintFaces(e, new THREE.Color("#5599ff"));
+      SelectAndPaintFaces(e, new THREE.Color("#a0f4ff"));
   };
 
   const meshHover = (e) => {
@@ -244,7 +245,17 @@ const EachMesh = (props) => {
     saveInitPosition();
   }, [props.geometry]);
   //useFrame------------------------------------------------------------------------------
-  useFrame((_, delta) => {});
+  useFrame((_, delta) => {
+    if (toolState.rotateObject) {
+      let rotSpeed = 0.01;
+      let x = camera.position.x;
+      let y = camera.position.y;
+      let z = camera.position.z;
+      camera.position.x = x * Math.cos(rotSpeed) + z * Math.sin(rotSpeed);
+      camera.position.z = z * Math.cos(rotSpeed) - x * Math.sin(rotSpeed);
+      camera.lookAt(new THREE.Vector3(0, 0, 0));
+    }
+  });
 
   //----------------------------------------------------------------------------------------
   return (
@@ -264,8 +275,11 @@ const EachMesh = (props) => {
       >
         <meshStandardMaterial
           roughness={0.01}
-          opacity={hovered ? 0.8 : 1}
-          color={toolState.findBoundary && hovered ? "white" : "#748DA6"}
+          transparent={true}
+          opacity={
+            toolState.findBoundary && props.resetColor && !hovered ? 0.5 : 1
+          }
+          // color={toolState.findBoundary && hovered ? "white" : "#748DA6"}
           side={THREE.DoubleSide}
           vertexColors={true}
           clipShadows
@@ -274,7 +288,7 @@ const EachMesh = (props) => {
         </meshStandardMaterial>
         {toolState.showLine && (
           <mesh {...props} ref={lineRef}>
-            <meshBasicMaterial color="white" wireframe>
+            <meshBasicMaterial color="gray" wireframe>
               <plane
                 attach="clippingPlanes-0"
                 normal={[0, 0, 1]}

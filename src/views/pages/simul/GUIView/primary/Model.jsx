@@ -141,25 +141,11 @@ const Model = (props) => {
   }, [camera, gl.domElement]);
 
   //animate
-  useFrame((state, delta) => {
-    if (toolState.rotateObject) {
-      groupRef.current.rotation.y += delta;
-    }
-  });
+  useFrame((state, delta) => {});
   //jsx
   return (
     <>
       {toolState.showBbox && <BoundingBox box={stlGeometry.boundingBox} />}
-      <Html wrapperClass={styles["tool-menu"]}>
-        <button>
-          <label htmlFor="stlfile">
-            <span className={"material-symbols-outlined " + styles["icons"]}>
-              folder_supervised
-            </span>
-          </label>
-          <input type="file" onChange={changeSTLfile} id="stlfile" />
-        </button>
-      </Html>
       <group ref={groupRef}>
         {meshList.map((geometry, i) => (
           <EachMesh
@@ -174,6 +160,16 @@ const Model = (props) => {
             resetColor={resetColorFlag && selectedMeshIndex !== i}
           />
         ))}
+        <Html wrapperClass={styles["file-change"]}>
+          <button>
+            <label htmlFor="stlfile">
+              <span className={"material-symbols-outlined " + styles["icons"]}>
+                folder_supervised
+              </span>
+            </label>
+            <input type="file" onChange={changeSTLfile} id="stlfile" />
+          </button>
+        </Html>
       </group>
 
       {toolState.showIndicator && (
