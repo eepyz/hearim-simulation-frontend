@@ -89,7 +89,7 @@ const Model = (props) => {
     setResetColorFlag(true);
   };
 
-  const changeSTLfile = useCallback(async (e) => {
+  const changeSTLfile = (e) => {
     const loader = new STLLoader();
     const uploadFile = e.target.files[0];
     const fileReader = new FileReader();
@@ -98,10 +98,13 @@ const Model = (props) => {
       const target = e.target;
       let stlGeometry = loader.parse(target.result);
       setGeometry(stlGeometry);
-      THREE.Cache.clear();
+      console.log(stlGeometry);
+      if (THREE.Cache) {
+        THREE.Cache.clear();
+      }
     };
     fileReader.readAsArrayBuffer(uploadFile);
-  }, []);
+  };
 
   //useEffect
   useEffect(() => {

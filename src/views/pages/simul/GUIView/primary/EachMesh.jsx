@@ -192,7 +192,7 @@ const EachMesh = (props) => {
     dispatch(pointerStateActions.objectClicked(true));
     resetColor();
     toolState.findBoundary &&
-      SelectAndPaintFaces(e, new THREE.Color("#a0f4ff"));
+      SelectAndPaintFaces(e, new THREE.Color("#cca0ff"));
   };
 
   const meshHover = (e) => {
