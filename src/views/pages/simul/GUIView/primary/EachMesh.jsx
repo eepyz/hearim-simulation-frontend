@@ -37,6 +37,7 @@ const EachMesh = (props) => {
 
   //functions------------------------------------------------------------------------------
   const saveInitPosition = () => {
+    console.log("initPosition");
     const box = props.box;
     const boxMax = Math.max(
       box.max.x - box.min.x,
@@ -206,10 +207,6 @@ const EachMesh = (props) => {
 
   //useEffect------------------------------------------------------------------------------
   useEffect(() => {
-    saveInitPosition();
-  }, []);
-
-  useEffect(() => {
     resetColor();
     if (!toolState.findBoundary) {
       dispatch(pointerStateActions.objectClicked(false));
@@ -243,6 +240,7 @@ const EachMesh = (props) => {
 
   useEffect(() => {
     resetColor();
+    saveInitPosition();
   }, [props.geometry]);
   //useFrame------------------------------------------------------------------------------
   useFrame((_, delta) => {});
