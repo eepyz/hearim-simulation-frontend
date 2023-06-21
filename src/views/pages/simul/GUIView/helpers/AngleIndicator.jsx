@@ -6,7 +6,7 @@ import * as THREE from "three";
 
 import { anglesActions } from "../../../../../store/config/angle";
 
-import Spherical from "../../../../../util/math/calc/Spherical";
+import Spherical from "../../../../../util/calc/Spherical";
 import { radToDeg } from "three/src/math/MathUtils";
 
 import FlowAngleSettings from "../../userSettings/AngleSettings";

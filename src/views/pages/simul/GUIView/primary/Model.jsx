@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
 
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import { extend, useThree, useFrame, useLoader } from "@react-three/fiber";
 import { OrbitControls, CycleRaycast, Html } from "@react-three/drei";
@@ -12,7 +12,9 @@ import { STLLoader } from "three/examples/jsm/loaders/STLLoader";
 import BoundingBox from "../helpers/BoundingBox";
 import FlowAngleIndicator from "../helpers/AngleIndicator";
 
-import MeshInfo from "../../../../../util/math/info/MeshInfo";
+import MeshInfo from "../../../../../util/info/MeshInfo";
+import { meshStateActions } from "../../../../../store/state/meshState"; //
+
 import EachMesh from "./EachMesh";
 
 import styles from "../../../../../assets/css/Simulation.module.css";
@@ -21,6 +23,8 @@ import styles from "../../../../../assets/css/Simulation.module.css";
 extend({ DragControls });
 
 const Model = (props) => {
+  const dispatch = useDispatch();
+
   //useSelector
   const toolState = useSelector((state) => state.toolState);
   const flowState = useSelector((state) => state.flowState);
@@ -83,27 +87,60 @@ const Model = (props) => {
 
     setMeshList(separatedGeometries);
     setMeshInfoList(separatedInfos);
+    dispatch(meshStateActions.saveMeshList(separatedGeometries));
+    dispatch(meshStateActions.saveMeshInfoList(separatedInfos));
   };
 
   const resetColors = () => {
     setResetColorFlag(true);
   };
 
-  const changeSTLfile = (e) => {
+  // const changeSTLfile = (e) => {
+  //   const loader = new STLLoader();
+  //   const uploadFile = e.target.files[0];
+  //   const fileReader = new FileReader();
+
+  //   fileReader.onload = function (e) {
+  //     const target = e.target;
+  //     let stlGeometry = loader.parse(target.result);
+  //     setGeometry(stlGeometry);
+  //     if (THREE.Cache) {
+  //       THREE.Cache.clear();
+  //     }
+  //   };
+  //   fileReader.readAsArrayBuffer(uploadFile);
+  // };
+
+  const changeSTLfile = async (e) => {
     const loader = new STLLoader();
     const uploadFile = e.target.files[0];
     const fileReader = new FileReader();
 
-    fileReader.onload = function (e) {
-      const target = e.target;
-      let stlGeometry = loader.parse(target.result);
-      setGeometry(stlGeometry);
-      console.log(stlGeometry);
+    const readFile = () => {
+      return new Promise((resolve, reject) => {
+        fileReader.onload = function (e) {
+          const target = e.target;
+          let stlGeometry = loader.parse(target.result);
+          setGeometry(stlGeometry);
+          resolve(stlGeometry);
+        };
+
+        fileReader.onerror = function (e) {
+          reject(e);
+        };
+
+        fileReader.readAsArrayBuffer(uploadFile);
+      });
+    };
+
+    try {
+      await readFile();
       if (THREE.Cache) {
         THREE.Cache.clear();
       }
-    };
-    fileReader.readAsArrayBuffer(uploadFile);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   //useEffect
@@ -113,9 +150,10 @@ const Model = (props) => {
   }, []);
 
   useEffect(() => {
-    if (stlGeometry !== null) {
-      setMeshInfos(stlGeometry);
-    }
+    // if (stlGeometry !== null) {
+    //   setMeshInfos(stlGeometry);
+    // }
+    setMeshInfos(stlGeometry);
   }, [stlGeometry]);
 
   useEffect(() => {
@@ -163,18 +201,17 @@ const Model = (props) => {
             resetColor={resetColorFlag && selectedMeshIndex !== i}
           />
         ))}
-        <Html wrapperClass={styles["file-change"]}>
-          <button>
-            <label htmlFor="stlfile">
-              <span className={"material-symbols-outlined " + styles["icons"]}>
-                folder_supervised
-              </span>
-            </label>
-            <input type="file" onChange={changeSTLfile} id="stlfile" />
-          </button>
-        </Html>
       </group>
-
+      <Html wrapperClass={styles["file-change"]}>
+        <button>
+          <label htmlFor="stlfile">
+            <span className={"material-symbols-outlined " + styles["icons"]}>
+              folder_supervised
+            </span>
+          </label>
+          <input type="file" onChange={changeSTLfile} id="stlfile" />
+        </button>
+      </Html>
       {toolState.showIndicator && (
         <FlowAngleIndicator box={stlGeometry.boundingBox} />
       )}

@@ -814,11 +814,6 @@ input:hover {
   margin-bottom: 5px;
 }
 
-.file-change {
-  position: absolute;
-  right: 0;
-}
-
 .file-change button {
   display: block;
   cursor: pointer;
@@ -826,11 +821,9 @@ input:hover {
   border: none;
   text-shadow: 0px 0px 1px rgb(74, 74, 74);
   outline: none;
-  margin: 10px 0px;
 }
 
 .file-change button input[type="file"] {
-  position: absolute;
   width: 1px;
   height: 1px;
   padding: 0;

@@ -8,7 +8,7 @@ import * as THREE from "three";
 
 import BoundingSphere from "../helpers/AngleIndicator";
 
-import Boundary from "../../../../../util/math/info/Boundary";
+import Boundary from "../../../../../util/info/Boundary";
 
 import { boundariesActions } from "../../../../../store/config/boundaries";
 import { pointerStateActions } from "../../../../../store/state/pointerState";
@@ -17,6 +17,7 @@ const EachMesh = (props) => {
   const dispatch = useDispatch();
   const toolState = useSelector((state) => state.toolState);
   const boundaries = useSelector((state) => state.boundaries.boundaries);
+
   const pointerState = useSelector((state) => {
     state.pointerState;
   });
@@ -37,7 +38,6 @@ const EachMesh = (props) => {
 
   //functions------------------------------------------------------------------------------
   const saveInitPosition = () => {
-    console.log("initPosition");
     const box = props.box;
     const boxMax = Math.max(
       box.max.x - box.min.x,
@@ -175,6 +175,7 @@ const EachMesh = (props) => {
             boundary: { ...Boundary },
             id: boundaryID,
             mesh: e.object.name,
+            meshNum: e.object.name.substr(-1),
             triangle: currentTriangles,
           })
         );

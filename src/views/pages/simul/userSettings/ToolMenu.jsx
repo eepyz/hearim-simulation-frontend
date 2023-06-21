@@ -1,6 +1,7 @@
 import { Fragment, useState, useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { toolStateActions } from "../../../../store/state/toolState";
+import { Exporter } from "../../../../util/exporter/exporter";
 
 import { STLLoader } from "three/examples/jsm/loaders/STLLoader";
 import * as THREE from "three";
@@ -10,6 +11,11 @@ const ToolMenu = () => {
   const dispatch = useDispatch();
   const toolState = useSelector((state) => state.toolState);
   const flowState = useSelector((state) => state.flowState);
+  const meshInfoList = useSelector((state) => state.meshState.meshInfoList);
+  const currentBoundary = useSelector(
+    (state) => state.boundaries.currentBoundary
+  );
+  const exporter = new Exporter();
 
   const ToolHandlers = {
     showLine: () => {
@@ -38,6 +44,9 @@ const ToolMenu = () => {
     },
     showIndicator: () => {
       dispatch(toolStateActions.showIndicator());
+    },
+    exportSTL: () => {
+      exporter.toASCIISTL(meshInfoList, currentBoundary);
     },
     showLookupTable: () => {
       dispatch(toolStateActions.showLookupTable());
@@ -260,7 +269,10 @@ const ToolMenu = () => {
           </span>
         </button>
 
-        <button title="Divide Surface and Export STL">
+        <button
+          title="Divide Surface and Export STL"
+          onClick={ToolHandlers.exportSTL}
+        >
           <span className={"material-symbols-outlined " + styles["icons"]}>
             {" "}
             file_open{" "}

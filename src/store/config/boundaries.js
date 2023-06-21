@@ -1,6 +1,6 @@
 import { createSlice, current } from "@reduxjs/toolkit";
 
-import Boundary from "../../util/math/info/Boundary";
+import Boundary from "../../util/info/Boundary";
 
 const initialState = {
   boundaries: {},
@@ -18,6 +18,7 @@ const boundariesSlice = createSlice({
       state.boundaries[action.payload.id] = action.payload.boundary;
       state.boundaries[action.payload.id].id = action.payload.id;
       state.boundaries[action.payload.id].mesh = action.payload.mesh;
+      state.boundaries[action.payload.id].meshNum = action.payload.meshNum;
       state.boundaries[action.payload.id].triangle = action.payload.triangle;
       state.currentBoundary = state.boundaries[action.payload.id];
     },
