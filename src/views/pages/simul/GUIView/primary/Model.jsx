@@ -38,6 +38,7 @@ const Model = (props) => {
   const [meshList, setMeshList] = useState([]);
   const [lineList, setLineList] = useState([]);
   const [meshInfoList, setMeshInfoList] = useState([]);
+  const [exportInfoList, setExportInfos] = useState([]);
   const [selectedMeshIndex, setSelectedMeshIndex] = useState(null);
   const [resetColorFlag, setResetColorFlag] = useState(false);
   const [stlGeometry, setGeometry] = useState(useLoader(STLLoader, modelUrl));
@@ -55,6 +56,7 @@ const Model = (props) => {
   const setMeshInfos = (stlGeometry) => {
     let separatedGeometries = [];
     let separatedInfos = [];
+    let exportInfos = [];
 
     const { attributes, groups } = stlGeometry;
 
@@ -81,14 +83,15 @@ const Model = (props) => {
 
       separatedGeometry.setAttribute("position", position);
       separatedGeometry.setAttribute("normal", normal);
-      separatedGeometries.push(separatedGeometry);
-      separatedInfos.push(new MeshInfo(separatedGeometry));
-    }
 
+      let meshInfo = new MeshInfo(separatedGeometry);
+      separatedGeometries.push(separatedGeometry);
+      separatedInfos.push(meshInfo);
+      exportInfos.push({ vertex: meshInfo.vertex, indices: meshInfo.indices });
+    }
     setMeshList(separatedGeometries);
     setMeshInfoList(separatedInfos);
-    dispatch(meshStateActions.saveMeshList(separatedGeometries));
-    dispatch(meshStateActions.saveMeshInfoList(separatedInfos));
+    dispatch(meshStateActions.saveMeshInfoList(exportInfos));
   };
 
   const resetColors = () => {

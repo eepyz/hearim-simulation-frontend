@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  meshList: null,
-  meshInfoList: null,
+  meshList: [],
+  meshInfoList: [],
 };
 
 const meshStateSlice = createSlice({
@@ -10,7 +10,7 @@ const meshStateSlice = createSlice({
   initialState: initialState,
   reducers: {
     saveMeshList(state, action) {
-      state.meshList = action.payload;
+      return action.payload;
     },
     saveMeshInfoList(state, action) {
       state.meshInfoList = action.payload;

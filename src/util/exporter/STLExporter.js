@@ -41,7 +41,10 @@ class STLExporter {
         const b = meshInfo.indices[3 * j + 1];
         const c = meshInfo.indices[3 * j + 2];
 
-        if (currentBoundary.meshNum === i && j in currentBoundary.triangle) {
+        if (
+          currentBoundary.meshNum - 1 === i &&
+          j in currentBoundary.triangle
+        ) {
           output += "";
           surfaceIndices.push(a, b, c);
         } else {

@@ -80,7 +80,12 @@ class MeshInfo {
       if (!(key in vertexMap)) {
         this.indices.push(this.vertex.length);
         vertexMap[key] = this.vertex.length;
-        this.vertex.push(new Vertex(vertex, normal, this.vertex.length));
+
+        let v = { x: vertex.x, y: vertex.y, z: vertex.z };
+        let n = { x: normal.x, y: normal.y, z: normal.z };
+
+        // this.vertex.push(new Vertex(v, n, this.vertex.length););
+        this.vertex.push({ point: v, normal: n, index: this.vertex.length });
       } else {
         this.indices.push(vertexMap[key]);
       }

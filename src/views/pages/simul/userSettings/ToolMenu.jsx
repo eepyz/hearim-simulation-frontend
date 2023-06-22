@@ -15,6 +15,7 @@ const ToolMenu = () => {
   const currentBoundary = useSelector(
     (state) => state.boundaries.currentBoundary
   );
+
   const exporter = new Exporter();
 
   const ToolHandlers = {
