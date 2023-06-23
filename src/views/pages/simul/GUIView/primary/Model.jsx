@@ -98,7 +98,7 @@ const Model = (props) => {
     } else {
       let meshInfo = new MeshInfo(stlGeometry);
       separatedGeometries.push(stlGeometry);
-      separatedInfos.push(stlGeometry);
+      separatedInfos.push(meshInfo);
       exportInfos.push({
         vertex: meshInfo.vertex,
         indices: meshInfo.indices,

@@ -49,6 +49,7 @@ const EachMesh = (props) => {
 
     modelRef.current.position.sub(boxCenter);
     const initPosition = modelRef.current.getWorldPosition(new THREE.Vector3());
+    setInitPosition(initPosition);
 
     boxCenter.normalize();
 
@@ -58,7 +59,6 @@ const EachMesh = (props) => {
       boxMax * 3
     );
 
-    setInitPosition(initPosition);
     setInitCameraPosition(initCameraPosition);
     camera.position.copy(initCameraPosition);
   };
@@ -210,6 +210,7 @@ const EachMesh = (props) => {
 
   //useEffect------------------------------------------------------------------------------
   useEffect(() => {
+    console.log(props.meshInfo);
     resetColor();
     saveInitPosition();
     return () => {
