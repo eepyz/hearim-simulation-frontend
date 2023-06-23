@@ -211,6 +211,14 @@ const EachMesh = (props) => {
   //useEffect------------------------------------------------------------------------------
   useEffect(() => {
     resetColor();
+    saveInitPosition();
+    return () => {
+      setInitPosition(new THREE.Vector3(0, 0, 0));
+    };
+  }, [props.geometry]);
+
+  useEffect(() => {
+    resetColor();
     if (!toolState.findBoundary) {
       dispatch(pointerStateActions.objectClicked(false));
     }
@@ -241,10 +249,6 @@ const EachMesh = (props) => {
     }
   }, [props.resetColor]);
 
-  useEffect(() => {
-    resetColor();
-    saveInitPosition();
-  }, [props.geometry]);
   //useFrame------------------------------------------------------------------------------
   useFrame((_, delta) => {
     if (toolState.rotateObject) {
@@ -278,9 +282,8 @@ const EachMesh = (props) => {
           roughness={0.01}
           transparent={true}
           opacity={
-            toolState.findBoundary && props.resetColor && !hovered ? 0.5 : 1
+            toolState.findBoundary && props.resetColor && !hovered ? 0.5 : 0.8
           }
-          // color={toolState.findBoundary && hovered ? "white" : "#748DA6"}
           side={THREE.DoubleSide}
           vertexColors={true}
           clipShadows

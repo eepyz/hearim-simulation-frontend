@@ -58,61 +58,60 @@ const Model = (props) => {
     let separatedInfos = [];
     let exportInfos = [];
 
-    const { attributes, groups } = stlGeometry;
+    if (stlGeometry.groups.length > 1) {
+      const { attributes, groups } = stlGeometry;
 
-    for (let i = 0; i < groups.length; i++) {
-      let group = groups[i];
-      const start = group.start;
-      const count = group.count;
+      for (let i = 0; i < groups.length; i++) {
+        let group = groups[i];
+        const start = group.start;
+        const count = group.count;
 
-      const separatedGeometry = new THREE.BufferGeometry();
+        const separatedGeometry = new THREE.BufferGeometry();
 
-      const position = new THREE.Float32BufferAttribute(
-        new Float32Array(count * 3),
-        3
-      );
-      const normal = new THREE.Float32BufferAttribute(
-        new Float32Array(count * 3),
-        3
-      );
+        const position = new THREE.Float32BufferAttribute(
+          new Float32Array(count * 3),
+          3
+        );
+        const normal = new THREE.Float32BufferAttribute(
+          new Float32Array(count * 3),
+          3
+        );
 
-      for (let p = 0; p < count; p++) {
-        position.copyAt(p, attributes.position, start + p);
-        normal.copyAt(p, attributes.normal, start + p);
+        for (let p = 0; p < count; p++) {
+          position.copyAt(p, attributes.position, start + p);
+          normal.copyAt(p, attributes.normal, start + p);
+        }
+
+        separatedGeometry.setAttribute("position", position);
+        separatedGeometry.setAttribute("normal", normal);
+
+        let meshInfo = new MeshInfo(separatedGeometry);
+        separatedGeometries.push(separatedGeometry);
+        separatedInfos.push(meshInfo);
+        exportInfos.push({
+          vertex: meshInfo.vertex,
+          indices: meshInfo.indices,
+        });
       }
-
-      separatedGeometry.setAttribute("position", position);
-      separatedGeometry.setAttribute("normal", normal);
-
-      let meshInfo = new MeshInfo(separatedGeometry);
-      separatedGeometries.push(separatedGeometry);
-      separatedInfos.push(meshInfo);
-      exportInfos.push({ vertex: meshInfo.vertex, indices: meshInfo.indices });
+      setMeshList(separatedGeometries);
+      setMeshInfoList(separatedInfos);
+    } else {
+      let meshInfo = new MeshInfo(stlGeometry);
+      separatedGeometries.push(stlGeometry);
+      separatedInfos.push(stlGeometry);
+      exportInfos.push({
+        vertex: meshInfo.vertex,
+        indices: meshInfo.indices,
+      });
+      setMeshList(separatedGeometries);
+      setMeshInfoList(separatedInfos);
     }
-    setMeshList(separatedGeometries);
-    setMeshInfoList(separatedInfos);
     dispatch(meshStateActions.saveMeshInfoList(exportInfos));
   };
 
   const resetColors = () => {
     setResetColorFlag(true);
   };
-
-  // const changeSTLfile = (e) => {
-  //   const loader = new STLLoader();
-  //   const uploadFile = e.target.files[0];
-  //   const fileReader = new FileReader();
-
-  //   fileReader.onload = function (e) {
-  //     const target = e.target;
-  //     let stlGeometry = loader.parse(target.result);
-  //     setGeometry(stlGeometry);
-  //     if (THREE.Cache) {
-  //       THREE.Cache.clear();
-  //     }
-  //   };
-  //   fileReader.readAsArrayBuffer(uploadFile);
-  // };
 
   const changeSTLfile = async (e) => {
     const loader = new STLLoader();
@@ -123,21 +122,22 @@ const Model = (props) => {
       return new Promise((resolve, reject) => {
         fileReader.onload = function (e) {
           const target = e.target;
-          let stlGeometry = loader.parse(target.result);
-          setGeometry(stlGeometry);
-          resolve(stlGeometry);
+          let geometry = loader.parse(target.result);
+          resolve(geometry);
+          setGeometry(geometry);
+          setMeshInfos(geometry);
         };
 
         fileReader.onerror = function (e) {
           reject(e);
         };
-
         fileReader.readAsArrayBuffer(uploadFile);
       });
     };
 
     try {
       await readFile();
+
       if (THREE.Cache) {
         THREE.Cache.clear();
       }
@@ -151,13 +151,6 @@ const Model = (props) => {
     setMeshInfos(stlGeometry);
     groupRef.current.position.set(0, 0, 0);
   }, []);
-
-  useEffect(() => {
-    // if (stlGeometry !== null) {
-    //   setMeshInfos(stlGeometry);
-    // }
-    setMeshInfos(stlGeometry);
-  }, [stlGeometry]);
 
   useEffect(() => {
     const dragControls = new DragControls(
