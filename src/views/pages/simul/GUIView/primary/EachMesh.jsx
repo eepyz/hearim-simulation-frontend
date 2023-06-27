@@ -47,18 +47,20 @@ const EachMesh = (props) => {
     const boxCenter = new THREE.Vector3();
     box.getCenter(boxCenter);
 
+    modelRef.current.position.copy(new THREE.Vector3(0, 0, 0)); //resetPosition
     modelRef.current.position.sub(boxCenter);
-    const initPosition = modelRef.current.getWorldPosition(new THREE.Vector3());
-    setInitPosition(initPosition);
+    const position = modelRef.current.getWorldPosition(new THREE.Vector3());
+
+    console.log(position);
 
     boxCenter.normalize();
-
     const initCameraPosition = new THREE.Vector3(
       boxCenter.x,
       boxCenter.y + 5,
       boxMax * 3
     );
 
+    setInitPosition(position);
     setInitCameraPosition(initCameraPosition);
     camera.position.copy(initCameraPosition);
   };
@@ -210,12 +212,8 @@ const EachMesh = (props) => {
 
   //useEffect------------------------------------------------------------------------------
   useEffect(() => {
-    console.log(props.meshInfo);
     resetColor();
     saveInitPosition();
-    return () => {
-      setInitPosition(new THREE.Vector3(0, 0, 0));
-    };
   }, [props.geometry]);
 
   useEffect(() => {
@@ -283,7 +281,7 @@ const EachMesh = (props) => {
           roughness={0.01}
           transparent={true}
           opacity={
-            toolState.findBoundary && props.resetColor && !hovered ? 0.5 : 0.8
+            toolState.findBoundary && props.resetColor && !hovered ? 0.7 : 1
           }
           side={THREE.DoubleSide}
           vertexColors={true}

@@ -3,8 +3,32 @@ import { Fragment } from "react";
 import styles from "../../../assets/css/Contact.module.css";
 
 import contactHeaderImg from "../../../assets/img/notice/team-work.png";
+// import contactService from "../../../services/contact.service";
 
 const Contact = () => {
+  const createOpinion = () => {
+    if (
+      opinion.firstName === "" ||
+      opinion.lastName === "" ||
+      opinion.email === "" ||
+      opinion.company === "" ||
+      opinion.message === ""
+    ) {
+      alert("Please Check your input");
+    } else if (!opinion.email.includes("@")) {
+      alert("Please Check Your email");
+    } else {
+      contactService
+        .create(opinion)
+        .then((res) => {
+          router.push({ name: "thankyou" });
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    }
+  };
+
   return (
     <Fragment>
       <main className="container">

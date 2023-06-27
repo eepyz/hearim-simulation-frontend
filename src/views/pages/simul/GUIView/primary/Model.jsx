@@ -17,8 +17,6 @@ import { meshStateActions } from "../../../../../store/state/meshState"; //
 
 import EachMesh from "./EachMesh";
 
-import styles from "../../../../../assets/css/Simulation.module.css";
-
 //convert to jsx
 extend({ DragControls });
 
@@ -34,14 +32,14 @@ const Model = (props) => {
   const orbitControlRef = useRef();
   const EachMeshRef = useRef();
   //state
-  const [modelUrl, setModelUrl] = useState(props.url);
+  const [stlGeometry, setGeometry] = useState(props.stlGeometry);
+
   const [meshList, setMeshList] = useState([]);
-  const [lineList, setLineList] = useState([]);
   const [meshInfoList, setMeshInfoList] = useState([]);
   const [exportInfoList, setExportInfos] = useState([]);
+
   const [selectedMeshIndex, setSelectedMeshIndex] = useState(null);
   const [resetColorFlag, setResetColorFlag] = useState(false);
-  const [stlGeometry, setGeometry] = useState(useLoader(STLLoader, modelUrl));
 
   //variables
   const { camera, gl, viewport, raycaster, mouse } = useThree();
@@ -97,14 +95,13 @@ const Model = (props) => {
       setMeshInfoList(separatedInfos);
     } else {
       let meshInfo = new MeshInfo(stlGeometry);
-      separatedGeometries.push(stlGeometry);
-      separatedInfos.push(meshInfo);
       exportInfos.push({
         vertex: meshInfo.vertex,
         indices: meshInfo.indices,
       });
-      setMeshList(separatedGeometries);
-      setMeshInfoList(separatedInfos);
+
+      setMeshList([stlGeometry]);
+      setMeshInfoList([meshInfo]);
     }
     dispatch(meshStateActions.saveMeshInfoList(exportInfos));
   };
@@ -113,43 +110,9 @@ const Model = (props) => {
     setResetColorFlag(true);
   };
 
-  const changeSTLfile = async (e) => {
-    const loader = new STLLoader();
-    const uploadFile = e.target.files[0];
-    const fileReader = new FileReader();
-
-    const readFile = () => {
-      return new Promise((resolve, reject) => {
-        fileReader.onload = function (e) {
-          const target = e.target;
-          let geometry = loader.parse(target.result);
-          resolve(geometry);
-          setGeometry(geometry);
-          setMeshInfos(geometry);
-        };
-
-        fileReader.onerror = function (e) {
-          reject(e);
-        };
-        fileReader.readAsArrayBuffer(uploadFile);
-      });
-    };
-
-    try {
-      await readFile();
-
-      if (THREE.Cache) {
-        THREE.Cache.clear();
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   //useEffect
   useEffect(() => {
     setMeshInfos(stlGeometry);
-    groupRef.current.position.set(0, 0, 0);
   }, []);
 
   useEffect(() => {
@@ -177,12 +140,17 @@ const Model = (props) => {
     };
   }, [camera, gl.domElement]);
 
+  useEffect(() => {
+    setGeometry(props.stlGeometry);
+    setMeshInfos(props.stlGeometry);
+  }, [props.stlGeometry]);
+
   //animate
-  useFrame((state, delta) => {});
+  // useFrame((state, delta) => {});
+
   //jsx
   return (
     <>
-      {toolState.showBbox && <BoundingBox box={stlGeometry.boundingBox} />}
       <group ref={groupRef}>
         {meshList.map((geometry, i) => (
           <EachMesh
@@ -198,16 +166,9 @@ const Model = (props) => {
           />
         ))}
       </group>
-      <Html wrapperClass={styles["file-change"]}>
-        <button>
-          <label htmlFor="stlfile">
-            <span className={"material-symbols-outlined " + styles["icons"]}>
-              folder_supervised
-            </span>
-          </label>
-          <input type="file" onChange={changeSTLfile} id="stlfile" />
-        </button>
-      </Html>
+
+      {toolState.showBbox && <BoundingBox box={stlGeometry.boundingBox} />}
+
       {toolState.showIndicator && (
         <FlowAngleIndicator box={stlGeometry.boundingBox} />
       )}
@@ -221,6 +182,7 @@ const Model = (props) => {
         target={[0, 0, 0]}
         zoomSpeed={3}
         rotateSpeed={1.5}
+        enablePan={false}
       />
     </>
   );

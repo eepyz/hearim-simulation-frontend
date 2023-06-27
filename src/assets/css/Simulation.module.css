@@ -814,6 +814,12 @@ input:hover {
   margin-bottom: 5px;
 }
 
+.file-change {
+  position: absolute;
+  bottom: 20px;
+  left: 30px;
+}
+
 .file-change button {
   display: block;
   cursor: pointer;
@@ -821,6 +827,12 @@ input:hover {
   border: none;
   text-shadow: 0px 0px 1px rgb(74, 74, 74);
   outline: none;
+  padding: 0;
+  margin: 0;
+}
+
+.file-change button label {
+  cursor: pointer;
 }
 
 .file-change button input[type="file"] {
@@ -831,42 +843,6 @@ input:hover {
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   border: 0;
-}
-
-/* surface info */
-.surface-info-box {
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  top: 300px;
-  right: 30px;
-  max-height: 300px;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  font-size: 13px;
-}
-
-.surface-info-elem {
-  width: 250px;
-  padding: 20px 25px;
-  border-radius: 10px;
-  transition: opacity ease-out 0.1s;
-  background-color: rgba(231, 244, 255, 0.8);
-  margin-bottom: 10px;
-}
-
-.slide-fade-enter-active {
-  transition: all 0.3s ease-out;
-}
-
-.slide-fade-leave-active {
-  transition: all 0.3s ease-out;
-}
-
-.slide-fade-enter-from,
-.slide-fade-leave-to {
-  transform: translateY(20px);
-  opacity: 0;
 }
 
 /* @media -------------------------------*/
